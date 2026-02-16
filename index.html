@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Human Load Consultancy</title>
+  <meta name="description" content="Preventief fysieke belasting verminderen bij beeldschermwerk in 12 weken." />
+
+  <style>
+    :root{
+      --bg: #f6f4ef;
+      --text: #1f1f1f;
+      --muted: #4a4a4a;
+      --rule: rgba(0,0,0,.18);
+      --max: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    /* HERO IMAGE/VIDEO */
+    .hero{
+      position: relative;
+      width: 100%;
+      height: clamp(240px, 45vh, 520px);
+      overflow: hidden;
+      background: #ddd;
+    }
+    .hero img, .hero video{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.01);
+    }
+    /* subtiele overlay, zodat tekst later altijd leesbaar kan */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(0,0,0,.18), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+
+    /* CONTENT WRAP */
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    /* BRAND ROW (zoals je voorbeeld) */
+    .brand-row{
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 28px;
+      align-items: start;
+      padding-top: 28px;
+    }
+
+    .kicker{
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: rgba(255,255,255,.92);
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      z-index: 2;
+      text-shadow: 0 2px 14px rgba(0,0,0,.35);
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(42px, 6vw, 84px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+    }
+
+    .tagline{
+      margin: 6px 0 0;
+      font-size: clamp(16px, 1.6vw, 20px);
+      color: var(--muted);
+      max-width: 34ch;
+    }
+
+    .rule{
+      margin-top: 26px;
+      border: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* Mobile: tagline onder de titel */
+    @media (max-width: 860px){
+      .brand-row{
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .tagline{
+        max-width: 60ch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HERO: nu met foto. Later kunnen we dit ook een video maken -->
+  <header class="hero">
+    <div class="kicker">Human Load Consultancy</div>
+
+    <!-- VERVANG LATER de src door jouw eigen foto of video -->
+    <img
+      src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=2000&q=80"
+      alt="Professionele werkomgeving"
+    />
+  </header>
+
+  <main class="wrap">
+    <section class="brand-row">
+      <h1>Human Load Consultancy</h1>
+
+      <p class="tagline">
+        Preventief fysieke belasting verminderen bij beeldschermwerk — in 12 weken.
+      </p>
+    </section>
+
+    <hr class="rule" />
+  </main>
+</body>
+</html>
