@@ -4,209 +4,350 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Human Load Consultancy</title>
-  <meta name="description" content="Preventief fysieke belasting verminderen bij beeldschermwerk in 12 weken." />
+  <meta name="description" content="Structureel grip op fysieke belasting bij beeldschermwerk — in 12 weken." />
 
   <style>
     :root{
-      --bg: #f6f4ef;
-      --text: #1f1f1f;
-      --muted: #4a4a4a;
-      --rule: rgba(0,0,0,.18);
-      --max: 1100px;
+      --nav-bg: #3b4351;         /* donker blauw/grijs (zoals jouw Canva) */
+      --page-bg: #f6f4ef;        /* warme lichte achtergrond */
+      --text: #111;
+      --white: #fff;
+      --muted-white: rgba(255,255,255,.85);
+      --border-white: rgba(255,255,255,.35);
+
+      --max: 1200px;
+      --radius: 999px;
+      --shadow: 0 18px 40px rgba(0,0,0,.08);
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body{
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
-      background: var(--bg);
+      background: var(--page-bg);
       color: var(--text);
-      line-height: 1.35;
     }
 
-    /* HERO IMAGE/VIDEO */
+    /* NAV */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--nav-bg);
+      padding: 14px 18px;
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr 280px;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .brand img{
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      flex: 0 0 auto;
+    }
+    .brand .name{
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.12;
+      letter-spacing: .01em;
+      white-space: nowrap;
+    }
+
+    .menu{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(18px, 4vw, 64px);
+    }
+    .menu a{
+      color: var(--white);
+      text-decoration: none;
+      font-size: clamp(18px, 1.7vw, 26px); /* strakker/kleiner */
+      letter-spacing: .02em;
+      opacity: .95;
+    }
+    .menu a:hover{
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 8px;
+    }
+
+    .right{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-btn{
+      color: var(--white);
+      background: transparent;
+      border: 1px solid var(--border-white);
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      font-size: 18px;
+      letter-spacing: .02em;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(6px);
+    }
+    .contact-btn:hover{
+      border-color: rgba(255,255,255,.55);
+    }
+
+    .flags{
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .flag{
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid var(--border-white);
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.9);
+      font-size: 12px;
+      letter-spacing: .08em;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .flag:hover{
+      border-color: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.14);
+    }
+    .flag.is-active{
+      background: rgba(255,255,255,.9);
+      color: #232a33;
+      border-color: rgba(255,255,255,.9);
+    }
+
+    /* HERO */
     .hero{
       position: relative;
       width: 100%;
-      height: clamp(240px, 45vh, 520px);
+      height: calc(100vh - 72px);
+      min-height: 520px;
       overflow: hidden;
-      background: #ddd;
+      background: #0e1116;
     }
-    .hero img, .hero video{
+    .hero video{
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transform: scale(1.01);
+      filter: saturate(.98) contrast(1.02);
     }
-    /* subtiele overlay, zodat tekst later altijd leesbaar kan */
+    /* overlay voor rustige, premium look */
     .hero::after{
       content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(90deg, rgba(0,0,0,.18), rgba(0,0,0,0));
-      pointer-events:none;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.30), rgba(0,0,0,.12) 55%, rgba(0,0,0,.22));
+      pointer-events: none;
     }
 
-    /* CONTENT WRAP */
-    .wrap{
+    .hero-controls{
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .control{
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.28);
+      color: var(--white);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+      letter-spacing: .02em;
+    }
+    .control:hover{
+      background: rgba(0,0,0,.36);
+      border-color: rgba(255,255,255,.35);
+    }
+
+    /* SECTIONS */
+    main{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 28px 20px 60px;
+      padding: 0 20px 120px;
     }
 
-    /* BRAND ROW (zoals je voorbeeld) */
-    .brand-row{
-      display: grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap: 28px;
-      align-items: start;
-      padding-top: 28px;
+    .section{
+      padding: 110px 0;
+      border-top: 1px solid rgba(0,0,0,.12);
     }
-
-    .kicker{
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 14px;
-      color: rgba(255,255,255,.92);
-      position: absolute;
-      top: 18px;
-      left: 20px;
-      z-index: 2;
-      text-shadow: 0 2px 14px rgba(0,0,0,.35);
+    .section h2{
+      margin: 0 0 16px;
+      font-size: clamp(26px, 2.8vw, 40px);
+      letter-spacing: -0.01em;
     }
-
-    h1{
+    .section p{
       margin: 0;
-      font-size: clamp(42px, 6vw, 84px);
-      letter-spacing: -0.02em;
-      line-height: 0.95;
+      max-width: 70ch;
+      font-size: 18px;
+      line-height: 1.75;
+      color: rgba(0,0,0,.70);
     }
 
-    .tagline{
-      margin: 6px 0 0;
-      font-size: clamp(16px, 1.6vw, 20px);
-      color: var(--muted);
-      max-width: 34ch;
-    }
-
-    .rule{
-      margin-top: 26px;
-      border: none;
-      border-top: 1px solid var(--rule);
-    }
-
-    /* Mobile: tagline onder de titel */
-    @media (max-width: 860px){
-      .brand-row{
+    /* Mobile */
+    @media (max-width: 980px){
+      .nav-inner{
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 12px;
       }
-      .tagline{
-        max-width: 60ch;
+      .menu{
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+      .right{
+        justify-content: space-between;
+      }
+      .hero{
+        height: calc(82vh - 72px);
+        min-height: 460px;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- HERO: nu met foto. Later kunnen we dit ook een video maken -->
-  <header class="hero">
-    <div class="kicker">Human Load Consultancy</div>
+  <nav class="nav" aria-label="Hoofdnavigatie">
+    <div class="nav-inner">
+      <!-- Links: logo + naam -->
+      <div class="brand">
+        <!-- Gebruik je bestaande logo bestand; pas de naam aan als je logo anders heet -->
+        <img src="./logo_for_my__Nano_Banana_Pro_76452.jpg" alt="Human Load Consultancy logo">
+        <div class="name">Human Load<br/>Consultancy</div>
+      </div>
 
-    <!-- VERVANG LATER de src door jouw eigen foto of video -->
-    <img
-      src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=2000&q=80"
-      alt="Professionele werkomgeving"
-    />
+      <!-- Midden: menu -->
+      <div class="menu">
+        <a href="#services">Services</a>
+        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
+      </div>
+
+      <!-- Rechts: contact + taal -->
+      <div class="right">
+        <a class="contact-btn" href="#contact">Contact</a>
+
+        <div class="flags" aria-label="Taalkeuze">
+          <button class="flag is-active" type="button" data-lang="nl" aria-pressed="true" title="Nederlands">NL</button>
+          <button class="flag" type="button" data-lang="en" aria-pressed="false" title="English">EN</button>
+          <button class="flag" type="button" data-lang="es" aria-pressed="false" title="Español">ES</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" aria-label="Hero video">
+    <!-- Upload straks jouw video als: hero.mp4 in dezelfde repo-root -->
+    <video id="heroVideo" autoplay loop playsinline muted>
+      <source src="./hero.mp4" type="video/mp4">
+      Je browser ondersteunt geen video.
+    </video>
+
+    <div class="hero-controls">
+      <button class="control" id="muteBtn" type="button">🔇 Geluid uit</button>
+    </div>
   </header>
 
-  <main class="wrap">
-<main class="wrap">
-
-  <!-- TITEL GEDEELTE -->
-  <section style="text-align: center; margin-top: 40px;">
-
-    <h1 style="
-      font-size: clamp(40px, 8vw, 120px);
-      letter-spacing: -0.03em;
-      margin: 0;
-    ">
-      HUMAN LOAD CONSULTANCY
-    </h1>
-
-    <p style="
-      font-size: clamp(16px, 2vw, 22px);
-      margin-top: 20px;
-      color: #444;
-    ">
-      Structureel grip op fysieke belasting bij beeldschermwerk — in 12 weken.
-    </p>
-
-  </section>
-
-  <hr class="rule" style="margin-top: 50px; margin-bottom: 80px;" />
-
-  <!-- OVER BLOK -->
-  <section style="
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  ">
-
-    <!-- Tekstblok -->
-    <div style="
-      background: #ffffff;
-      padding: 60px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    ">
-
-      <h2 style="margin-top: 0; font-size: 28px;">
-        Over Human Load Consultancy
-      </h2>
-
-      <p style="font-size: 18px; line-height: 1.6; margin-top: 30px;">
-        Wij lossen fysieke belasting niet tijdelijk op —
-        we veranderen het systeem erachter.
+  <main>
+    <section id="services" class="section">
+      <h2>Services</h2>
+      <p>
+        (Plaats hier straks je services content in de stijl van je Canva ontwerp.)
       </p>
+    </section>
 
-      <p style="font-size: 18px; line-height: 1.6;">
-        Ons 12-weken traject richt zich op gedrag,
-        patronen en structurele aanpassingen binnen organisaties.
+    <section id="faq" class="section">
+      <h2>FAQ</h2>
+      <p>
+        (Plaats hier straks je FAQ. We kunnen dit later als strakke accordion bouwen.)
       </p>
+    </section>
 
-      <p style="font-size: 18px; line-height: 1.6;">
-        Geen losse interventies, maar een duurzame aanpak
-        die medewerkers zelfstandig preventief laat handelen.
+    <section id="about" class="section">
+      <h2>About</h2>
+      <p>
+        (Plaats hier straks je “Over Human Load Consultancy” tekst — kort, scherp, consultancy-style.)
       </p>
+    </section>
 
-    </div>
-
-    <!-- Logo -->
-    <div style="text-align: center;">
-<img
-  src="./logo_for_my__Nano_Banana_Pro_76452.jpg"
-  alt="Human Load Consultancy Logo"
-  style="width: 100%; height: auto; display: block;"
->
-  <div style="text-align:center; padding: 24px;">
-    <div style="font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color:#666;">
-    </div>
-    <div style="margin-top: 10px; font-size: 22px; font-weight: 600;">
-    </div>
-  </div>
-</div>
-
-
-    </div>
-
-  </section>
-
-</main>
-    
-
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>
+        (Plaats hier straks je contactblok of formulier. Bijvoorbeeld: e-mail + intake-knop.)
+      </p>
+    </section>
   </main>
+
+  <script>
+    // VIDEO: autoplay werkt betrouwbaar als muted start.
+    // Met deze knop kan de bezoeker het geluid aan/uit zetten.
+    const video = document.getElementById('heroVideo');
+    const muteBtn = document.getElementById('muteBtn');
+
+    function updateMuteLabel(){
+      muteBtn.textContent = video.muted ? "🔇 Geluid uit" : "🔊 Geluid aan";
+    }
+
+    muteBtn.addEventListener('click', async () => {
+      video.muted = !video.muted;
+      updateMuteLabel();
+
+      // Sommige browsers willen een play() na user-interactie.
+      try { if (video.paused) await video.play(); } catch(e) {}
+    });
+
+    updateMuteLabel();
+
+    // TAAL: versie 1 = alleen “actief” highlight + html lang attribuut.
+    // Echte vertalingen bouwen we later.
+    const flagButtons = document.querySelectorAll('.flag');
+    flagButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+
+        flagButtons.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        document.documentElement.lang = lang;
+      });
+    });
+  </script>
 </body>
 </html>
