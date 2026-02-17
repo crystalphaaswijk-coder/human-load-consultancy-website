@@ -8,16 +8,26 @@
 
   <style>
     :root{
-      --nav-bg: #3b4351;         /* donker blauw/grijs (zoals jouw Canva) */
-      --page-bg: #f6f4ef;        /* warme lichte achtergrond */
+      --nav-bg: #3b4351;         /* donker blauw/grijs */
+      --page-bg: #f6f4ef;        /* warm licht */
       --text: #111;
       --white: #fff;
-      --muted-white: rgba(255,255,255,.85);
+
+      --muted: rgba(0,0,0,.68);
+      --muted2: rgba(0,0,0,.52);
+
+      --border: rgba(0,0,0,.12);
       --border-white: rgba(255,255,255,.35);
+
+      --panel: #1f2731;          /* donker vlak rechts */
+      --accent: #8a5a3c;         /* bruin (pijlen + actieve indicator) */
+      --indicator: rgba(0,0,0,.18);
 
       --max: 1200px;
       --radius: 999px;
       --shadow: 0 18px 40px rgba(0,0,0,.08);
+
+      --carousel-h: 520px;
     }
 
     * { box-sizing: border-box; }
@@ -45,7 +55,6 @@
       align-items: center;
       gap: 18px;
     }
-
     .brand{
       display: flex;
       align-items: center;
@@ -68,7 +77,6 @@
       letter-spacing: .01em;
       white-space: nowrap;
     }
-
     .menu{
       display: flex;
       justify-content: center;
@@ -78,7 +86,7 @@
     .menu a{
       color: var(--white);
       text-decoration: none;
-      font-size: clamp(18px, 1.7vw, 26px); /* strakker/kleiner */
+      font-size: clamp(18px, 1.7vw, 26px);
       letter-spacing: .02em;
       opacity: .95;
     }
@@ -87,14 +95,12 @@
       text-decoration: underline;
       text-underline-offset: 8px;
     }
-
     .right{
       display: flex;
       justify-content: flex-end;
       align-items: center;
       gap: 12px;
     }
-
     .contact-btn{
       color: var(--white);
       background: transparent;
@@ -107,19 +113,11 @@
       display: inline-block;
       backdrop-filter: blur(6px);
     }
-    .contact-btn:hover{
-      border-color: rgba(255,255,255,.55);
-    }
+    .contact-btn:hover{ border-color: rgba(255,255,255,.55); }
 
-    .flags{
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .flags{ display: flex; gap: 8px; align-items: center; }
     .flag{
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
+      width: 34px; height: 34px; border-radius: 999px;
       border: 1px solid var(--border-white);
       background: rgba(255,255,255,.10);
       color: rgba(255,255,255,.9);
@@ -130,15 +128,8 @@
       cursor: pointer;
       user-select: none;
     }
-    .flag:hover{
-      border-color: rgba(255,255,255,.55);
-      background: rgba(255,255,255,.14);
-    }
-    .flag.is-active{
-      background: rgba(255,255,255,.9);
-      color: #232a33;
-      border-color: rgba(255,255,255,.9);
-    }
+    .flag:hover{ border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.14); }
+    .flag.is-active{ background: rgba(255,255,255,.9); color: #232a33; border-color: rgba(255,255,255,.9); }
 
     /* HERO */
     .hero{
@@ -150,23 +141,18 @@
       background: #0e1116;
     }
     .hero video{
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
       filter: saturate(.98) contrast(1.02);
     }
-    /* overlay voor rustige, premium look */
     .hero::after{
       content:"";
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(90deg, rgba(0,0,0,.30), rgba(0,0,0,.12) 55%, rgba(0,0,0,.22));
       pointer-events: none;
     }
-
     .hero-controls{
       position: absolute;
       right: 18px;
@@ -187,24 +173,188 @@
       font-size: 14px;
       letter-spacing: .02em;
     }
-    .control:hover{
-      background: rgba(0,0,0,.36);
-      border-color: rgba(255,255,255,.35);
-    }
+    .control:hover{ background: rgba(0,0,0,.36); border-color: rgba(255,255,255,.35); }
 
-    /* SECTIONS */
+    /* MAIN WRAP */
     main{
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 20px 120px;
     }
 
+    /* INTRO ABOVE CAROUSEL */
+    .intro{
+      padding: 92px 0 30px;
+      position: relative;
+    }
+    .intro .soft-title{
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: .04em;
+      color: rgba(0,0,0,.35);
+      margin: 0 0 28px;
+    }
+    .intro .lead{
+      text-align: center;
+      margin: 0 auto;
+      max-width: 78ch;
+      font-size: clamp(22px, 2.2vw, 34px);
+      line-height: 1.35;
+      color: rgba(0,0,0,.65);
+    }
+    /* subtle circle decor like your mock */
+    .intro::before{
+      content:"";
+      position: absolute;
+      left: 6%;
+      top: 30px;
+      width: 210px;
+      height: 210px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.05);
+      filter: blur(.2px);
+      z-index: -1;
+    }
+
+    .framework{
+      text-align: center;
+      margin-top: 40px;
+      font-size: 18px;
+      letter-spacing: .06em;
+      color: rgba(0,0,0,.35);
+    }
+
+    /* INDICATORS (3 bars) */
+    .indicators{
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 18px 0 28px;
+    }
+    .indicator{
+      width: 44px;
+      height: 4px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--indicator);
+      cursor: pointer;
+    }
+    .indicator[aria-current="true"]{
+      background: var(--accent);
+    }
+
+    /* CAROUSEL */
+    .carousel-wrap{
+      position: relative;
+      height: var(--carousel-h);
+    }
+
+    .carousel{
+      position: relative;
+      height: 100%;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #e9e6df;
+    }
+
+    .slide{
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 420ms ease;
+    }
+    .slide.is-active{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide .media{
+      position: relative;
+      background: #d8d3ca;
+      overflow: hidden;
+    }
+    .slide .media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide .panel{
+      background: var(--panel);
+      color: rgba(255,255,255,.92);
+      display: flex;
+      align-items: center;
+      padding: 60px;
+    }
+    .panel-inner{
+      max-width: 52ch;
+      text-align: left; /* your choice 3B */
+    }
+    .panel-inner h3{
+      margin: 0 0 20px;
+      font-size: clamp(28px, 2.6vw, 44px);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      color: white;
+    }
+    .panel-inner p{
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.78);
+    }
+
+    /* ARROWS */
+    .arrow{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      border: 0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.0);
+      color: var(--accent);
+      z-index: 5;
+      transition: opacity 220ms ease, background 220ms ease;
+      opacity: 0; /* premium: hidden by default on desktop */
+    }
+    .arrow:hover{
+      background: rgba(255,255,255,.12);
+    }
+    .arrow svg{
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+    .arrow.left{ left: 18px; }
+    .arrow.right{ right: 18px; }
+
+    /* Premium behavior: show arrows on hover (desktop) */
+    @media (hover:hover) and (pointer:fine){
+      .carousel:hover .arrow{ opacity: 1; }
+    }
+    /* Mobile: always show (no hover) */
+    @media (hover:none){
+      .arrow{ opacity: 1; background: rgba(255,255,255,.10); }
+    }
+
+    /* SECTION ANCHORS BELOW (placeholders for later) */
     .section{
-      padding: 110px 0;
-      border-top: 1px solid rgba(0,0,0,.12);
+      padding: 90px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 90px;
     }
     .section h2{
-      margin: 0 0 16px;
+      margin: 0 0 14px;
       font-size: clamp(26px, 2.8vw, 40px);
       letter-spacing: -0.01em;
     }
@@ -213,10 +363,10 @@
       max-width: 70ch;
       font-size: 18px;
       line-height: 1.75;
-      color: rgba(0,0,0,.70);
+      color: var(--muted);
     }
 
-    /* Mobile */
+    /* RESPONSIVE */
     @media (max-width: 980px){
       .nav-inner{
         grid-template-columns: 1fr;
@@ -227,13 +377,28 @@
         overflow-x: auto;
         padding-bottom: 6px;
       }
-      .right{
-        justify-content: space-between;
-      }
+      .right{ justify-content: space-between; }
       .hero{
         height: calc(82vh - 72px);
         min-height: 460px;
       }
+
+      :root{ --carousel-h: 620px; } /* a bit taller for mobile readability */
+      .slide{
+        grid-template-columns: 1fr;
+      }
+      .slide .panel{
+        padding: 34px 26px;
+      }
+      .carousel-wrap{
+        height: var(--carousel-h);
+      }
+    }
+
+    @media (max-width: 520px){
+      :root{ --carousel-h: 660px; }
+      .panel-inner p{ font-size: 16px; }
+      .panel-inner h3{ font-size: 30px; }
     }
   </style>
 </head>
@@ -241,24 +406,19 @@
 <body>
   <nav class="nav" aria-label="Hoofdnavigatie">
     <div class="nav-inner">
-      <!-- Links: logo + naam -->
       <div class="brand">
-        <!-- Gebruik je bestaande logo bestand; pas de naam aan als je logo anders heet -->
         <img src="./logo_for_my__Nano_Banana_Pro_76452.jpg" alt="Human Load Consultancy logo">
         <div class="name">Human Load<br/>Consultancy</div>
       </div>
 
-      <!-- Midden: menu -->
       <div class="menu">
-        <a href="#services">Services</a>
+        <a href="#packages">Services</a>
         <a href="#faq">FAQ</a>
         <a href="#about">About</a>
       </div>
 
-      <!-- Rechts: contact + taal -->
       <div class="right">
         <a class="contact-btn" href="#contact">Contact</a>
-
         <div class="flags" aria-label="Taalkeuze">
           <button class="flag is-active" type="button" data-lang="nl" aria-pressed="true" title="Nederlands">NL</button>
           <button class="flag" type="button" data-lang="en" aria-pressed="false" title="English">EN</button>
@@ -269,7 +429,6 @@
   </nav>
 
   <header class="hero" aria-label="Hero video">
-    <!-- Upload straks jouw video als: hero.mp4 in dezelfde repo-root -->
     <video id="heroVideo" autoplay loop playsinline muted>
       <source src="./hero.mp4" type="video/mp4">
       Je browser ondersteunt geen video.
@@ -281,73 +440,220 @@
   </header>
 
   <main>
-    <section id="services" class="section">
-      <h2>Services</h2>
-      <p>
-        (Plaats hier straks je services content in de stijl van je Canva ontwerp.)
+    <!-- INTRO + PACKAGES -->
+    <section id="packages" class="intro">
+      <p class="soft-title">Human Load Consultancy</p>
+
+      <p class="lead">
+        Human Load Consultancy helps organisations reduce sick leave by proactively focusing on physical strain for employees who work extensively behind a screen.
+        Through a structured 12-week trajectory, prevention becomes part of daily operations — not an afterthought.
       </p>
+
+      <div class="framework">A Three-Level Prevention Framework</div>
+
+      <div class="indicators" role="tablist" aria-label="Pakketten">
+        <button class="indicator" role="tab" aria-current="true" aria-label="Slide 1" data-go="0"></button>
+        <button class="indicator" role="tab" aria-current="false" aria-label="Slide 2" data-go="1"></button>
+        <button class="indicator" role="tab" aria-current="false" aria-label="Slide 3" data-go="2"></button>
+      </div>
+
+      <div class="carousel-wrap">
+        <div class="carousel" id="carousel">
+          <!-- Arrows -->
+          <button class="arrow left" type="button" aria-label="Vorige" id="prevBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          </button>
+          <button class="arrow right" type="button" aria-label="Volgende" id="nextBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.59 16.59 1.41 1.41 6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+          </button>
+
+          <!-- Slides -->
+          <article class="slide is-active" data-index="0" aria-label="Foundation">
+            <div class="media">
+              <!-- Vervang later door jouw eigen afbeelding (upload als foundation.jpg) -->
+              <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" alt="Foundation package image">
+            </div>
+            <div class="panel">
+              <div class="panel-inner">
+                <h3>Foundation</h3>
+                <p>A structured foundation for preventing physical strain in screen-based work.</p>
+                <p>This 12-week program focuses on awareness, behavioural change and practical adjustments in daily routines.</p>
+                <p>It establishes the first structural layer of prevention within the organisation.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide" data-index="1" aria-label="Organisational">
+            <div class="media">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80" alt="Organisational package image">
+            </div>
+            <div class="panel">
+              <div class="panel-inner">
+                <h3>Organisational</h3>
+                <p>Prevention shifts from individual responsibility to organisational alignment.</p>
+                <p>Work patterns, collaboration and expectations are examined to reduce structural strain.</p>
+                <p>Physical load is addressed as a collective and systemic matter — not a personal limitation.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide" data-index="2" aria-label="Strategic">
+            <div class="media">
+              <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1600&q=80" alt="Strategic package image">
+            </div>
+            <div class="panel">
+              <div class="panel-inner">
+                <h3>Strategic</h3>
+                <p>Prevention becomes structurally integrated into governance and operational policy.</p>
+                <p>Leadership, HR and management embed physical load awareness into decision-making processes.</p>
+                <p>The result is not temporary relief, but sustainable structural integration.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
+    <!-- Placeholders for your one-page nav targets -->
     <section id="faq" class="section">
       <h2>FAQ</h2>
-      <p>
-        (Plaats hier straks je FAQ. We kunnen dit later als strakke accordion bouwen.)
-      </p>
+      <p>(Komt later: we bouwen dit als premium accordion.)</p>
     </section>
 
     <section id="about" class="section">
       <h2>About</h2>
-      <p>
-        (Plaats hier straks je “Over Human Load Consultancy” tekst — kort, scherp, consultancy-style.)
-      </p>
+      <p>(Komt later: jouw “Over” verhaal, kort en beleidsmatig.)</p>
     </section>
 
     <section id="contact" class="section">
       <h2>Contact</h2>
-      <p>
-        (Plaats hier straks je contactblok of formulier. Bijvoorbeeld: e-mail + intake-knop.)
-      </p>
+      <p>(Komt later: contactblok + intake CTA.)</p>
     </section>
   </main>
 
   <script>
     // VIDEO: autoplay werkt betrouwbaar als muted start.
-    // Met deze knop kan de bezoeker het geluid aan/uit zetten.
     const video = document.getElementById('heroVideo');
     const muteBtn = document.getElementById('muteBtn');
 
     function updateMuteLabel(){
       muteBtn.textContent = video.muted ? "🔇 Geluid uit" : "🔊 Geluid aan";
     }
-
     muteBtn.addEventListener('click', async () => {
       video.muted = !video.muted;
       updateMuteLabel();
-
-      // Sommige browsers willen een play() na user-interactie.
       try { if (video.paused) await video.play(); } catch(e) {}
     });
-
     updateMuteLabel();
 
-    // TAAL: versie 1 = alleen “actief” highlight + html lang attribuut.
-    // Echte vertalingen bouwen we later.
+    // TAAL: v1 = alleen active highlight
     const flagButtons = document.querySelectorAll('.flag');
     flagButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const lang = btn.getAttribute('data-lang');
-
-        flagButtons.forEach(b => {
-          b.classList.remove('is-active');
-          b.setAttribute('aria-pressed', 'false');
-        });
-
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-pressed', 'true');
-
+        flagButtons.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('is-active'); btn.setAttribute('aria-pressed', 'true');
         document.documentElement.lang = lang;
       });
     });
+
+    // CAROUSEL (fade + autoplay + pause-after-interaction + swipe + clickable indicators)
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const indicators = Array.from(document.querySelectorAll('.indicator'));
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const carousel = document.getElementById('carousel');
+
+    let current = 0;
+    const AUTOPLAY_MS = 6000;      // your choice 2B (auto)
+    const RESUME_AFTER_MS = 8000;  // your choice 1B (pause then resume)
+    let autoplayTimer = null;
+    let resumeTimer = null;
+
+    function setActive(index, reason = "auto"){
+      const clamped = (index + slides.length) % slides.length;
+      current = clamped;
+
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === current));
+      indicators.forEach((d, i) => d.setAttribute('aria-current', i === current ? "true" : "false"));
+    }
+
+    function next(reason="auto"){ setActive(current + 1, reason); }
+    function prev(reason="auto"){ setActive(current - 1, reason); }
+
+    function stopAutoplay(){
+      if (autoplayTimer) clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+
+    function startAutoplay(){
+      stopAutoplay();
+      autoplayTimer = setInterval(() => next("auto"), AUTOPLAY_MS);
+    }
+
+    function pauseThenResume(){
+      // pause autoplay temporarily after interaction
+      stopAutoplay();
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => startAutoplay(), RESUME_AFTER_MS);
+    }
+
+    // Buttons
+    nextBtn.addEventListener('click', () => { next("click"); pauseThenResume(); });
+    prevBtn.addEventListener('click', () => { prev("click"); pauseThenResume(); });
+
+    // Indicators click
+    indicators.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const go = Number(btn.getAttribute('data-go'));
+        setActive(go, "indicator");
+        pauseThenResume();
+      });
+    });
+
+    // Swipe (mobile)
+    let touchStartX = null;
+    let touchStartY = null;
+    let touchStartT = null;
+
+    function onTouchStart(e){
+      const t = e.touches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touchStartT = Date.now();
+    }
+
+    function onTouchMove(e){
+      // no-op (we just measure)
+    }
+
+    function onTouchEnd(e){
+      if (touchStartX === null || touchStartY === null) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      const dt = Date.now() - touchStartT;
+
+      // Only horizontal swipes, avoid accidental vertical scroll gestures
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+
+      // thresholds tuned for "premium feel"
+      if (absX > 60 && absX > absY * 1.6 && dt < 700){
+        if (dx < 0) next("swipe");
+        else prev("swipe");
+        pauseThenResume();
+      }
+
+      touchStartX = touchStartY = touchStartT = null;
+    }
+
+    carousel.addEventListener('touchstart', onTouchStart, { passive: true });
+    carousel.addEventListener('touchmove', onTouchMove, { passive: true });
+    carousel.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    // Start autoplay
+    startAutoplay();
   </script>
 </body>
 </html>
