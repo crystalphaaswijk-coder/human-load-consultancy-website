@@ -557,7 +557,30 @@
     min-height: unset;
   }
 }
+/* ===== Premium FAQ highlight line ===== */
 
+.faq-item {
+  position: relative;
+  padding-left: 18px;
+}
+
+.faq-item.is-open::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 3px;
+  height: calc(100% - 16px);
+  background: var(--accent);
+  border-radius: 3px;
+  opacity: 0;
+  animation: faqLineFade 0.25s ease forwards;
+}
+
+@keyframes faqLineFade {
+  to { opacity: 1; }
+}
+    
   </style>
 </head>
 
