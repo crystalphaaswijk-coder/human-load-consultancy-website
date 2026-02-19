@@ -580,6 +580,214 @@
 @keyframes faqLineFade {
   to { opacity: 1; }
 }
+
+/* ===== Methodology Carousel (HLC) ===== */
+.hlc-methodology{
+  padding: 140px 0 110px;
+  border-top: 1px solid var(--border);
+  margin-top: 90px;
+}
+
+.hlc-methodology__header{
+  max-width: 900px;
+  margin: 0 auto 26px;
+  text-align: left;
+}
+
+.hlc-kicker{
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.45);
+}
+
+.hlc-h2{
+  margin: 0 0 14px;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.hlc-subline{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 72ch;
+}
+
+/* Carousel shell */
+.hlc-carousel{
+  position: relative;
+  margin-top: 34px;
+}
+
+.hlc-viewport{
+  overflow: hidden;
+  border-radius: 26px;
+}
+
+.hlc-track{
+  display: flex;
+  gap: 22px;
+  will-change: transform;
+  transition: transform 520ms cubic-bezier(.2,.85,.25,1);
+  padding: 14px 10px 18px;
+}
+
+/* side-peek op desktop */
+.hlc-slide{
+  flex: 0 0 calc(100% - 220px);
+  min-width: 0;
+}
+
+@media (max-width: 920px){
+  .hlc-slide{ flex-basis: calc(100% - 120px); }
+}
+
+@media (max-width: 720px){
+  .hlc-methodology{ padding: 110px 0 90px; }
+  .hlc-track{ gap: 16px; padding: 10px 6px 16px; }
+  .hlc-slide{ flex-basis: 100%; } /* geen side peek */
+  .hlc-methodology__header{ text-align: left; }
+}
+
+/* Cards (match jouw premium theme: soft, clean) */
+.hlc-card{
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 28px 28px 26px;
+  backdrop-filter: blur(8px);
+}
+
+.hlc-eyebrow{
+  margin: 0 0 14px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.50);
+}
+
+.hlc-body{
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(0,0,0,.85);
+  max-width: 72ch;
+}
+
+.hlc-body p{ margin: 0 0 12px; }
+.hlc-body p:last-child{ margin-bottom: 0; }
+
+.hlc-bullets{
+  margin: 10px 0 14px;
+  padding-left: 18px;
+  color: rgba(0,0,0,.85);
+}
+.hlc-bullets li{ margin: 6px 0; }
+
+.hlc-emphasis{
+  margin: 14px 0 8px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+/* Nav buttons (subtiel, premium) */
+.hlc-nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.70);
+  box-shadow: 0 10px 24px rgba(0,0,0,.10);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, opacity 160ms ease;
+  z-index: 5;
+  opacity: .95;
+}
+.hlc-nav:hover{ background: rgba(255,255,255,.88); transform: translateY(-50%) scale(1.02); }
+.hlc-nav:active{ transform: translateY(-50%) scale(.98); }
+.hlc-nav span{ font-size: 26px; line-height: 1; }
+
+.hlc-nav--prev{ left: -8px; }
+.hlc-nav--next{ right: -8px; }
+
+@media (max-width: 720px){
+  .hlc-nav--prev{ left: 6px; }
+  .hlc-nav--next{ right: 6px; }
+}
+
+/* Meta (01/06 + progress lijn) */
+.hlc-meta{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.hlc-count{
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.55);
+}
+
+.hlc-bar{
+  width: min(220px, 48vw);
+  height: 2px;
+  background: rgba(0,0,0,.14);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.hlc-barFill{
+  display: block;
+  height: 100%;
+  width: 16.66%;
+  background: rgba(0,0,0,.45);
+  border-radius: 999px;
+  transition: width 420ms cubic-bezier(.2,.85,.25,1);
+}
+
+/* Impact panel (onder de carousel, subtiel contrast) */
+.hlc-impact{
+  margin-top: 26px;
+}
+
+.hlc-impact__panel{
+  border-radius: 26px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: rgba(0,0,0,.035);
+  padding: 44px 36px;
+}
+
+.hlc-impact__title{
+  margin: 0 0 16px;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.hlc-impact__lines{
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  font-size: 18px;
+  line-height: 1.35;
+  color: rgba(0,0,0,.85);
+}
+
+@media (max-width: 720px){
+  .hlc-impact__panel{ padding: 34px 22px; }
+}
     
   </style>
 </head>
