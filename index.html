@@ -900,18 +900,24 @@
     startAutoplay();
     
     // ===== FAQ accordion (premium): click opens, hover only highlights =====
-(function () {
+// ===== FAQ accordion (robust) =====
+window.addEventListener('DOMContentLoaded', () => {
   const items = Array.from(document.querySelectorAll('.faq-item'));
   if (!items.length) return;
 
   // Start closed
   items.forEach((item) => {
-    const ans = item.querySelector('.faq-answer');
-    if (ans) ans.style.maxHeight = '0px';
     item.classList.remove('is-open');
+    const ans = item.querySelector('.faq-answer');
+    const icon = item.querySelector('.faq-icon');
+    if (ans) {
+      ans.style.overflow = 'hidden';
+      ans.style.maxHeight = '0px';
+    }
+    if (icon) icon.textContent = '+';
   });
 
-  function closeItem(item) {
+  function close(item) {
     item.classList.remove('is-open');
     const ans = item.querySelector('.faq-answer');
     const icon = item.querySelector('.faq-icon');
@@ -919,7 +925,7 @@
     if (icon) icon.textContent = '+';
   }
 
-  function openItem(item) {
+  function open(item) {
     item.classList.add('is-open');
     const ans = item.querySelector('.faq-answer');
     const icon = item.querySelector('.faq-icon');
@@ -929,27 +935,30 @@
 
   items.forEach((item) => {
     const q = item.querySelector('.faq-question');
-    if (!q) return;
+    const ans = item.querySelector('.faq-answer');
+    if (!q || !ans) return;
+
+    q.style.cursor = 'pointer';
 
     q.addEventListener('click', () => {
       const isOpen = item.classList.contains('is-open');
 
       // 1 open tegelijk
       items.forEach((other) => {
-        if (other !== item) closeItem(other);
+        if (other !== item) close(other);
       });
 
-      if (isOpen) closeItem(item);
-      else openItem(item);
+      if (isOpen) close(item);
+      else open(item);
     });
   });
 
-  // Recalculate height on resize for the open item (premium polish)
+  // Recalc open height on resize
   window.addEventListener('resize', () => {
-    const open = document.querySelector('.faq-item.is-open .faq-answer');
-    if (open) open.style.maxHeight = open.scrollHeight + 'px';
+    const openAns = document.querySelector('.faq-item.is-open .faq-answer');
+    if (openAns) openAns.style.maxHeight = openAns.scrollHeight + 'px';
   });
-})();
+});
 
   </script>
 </body>
