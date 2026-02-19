@@ -875,6 +875,59 @@
 
     // Start autoplay
     startAutoplay();
+    
+    // ===== FAQ accordion (premium): click opens, hover only highlights =====
+(function () {
+  const items = Array.from(document.querySelectorAll('.faq-item'));
+  if (!items.length) return;
+
+  // Start closed
+  items.forEach((item) => {
+    const ans = item.querySelector('.faq-answer');
+    if (ans) ans.style.maxHeight = '0px';
+    item.classList.remove('is-open');
+  });
+
+  function closeItem(item) {
+    item.classList.remove('is-open');
+    const ans = item.querySelector('.faq-answer');
+    const icon = item.querySelector('.faq-icon');
+    if (ans) ans.style.maxHeight = '0px';
+    if (icon) icon.textContent = '+';
+  }
+
+  function openItem(item) {
+    item.classList.add('is-open');
+    const ans = item.querySelector('.faq-answer');
+    const icon = item.querySelector('.faq-icon');
+    if (ans) ans.style.maxHeight = ans.scrollHeight + 'px';
+    if (icon) icon.textContent = '−';
+  }
+
+  items.forEach((item) => {
+    const q = item.querySelector('.faq-question');
+    if (!q) return;
+
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+
+      // 1 open tegelijk
+      items.forEach((other) => {
+        if (other !== item) closeItem(other);
+      });
+
+      if (isOpen) closeItem(item);
+      else openItem(item);
+    });
+  });
+
+  // Recalculate height on resize for the open item (premium polish)
+  window.addEventListener('resize', () => {
+    const open = document.querySelector('.faq-item.is-open .faq-answer');
+    if (open) open.style.maxHeight = open.scrollHeight + 'px';
+  });
+})();
+
   </script>
 </body>
 </html>
