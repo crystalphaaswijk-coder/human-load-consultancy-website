@@ -899,64 +899,71 @@
     // Start autoplay
     startAutoplay();
     
-    // ===== FAQ accordion (premium): click opens, hover only highlights =====
-// ===== FAQ accordion (robust) =====
+    // ===== FAQ accordion (works with multiple class name variants) =====
 window.addEventListener('DOMContentLoaded', () => {
   const items = Array.from(document.querySelectorAll('.faq-item'));
   if (!items.length) return;
 
+  const getQ = (item) => item.querySelector('.faq-q, .faq-question');
+  const getA = (item) => item.querySelector('.faq-a, .faq-answer');
+
   // Start closed
   items.forEach((item) => {
     item.classList.remove('is-open');
-    const ans = item.querySelector('.faq-answer');
-    const icon = item.querySelector('.faq-icon');
-    if (ans) {
-      ans.style.overflow = 'hidden';
-      ans.style.maxHeight = '0px';
-    }
-    if (icon) icon.textContent = '+';
+    const a = getA(item);
+    if (!a) return;
+
+    // supports both "hidden" attribute and height animation
+    a.hidden = true;
+    a.style.overflow = 'hidden';
+    a.style.maxHeight = '0px';
   });
 
-  function close(item) {
+  function closeItem(item) {
     item.classList.remove('is-open');
-    const ans = item.querySelector('.faq-answer');
-    const icon = item.querySelector('.faq-icon');
-    if (ans) ans.style.maxHeight = '0px';
-    if (icon) icon.textContent = '+';
+    const a = getA(item);
+    if (!a) return;
+    a.style.maxHeight = '0px';
+    a.hidden = true;
   }
 
-  function open(item) {
+  function openItem(item) {
     item.classList.add('is-open');
-    const ans = item.querySelector('.faq-answer');
-    const icon = item.querySelector('.faq-icon');
-    if (ans) ans.style.maxHeight = ans.scrollHeight + 'px';
-    if (icon) icon.textContent = '−';
+    const a = getA(item);
+    if (!a) return;
+
+    a.hidden = false;
+    // wait a tick so scrollHeight is correct after un-hiding
+    requestAnimationFrame(() => {
+      a.style.maxHeight = a.scrollHeight + 'px';
+    });
   }
 
   items.forEach((item) => {
-    const q = item.querySelector('.faq-question');
-    const ans = item.querySelector('.faq-answer');
-    if (!q || !ans) return;
-
-    q.style.cursor = 'pointer';
+    const q = getQ(item);
+    const a = getA(item);
+    if (!q || !a) return;
 
     q.addEventListener('click', () => {
       const isOpen = item.classList.contains('is-open');
 
       // 1 open tegelijk
       items.forEach((other) => {
-        if (other !== item) close(other);
+        if (other !== item) closeItem(other);
       });
 
-      if (isOpen) close(item);
-      else open(item);
+      if (isOpen) closeItem(item);
+      else openItem(item);
     });
   });
 
-  // Recalc open height on resize
+  // Recalculate open height on resize
   window.addEventListener('resize', () => {
-    const openAns = document.querySelector('.faq-item.is-open .faq-answer');
-    if (openAns) openAns.style.maxHeight = openAns.scrollHeight + 'px';
+    const openItemEl = document.querySelector('.faq-item.is-open');
+    if (!openItemEl) return;
+    const a = getA(openItemEl);
+    if (!a) return;
+    a.style.maxHeight = a.scrollHeight + 'px';
   });
 });
 
