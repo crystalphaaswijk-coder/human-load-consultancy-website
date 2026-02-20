@@ -788,6 +788,43 @@
 @media (max-width: 720px){
   .hlc-impact__panel{ padding: 34px 22px; }
 }
+/* ===== Fix: slides always same height ===== */
+.hlc-track{
+  align-items: stretch;       /* alle slides even hoog */
+}
+
+.hlc-slide{
+  display: flex;              /* laat de card de volle hoogte nemen */
+}
+
+.hlc-card{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Fix: less empty space / better text fit ===== */
+.hlc-card{
+  padding: 22px 22px 20px;    /* compacter */
+}
+
+.hlc-body{
+  max-width: 62ch;            /* voorkomt rare lege regels */
+}
+
+.hlc-body p{
+  margin: 0 0 10px;           /* minder wit tussen paragrafen */
+}
+
+.hlc-bullets{
+  margin: 8px 0 12px;
+}
+
+.hlc-bullets li{
+  margin: 5px 0;
+}
+
     
   </style>
 </head>
