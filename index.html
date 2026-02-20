@@ -1340,10 +1340,10 @@ window.addEventListener('DOMContentLoaded', () => {
     nextBtn.style.opacity = atEnd ? "0.55" : "1";
   };
 
-  const go = (dir) => {
-    const next = index + dir;
-    index = Math.max(0, Math.min(slides.length - 1, next));
-    apply();
+ const go = (dir) => {
+  const total = slides.length;
+  index = (index + dir + total) % total; // rondlopend
+  apply();
   };
 
   prevBtn.addEventListener("click", () => go(-1));
