@@ -18,16 +18,22 @@ faders.forEach(fader => {
 
 const heroBg = document.querySelector('.hero-bg');
 
+const heroBg = document.querySelector(".hero-bg");
+let ticking = false;
+
 function parallaxHero() {
   if (!heroBg) return;
 
-  const scrollY = window.scrollY || window.pageYOffset;
-
-  // Subtiele parallax: hoe hoger dit getal, hoe “sterker” het effect
-  const offset = scrollY * 0.2;
-
-  heroBg.style.transform = `translateY(${offset}px)`;
+  const y = window.scrollY || window.pageYOffset;
+  heroBg.style.transform = `translateY(${y * 0.18}px)`;
+  ticking = false;
 }
 
-window.addEventListener('scroll', parallaxHero, { passive: true });
-window.addEventListener('load', parallaxHero);
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(parallaxHero);
+    ticking = true;
+  }
+}, { passive: true });
+
+window.addEventListener("load", parallaxHero);
