@@ -117,13 +117,13 @@ section{ padding: 120px 0; }
 /* Top bar (logo left, pill right) */
 .hero-top{
   position: absolute;
-  top: 14px;   /* was 22px */
-  left: 24px;
-  right: 24px;
-}
+  top: 14px;
+  left: 32px;
+  right: 32px;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between;  /* BELANGRIJK */
   z-index: 3;
 }
 
