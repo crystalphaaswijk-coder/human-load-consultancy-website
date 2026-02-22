@@ -17,30 +17,31 @@ faders.forEach((fader) => {
   appearOnScroll.observe(fader);
 });
 
-// Hero parallax (subtiel / Kora-achtig)
+const hero = document.querySelector(".hero");
 const heroBg = document.querySelector(".hero-bg");
 let ticking = false;
 
 function parallaxHero() {
-  if (!heroBg) return;
+  if (!hero || !heroBg) return;
 
   const y = window.scrollY || window.pageYOffset;
+  const heroH = hero.offsetHeight;
 
-  // maak sterker door dit getal te verhogen
-  heroBg.style.transform = `translateY(${y * 0.35}px)`;
+  // alleen parallax binnen hero-range (0 → 1)
+  const p = Math.min(Math.max(y / heroH, 0), 1);
 
+  // sterker effect: max 140px shift
+  const offset = p * 140;
+
+  heroBg.style.transform = `translateY(${offset}px)`;
   ticking = false;
 }
 
-window.addEventListener(
-  "scroll",
-  () => {
-    if (!ticking) {
-      window.requestAnimationFrame(parallaxHero);
-      ticking = true;
-    }
-  },
-  { passive: true }
-);
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    requestAnimationFrame(parallaxHero);
+    ticking = true;
+  }
+}, { passive: true });
 
 window.addEventListener("load", parallaxHero);
