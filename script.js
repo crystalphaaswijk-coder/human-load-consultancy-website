@@ -21,27 +21,31 @@ const hero = document.querySelector(".hero");
 const heroBg = document.querySelector(".hero-bg");
 let ticking = false;
 
-function parallaxHero() {
-  if (!hero || !heroBg) return;
+const heroWrap = document.querySelector(".hero-wrap");
+const heroBg = document.querySelector(".hero-bg");
+let ticking = false;
+
+function parallaxHero(){
+  if(!heroWrap || !heroBg) return;
 
   const y = window.scrollY || window.pageYOffset;
-  const heroH = hero.offsetHeight;
+  const h = heroWrap.offsetHeight;
 
-  // alleen parallax binnen hero-range (0 → 1)
-  const p = Math.min(Math.max(y / heroH, 0), 1);
+  // 0..1 binnen de hero-wrap
+  const p = Math.min(Math.max(y / h, 0), 1);
 
-  // sterker effect: max 140px shift
-  const offset = p * 140;
+  // sterker effect (pas gerust aan)
+  const offset = p * 180;
 
   heroBg.style.transform = `translateY(${offset}px)`;
   ticking = false;
 }
 
 window.addEventListener("scroll", () => {
-  if (!ticking) {
+  if(!ticking){
     requestAnimationFrame(parallaxHero);
     ticking = true;
   }
-}, { passive: true });
+}, { passive:true });
 
 window.addEventListener("load", parallaxHero);
