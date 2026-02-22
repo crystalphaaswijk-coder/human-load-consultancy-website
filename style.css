@@ -35,7 +35,31 @@ p {
 }
 
 .hero {
-  background: #ffffff;
+  position: relative;
+  min-height: 100vh; /* fullscreen zoals Kora */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10%;
+  text-align: center;
+  color: white;
+
+  background: url("front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg") center/cover no-repeat;
+}
+
+/* Donkere overlay met jouw hoofdkleur #343a48 */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(52, 58, 72, 0.75);
+}
+
+.hero h1,
+.hero p {
+  position: relative;
+  z-index: 2;
 }
 
 .service-grid {
