@@ -1,4 +1,4 @@
-// Year in footer
+// Footer year
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -21,6 +21,7 @@ faders.forEach((el) => appearOnScroll.observe(el));
 // Hero parallax (within hero-wrap only)
 const heroWrap = document.querySelector(".hero-wrap");
 const heroBg = document.querySelector(".hero-bg");
+
 let ticking = false;
 
 function parallaxHero() {
@@ -32,7 +33,7 @@ function parallaxHero() {
   // 0..1 within hero-wrap
   const p = Math.min(Math.max(y / h, 0), 1);
 
-  // stronger but still premium
+  // premium but visible
   const offset = p * 220; // px
 
   heroBg.style.transform = `translateY(${offset}px)`;
@@ -52,8 +53,4 @@ window.addEventListener(
 
 window.addEventListener("load", () => {
   parallaxHero();
-
-  // Prevent blank page edge case: make hero visible immediately if it has fade-in
-  const hero = document.querySelector(".hero.fade-in");
-  if (hero) hero.classList.add("appear");
 });
