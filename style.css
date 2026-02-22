@@ -1,65 +1,109 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ===== Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  --ink: #343a48;            /* hoofdkleur */
+  --bg: #ffffff;
+  --sheet: #ffffff;
+  --muted: #f4f5f8;
+  --accent: #6c63ff;         /* paars accent */
+  --accent2: #78b4ff;        /* blauwige glow */
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  color: #1c1c1c;
-  background: #f7f6f4;
+html, body { height: 100%; }
+
+body{
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
   line-height: 1.6;
 }
 
-.hero-wrap{
-  height: 100vh;        /* begrenst sticky */
-  position: relative;
-}
-
-section, header {
-  padding: 120px 10%;
-  text-align: center;
-}
-
-h1 {
-  font-size: 4rem;
-  font-weight: 500;
-  margin-bottom: 24px;
+/* ===== Typography ===== */
+h1{
+  font-size: clamp(2.4rem, 4.3vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   max-width: 1000px;
 }
 
-h2 {
-  font-size: 2.4rem;
-  font-weight: 500;
-  margin-bottom: 60px;
+h2{
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 56px;
 }
 
-p {
-  max-width: 700px;
-  margin: 0 auto;
+p{
   font-weight: 300;
 }
 
-.hero{
-  position: sticky;     /* pinned */
-  top: 0;
-  height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0 10%;
-  text-align: center;
-  color: #fff;
-
-  overflow: hidden;
-  isolation: isolate;
-  z-index: 1;
+.lead{
+  font-size: 1.15rem;
+  max-width: 760px;
+  margin: 0 auto;
+  opacity: 0.95;
 }
 
-/* Parallax image layer */
+/* ===== Layout helpers ===== */
+.section-inner{
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section{
+  padding: 120px 0;
+}
+
+/* ===== Buttons ===== */
+.btn{
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: transform .35s ease, background .35s ease, box-shadow .35s ease, color .35s ease, border-color .35s ease;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 16px 40px rgba(108,99,255,0.18);
+}
+
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 55px rgba(108,99,255,0.28);
+}
+
+.btn-ghost{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.30);
+  color: #fff;
+  box-shadow: none;
+}
+
+.btn-ghost:hover{
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.45);
+}
+
+/* ===== HERO: pinned + chapter slide feel ===== */
+.hero-wrap{
+  height: 200vh;          /* bepaalt hoe lang hero "blijft staan" */
+  position: relative;
+}
+
+.hero{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+/* hero background (parallax laag) */
 .hero-bg{
   position: absolute;
   inset: -12%;
@@ -69,128 +113,165 @@ p {
   z-index: 0;
 }
 
+/* donker overlay met #343a48 */
 .hero::before{
-  content:"";
-  position: fixed;            /* ook fixed */
+  content: "";
+  position: absolute;
   inset: 0;
-  height: 100vh;
-  background: rgba(52,58,72,0.70);
-  z-index: -1;
-  pointer-events: none;
+  background: rgba(52, 58, 72, 0.70);
+  z-index: 1;
 }
 
+/* blauwe/paarse glow */
 .hero::after{
-  content:"";
-  position: fixed;            /* ook fixed */
+  content: "";
+  position: absolute;
   inset: -20%;
-  height: 140vh;
   background:
     radial-gradient(60% 40% at 50% 30%, rgba(108, 99, 255, 0.35), rgba(108, 99, 255, 0) 60%),
-    radial-gradient(40% 30% at 20% 20%, rgba(120, 180, 255, 0.25), rgba(120, 180, 255, 0) 65%);
-  z-index: -1;
+    radial-gradient(45% 35% at 20% 20%, rgba(120, 180, 255, 0.28), rgba(120, 180, 255, 0) 65%);
+  z-index: 2;
   pointer-events: none;
 }
 
-.hero h1,
-.hero p {
+.hero-content{
   position: relative;
   z-index: 3;
+  text-align: center;
+  padding: 0 10%;
+}
+
+.hero-content p{
+  max-width: 720px;
+  margin: 18px auto 0;
+  font-size: 1.1rem;
+  opacity: 0.92;
+}
+
+.hero-actions{
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+/* ===== SERVICES: white sheet slides over hero ===== */
+.services{
+  position: relative;
+  z-index: 10;
+
+  margin-top: -40vh;     /* overlap over hero */
+  padding-top: 40vh;     /* compenseer */
+
+  background: var(--sheet);
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  box-shadow: 0 -20px 60px rgba(0,0,0,0.08);
+  color: var(--ink);
 }
 
 .service-grid{
-  display:flex;
-  gap: 50px;
-  justify-content:center;
+  display: flex;
+  gap: 28px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .service-card{
-  background:#fff;                 /* altijd zichtbaar */
+  width: min(340px, 100%);
+  background: #fff;
   border: 1px solid rgba(52,58,72,0.12);
-  border-radius: 14px;
-  padding: 70px 50px;
-  width: 320px;
-  transition: transform .5s ease, box-shadow .5s ease, border-color .5s ease;
-  cursor:pointer;
+  border-radius: 16px;
+  padding: 54px 44px;
+  cursor: pointer;
+  transition: transform .5s ease, box-shadow .5s ease, border-color .5s ease, background .5s ease;
   box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+  outline: none;
 }
 
-.service-card:hover{
-  transform: translateY(-10px);
-  box-shadow: 0 28px 70px rgba(0,0,0,0.10);
-  border-color: rgba(108,99,255,0.35); /* paarse accent */
+.service-card h3{
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--ink);
 }
 
 .service-hover{
-  opacity:0;
+  opacity: 0;
   transform: translateY(10px);
   transition: all .5s ease;
-  margin-top: 18px;
+  color: var(--ink);
 }
 
-.service-card:hover .service-hover{
-  opacity:1;
-  transform: translateY(0);
+.service-card:hover,
+.service-card:focus{
+  transform: translateY(-10px);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.10);
+  border-color: rgba(108,99,255,0.35);
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 14px 32px;
-  background: #1c1c1c;
-  color: white;
-  text-decoration: none;
-  transition: 0.4s ease;
-}
-
-.btn:hover {
-  background: #3a3a3a;
-}
-
-/* Fade in animation */
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.fade-in.appear {
+.service-card:hover .service-hover,
+.service-card:focus .service-hover{
   opacity: 1;
   transform: translateY(0);
 }
 
-.services{
-  position: relative;
-  z-index: 10;
-  margin-top: -25vh;        /* schuift over de hero */
-  padding-top: 25vh;        /* compenseert zodat content niet “afgesneden” wordt */
-  background: #ffffff;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
-  box-shadow: 0 -20px 60px rgba(0,0,0,0.08);
+/* ===== Approach ===== */
+.approach{
+  background: var(--muted);
 }
 
-.services{
-  position: relative;
-  z-index: 5;
-  margin-top: -22vh;       /* schuift over hero */
-  padding-top: 22vh;       /* compenseert zodat content niet afsnijdt */
-  background: #fff;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
-  box-shadow: 0 -20px 60px rgba(0,0,0,0.08);
+.pill-row{
+  margin-top: 34px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.services{
-  position: relative;
-  z-index: 10;
+.pill{
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(52,58,72,0.12);
+  background: rgba(255,255,255,0.65);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
 
-  margin-top: -22vh;    /* schuift over hero */
-  padding-top: 22vh;    /* compenseert */
+/* ===== CTA ===== */
+.cta{
+  background: var(--ink);
+  color: #fff;
+}
 
-  background: #ffffff;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
-  box-shadow: 0 -20px 60px rgba(0,0,0,0.08);
+.cta .btn{
+  margin-top: 28px;
+}
+
+/* ===== Footer ===== */
+.footer{
+  padding: 40px 0;
+  background: #0f121a;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+}
+
+/* ===== Fade-in on scroll ===== */
+.fade-in{
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity .85s ease, transform .85s ease;
+}
+
+.fade-in.appear{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive tweaks ===== */
+@media (max-width: 700px){
+  section{ padding: 90px 0; }
+  .services{ margin-top: -28vh; padding-top: 28vh; }
+  .service-card{ padding: 44px 34px; }
 }
