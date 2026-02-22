@@ -86,6 +86,12 @@ p {
   z-index: 3;
 }
 
+.hero{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
 .service-grid {
   display: flex;
   gap: 40px;
