@@ -120,9 +120,8 @@ section{ padding: 120px 0; }
   top: 14px;
   left: 32px;
   right: 32px;
-
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;  /* BELANGRIJK */
   z-index: 3;
 }
@@ -139,7 +138,6 @@ section{ padding: 120px 0; }
   width: auto;
   display: block;
   filter: drop-shadow(0 10px 25px rgba(0,0,0,0.18));
-  transform: translateY(-12px);
 }
 
 /* Pill CTA like Kora (right top) */
