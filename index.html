@@ -1,61 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Human Load Consultancy</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human Load Consultancy</title>
+
+  <link rel="stylesheet" href="style.css?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="hero fade-in appear">
-<div class="hero-wrap">
-  <header class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
+  <!-- HERO WRAP: bepaalt hoe lang de hero "pinned" blijft -->
+  <div class="hero-wrap">
+    <header class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
 
-    <h1>Preventive work culture for screen-based work</h1>
-    <p>We help organizations reduce physical strain before it becomes a problem.</p>
-  </header>
-</div>
+      <div class="hero-content">
+        <h1>Preventive work culture for screen-based work</h1>
+        <p>We help organizations reduce physical strain before it becomes a problem.</p>
 
-<section class="services fade-in">
-  <h2>Our Services</h2>
-
-  <div class="service-grid">
-    <div class="service-card">
-      <h3>Prevention</h3>
-      <div class="service-hover">
-        <p>Structured 12-week trajectory focused on sustainable behavior change.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#contact">Schedule a conversation</a>
+          <a class="btn btn-ghost" href="#services">Explore services</a>
+        </div>
       </div>
-    </div>
-
-    <div class="service-card">
-      <h3>Insight</h3>
-      <div class="service-hover">
-        <p>Data-informed analysis of physical workload risks.</p>
-      </div>
-    </div>
-
-    <div class="service-card">
-      <h3>Embedding</h3>
-      <div class="service-hover">
-        <p>From awareness to policy and long-term structural integration.</p>
-      </div>
-    </div>
+    </header>
   </div>
-</section>
 
-<section class="approach fade-in">
-  <h2>Our Approach & Values</h2>
-  <p>Calm. Structured. Measurable. Sustainable.</p>
-</section>
+  <!-- SERVICES (sheet schuift over hero) -->
+  <section id="services" class="services fade-in">
+    <div class="section-inner">
+      <h2>Our Services</h2>
 
-<section class="cta fade-in">
-  <h2>Discover what we can do for your organization.</h2>
-  <a href="#" class="btn">Schedule a conversation</a>
-</section>
+      <div class="service-grid">
+        <article class="service-card" tabindex="0">
+          <h3>Prevention</h3>
+          <p class="service-hover">
+            Structured 12-week trajectory focused on sustainable behavior change.
+          </p>
+        </article>
 
-<script src="script.js"></script>
+        <article class="service-card" tabindex="0">
+          <h3>Insight</h3>
+          <p class="service-hover">
+            Data-informed analysis of physical workload risks across daily routines.
+          </p>
+        </article>
+
+        <article class="service-card" tabindex="0">
+          <h3>Embedding</h3>
+          <p class="service-hover">
+            From insights to policy and long-term structural integration.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="approach fade-in">
+    <div class="section-inner">
+      <h2>Our Approach &amp; Values</h2>
+      <p class="lead">
+        Calm. Structured. Measurable. Sustainable.
+      </p>
+
+      <div class="pill-row">
+        <span class="pill">Prevention-first</span>
+        <span class="pill">Practical routines</span>
+        <span class="pill">Data-informed</span>
+        <span class="pill">Built for teams</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact" class="cta fade-in">
+    <div class="section-inner">
+      <h2>Discover what we can do for your organization.</h2>
+      <p class="lead">A short online call to understand your context and recommend the right trajectory.</p>
+      <a class="btn" href="#">Schedule a conversation</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="section-inner">
+      <p>© <span id="year"></span> Human Load Consultancy</p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=1"></script>
 </body>
 </html>
