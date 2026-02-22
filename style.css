@@ -45,7 +45,43 @@ p {
   text-align: center;
   color: white;
 
-background: url("front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg") center/cover no-repeat;
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10%;
+  text-align: center;
+  color: white;
+  overflow: hidden; /* belangrijk voor parallax */
+}
+
+/* De parallax-laag */
+.hero-bg {
+  position: absolute;
+  inset: -10%;              /* iets groter dan het scherm zodat je geen randen ziet */
+  background: url("front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg") center/cover no-repeat;
+  transform: translateY(0);
+  will-change: transform;
+  z-index: 0;
+}
+
+/* Donkere overlay met jouw #343a48 */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(52, 58, 72, 0.75);
+  z-index: 1;
+}
+
+/* Zorg dat tekst boven overlay blijft */
+.hero h1,
+.hero p {
+  position: relative;
+  z-index: 2;
 }
 
 /* Donkere overlay met jouw hoofdkleur #343a48 */
