@@ -35,50 +35,51 @@ p {
   font-weight: 300;
 }
 
-.hero {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  
+.hero{
+  position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 10%;
   text-align: center;
-  color: white;
+  color: #fff;
   overflow: hidden;
-  isolation: isolate; /* super belangrijk: houdt lagen netjes binnen de hero */
-}
-
-/* Parallax image layer */
-.hero-bg {
-  position: absolute;
-  inset: -12%;
-  background: url("front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg") center/cover no-repeat;
-  transform: translateY(0);
-  will-change: transform;
-  z-index: 0;
-}
-
-/* Donkere overlay met jouw #343a48 */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(52, 58, 72, 0.70);
   z-index: 1;
 }
 
-/* Blauwe/paarse premium glow (zoals jij bedoelt) */
-.hero::after {
-  content: "";
-  position: absolute;
+/* Parallax image layer */
+.hero-bg{
+  position: fixed;            /* KEY: background blijft staan */
+  inset: 0;
+  height: 100vh;
+  background: url("front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg") center/cover no-repeat;
+  transform: translateY(0);
+  will-change: transform;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.hero::before{
+  content:"";
+  position: fixed;            /* ook fixed */
+  inset: 0;
+  height: 100vh;
+  background: rgba(52,58,72,0.70);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero::after{
+  content:"";
+  position: fixed;            /* ook fixed */
   inset: -20%;
+  height: 140vh;
   background:
     radial-gradient(60% 40% at 50% 30%, rgba(108, 99, 255, 0.35), rgba(108, 99, 255, 0) 60%),
     radial-gradient(40% 30% at 20% 20%, rgba(120, 180, 255, 0.25), rgba(120, 180, 255, 0) 65%);
-  z-index: 2;
+  z-index: -1;
   pointer-events: none;
 }
 
