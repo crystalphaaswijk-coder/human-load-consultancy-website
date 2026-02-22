@@ -334,3 +334,81 @@ section{ padding: 120px 0; }
   .services{ margin-top: -28vh; padding-top: 28vh; }
   .service-card{ padding: 44px 34px; }
 }
+
+/* ===== INTERLUDE SECTION ===== */
+
+.interlude{
+  padding: 180px 0;
+  position: relative;
+  overflow: hidden;
+
+  /* zachte blauwe gloed achtergrond */
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(120, 180, 255, 0.12), transparent 60%),
+    linear-gradient(to bottom, #f9fbff, #ffffff);
+}
+
+.interlude-inner{
+  width: min(1200px, 90%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1.2fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.interlude-left h2{
+  font-size: clamp(2.5rem, 3.5vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1c1c1c;
+}
+
+.interlude-right p{
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  color: #343a48;
+}
+
+.interlude-right em{
+  font-style: italic;
+}
+
+/* ===== Vertical beige line ===== */
+
+.interlude-divider{
+  position: relative;
+  width: 1px;
+  height: 320px;
+  background: #d8cfc2; /* subtiel beige */
+  overflow: hidden;
+}
+
+/* Moving glow */
+
+.interlude-divider::after{
+  content: "";
+  position: absolute;
+  left: -1px;
+  width: 3px;
+  height: 80px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0.8),
+    rgba(255,255,255,0)
+  );
+
+  animation: glowMove 4s ease-in-out infinite;
+}
+
+/* Glow animation */
+
+@keyframes glowMove{
+  0% { top: -80px; }
+  50% { top: 100%; }
+  100% { top: -80px; }
+}
