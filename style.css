@@ -11,6 +11,11 @@ body {
   line-height: 1.6;
 }
 
+.hero-wrap{
+  height: 100vh;        /* begrenst sticky */
+  position: relative;
+}
+
 section, header {
   padding: 120px 10%;
   text-align: center;
@@ -36,29 +41,32 @@ p {
 }
 
 .hero{
-  position: relative;
-  min-height: 100vh;
+  position: sticky;     /* pinned */
+  top: 0;
+  height: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   padding: 0 10%;
   text-align: center;
   color: #fff;
+
   overflow: hidden;
+  isolation: isolate;
   z-index: 1;
 }
 
 /* Parallax image layer */
 .hero-bg{
-  position: fixed;            /* KEY: background blijft staan */
-  inset: 0;
-  height: 100vh;
+  position: absolute;
+  inset: -12%;
   background: url("front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg") center/cover no-repeat;
   transform: translateY(0);
   will-change: transform;
-  z-index: -2;
-  pointer-events: none;
+  z-index: 0;
 }
 
 .hero::before{
@@ -169,6 +177,19 @@ p {
   margin-top: -22vh;       /* schuift over hero */
   padding-top: 22vh;       /* compenseert zodat content niet afsnijdt */
   background: #fff;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  box-shadow: 0 -20px 60px rgba(0,0,0,0.08);
+}
+
+.services{
+  position: relative;
+  z-index: 10;
+
+  margin-top: -22vh;    /* schuift over hero */
+  padding-top: 22vh;    /* compenseert */
+
+  background: #ffffff;
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;
   box-shadow: 0 -20px 60px rgba(0,0,0,0.08);
