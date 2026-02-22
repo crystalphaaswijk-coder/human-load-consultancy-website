@@ -1,51 +1,59 @@
+// Year in footer
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
 // Fade-in on scroll
 const faders = document.querySelectorAll(".fade-in");
 
-const appearOptions = {
-  threshold: 0.2,
-};
+const appearOnScroll = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("appear");
+      observer.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.15 }
+);
 
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    entry.target.classList.add("appear");
-    observer.unobserve(entry.target);
-  });
-}, appearOptions);
+faders.forEach((el) => appearOnScroll.observe(el));
 
-faders.forEach((fader) => {
-  appearOnScroll.observe(fader);
-});
-
-const hero = document.querySelector(".hero");
-const heroBg = document.querySelector(".hero-bg");
-let ticking = false;
-
+// Hero parallax (within hero-wrap only)
 const heroWrap = document.querySelector(".hero-wrap");
 const heroBg = document.querySelector(".hero-bg");
 let ticking = false;
 
-function parallaxHero(){
-  if(!heroWrap || !heroBg) return;
+function parallaxHero() {
+  if (!heroWrap || !heroBg) return;
 
   const y = window.scrollY || window.pageYOffset;
   const h = heroWrap.offsetHeight;
 
-  // 0..1 binnen de hero-wrap
+  // 0..1 within hero-wrap
   const p = Math.min(Math.max(y / h, 0), 1);
 
-  // sterker effect (pas gerust aan)
-  const offset = p * 180;
+  // stronger but still premium
+  const offset = p * 220; // px
 
   heroBg.style.transform = `translateY(${offset}px)`;
   ticking = false;
 }
 
-window.addEventListener("scroll", () => {
-  if(!ticking){
-    requestAnimationFrame(parallaxHero);
-    ticking = true;
-  }
-}, { passive:true });
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!ticking) {
+      requestAnimationFrame(parallaxHero);
+      ticking = true;
+    }
+  },
+  { passive: true }
+);
 
-window.addEventListener("load", parallaxHero);
+window.addEventListener("load", () => {
+  parallaxHero();
+
+  // Prevent blank page edge case: make hero visible immediately if it has fade-in
+  const hero = document.querySelector(".hero.fade-in");
+  if (hero) hero.classList.add("appear");
+});
