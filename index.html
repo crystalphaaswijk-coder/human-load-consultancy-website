@@ -5,31 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Human Load Consultancy</title>
 
-  <link rel="stylesheet" href="style.css?v=1" />
+  <link rel="stylesheet" href="style.css?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- HERO WRAP: bepaalt hoe lang de hero "pinned" blijft -->
+  <!-- HERO WRAP: bepaalt hoe lang de hero pinned blijft -->
   <div class="hero-wrap">
     <header class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
 
-      <div class="hero-content">
+      <!-- Top bar -->
+      <div class="hero-top">
+        <a class="brand" href="#" aria-label="Human Load Consultancy home">
+          <img src="logo%20zonder%20achtergrond.png" alt="Human Load Consultancy logo" />
+        </a>
+
+        <a class="pill-cta" href="#contact">Schedule a conversation <span class="pill-icon">↗</span></a>
+      </div>
+
+      <!-- Left/bottom copy like Kora -->
+      <div class="hero-copy">
         <h1>Preventive work culture for screen-based work</h1>
         <p>We help organizations reduce physical strain before it becomes a problem.</p>
-
-        <div class="hero-actions">
-          <a class="btn" href="#contact">Schedule a conversation</a>
-          <a class="btn btn-ghost" href="#services">Explore services</a>
-        </div>
       </div>
+
+      <!-- Bottom scroll indicator -->
+      <a class="scroll-indicator" href="#services" aria-label="Scroll to explore">
+        <span class="scroll-text">Explore</span>
+        <span class="scroll-arrow" aria-hidden="true">↓</span>
+      </a>
     </header>
   </div>
 
-  <!-- SERVICES (sheet schuift over hero) -->
+  <!-- SERVICES -->
   <section id="services" class="services fade-in">
     <div class="section-inner">
       <h2>Our Services</h2>
@@ -63,9 +74,7 @@
   <section class="approach fade-in">
     <div class="section-inner">
       <h2>Our Approach &amp; Values</h2>
-      <p class="lead">
-        Calm. Structured. Measurable. Sustainable.
-      </p>
+      <p class="lead">Calm. Structured. Measurable. Sustainable.</p>
 
       <div class="pill-row">
         <span class="pill">Prevention-first</span>
@@ -76,7 +85,7 @@
     </div>
   </section>
 
-  <!-- CONTACT / CTA -->
+  <!-- CONTACT -->
   <section id="contact" class="cta fade-in">
     <div class="section-inner">
       <h2>Discover what we can do for your organization.</h2>
@@ -91,6 +100,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=1"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
