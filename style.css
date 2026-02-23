@@ -18,6 +18,9 @@ body{
   line-height: 1.6;
 }
 
+html, body { overflow-x: hidden; }
+img { max-width: 100%; height: auto; }
+
 /* Typography */
 h1{
   font-size: clamp(2.4rem, 4.1vw, 4.2rem);
