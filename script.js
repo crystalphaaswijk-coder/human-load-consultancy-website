@@ -124,3 +124,19 @@ window.addEventListener("resize", sectionParallax);
   window.addEventListener("load", updateParallax);
   window.addEventListener("resize", updateParallax);
 })();
+
+// ===== Reveal on scroll =====
+(() => {
+  const reveals = Array.from(document.querySelectorAll(".reveal"));
+  if (!reveals.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("is-inview");
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.18 });
+
+  reveals.forEach((el) => io.observe(el));
+})();
