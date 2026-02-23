@@ -44,3 +44,46 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 window.addEventListener("load", parallaxHero);
+
+// Section parallax (text + image)
+const parallaxEls = Array.from(document.querySelectorAll("[data-parallax]"));
+let sectionTicking = false;
+
+function sectionParallax() {
+  const y = window.scrollY || window.pageYOffset;
+  const vh = window.innerHeight || 800;
+
+  parallaxEls.forEach((el) => {
+    const speed = parseFloat(el.getAttribute("data-parallax")) || 0.12;
+
+    // element position in viewport
+    const rect = el.getBoundingClientRect();
+
+    // only animate when near viewport (performance + avoids weird jumps)
+    if (rect.bottom < -200 || rect.top > vh + 200) return;
+
+    // centered progress: 0 when element centered, negative above, positive below
+    const centerOffset = rect.top + rect.height / 2 - vh / 2;
+
+    // translate opposite direction for a premium feel
+    const translate = -centerOffset * speed;
+
+    el.style.transform = `translate3d(0, ${translate}px, 0)`;
+  });
+
+  sectionTicking = false;
+}
+
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!sectionTicking) {
+      requestAnimationFrame(sectionParallax);
+      sectionTicking = true;
+    }
+  },
+  { passive: true }
+);
+
+window.addEventListener("load", sectionParallax);
+window.addEventListener("resize", sectionParallax);
