@@ -447,44 +447,23 @@ padding-top: 120px; /* of wat je standaard section padding is */
   box-shadow: 0 -20px 60px rgba(0,0,0,0.08);
 }
 
-/* ===== Services intro (beige + text/image parallax) ===== */
-
+/* ===== Services intro (beige + stable layout) ===== */
 .services-intro{
-  background: #efe7dd;              /* beige */
+  background: #efe7dd !important;  /* beige, force */
   padding: 140px 0;
 }
 
 .services-intro-inner{
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(320px, 1.05fr) minmax(280px, 0.95fr);
   gap: 60px;
   align-items: center;
 }
 
-.services-intro-title{
-  font-size: clamp(2.2rem, 3.2vw, 3rem);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  margin-bottom: 28px;
-  color: #1c1c1c;
-}
-
-.services-intro-list{
-  list-style: disc;
-  padding-left: 22px;
-  margin: 0;
-  color: #343a48;
-}
-
-.services-intro-list li{
-  font-size: 1.08rem;
-  line-height: 1.75;
-  margin-bottom: 18px;
-}
-
 .services-intro-media{
   position: relative;
+  max-width: 520px;        /* voorkomt mega-afbeelding */
+  justify-self: end;       /* rechts uitlijnen */
 }
 
 .services-intro-media img{
@@ -495,18 +474,9 @@ padding-top: 120px; /* of wat je standaard section padding is */
   box-shadow: 0 22px 70px rgba(0,0,0,0.12);
 }
 
-/* Parallax smoothness */
-[data-parallax]{
-  will-change: transform;
-}
-
 /* Responsive */
 @media (max-width: 900px){
-  .services-intro-inner{
-    grid-template-columns: 1fr;
-    gap: 34px;
-  }
-  .services-intro{
-    padding: 100px 0;
-  }
+  .services-intro{ padding: 100px 0; }
+  .services-intro-inner{ grid-template-columns: 1fr; gap: 34px; }
+  .services-intro-media{ max-width: 640px; justify-self: start; }
 }
