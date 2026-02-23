@@ -87,3 +87,40 @@ window.addEventListener(
 
 window.addEventListener("load", sectionParallax);
 window.addEventListener("resize", sectionParallax);
+
+// ===== Parallax for blocks with [data-parallax] =====
+(() => {
+  const parallaxEls = Array.from(document.querySelectorAll("[data-parallax]"));
+  if (!parallaxEls.length) return;
+
+  let ticking = false;
+
+  function updateParallax() {
+    const vh = window.innerHeight || 800;
+
+    parallaxEls.forEach((el) => {
+      const speed = parseFloat(el.getAttribute("data-parallax")) || 0.12;
+      const rect = el.getBoundingClientRect();
+
+      // alleen rond viewport bewegen
+      if (rect.bottom < -200 || rect.top > vh + 200) return;
+
+      const centerOffset = rect.top + rect.height / 2 - vh / 2;
+      const translate = -centerOffset * speed;
+
+      el.style.transform = `translate3d(0, ${translate}px, 0)`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener("load", updateParallax);
+  window.addEventListener("resize", updateParallax);
+})();
