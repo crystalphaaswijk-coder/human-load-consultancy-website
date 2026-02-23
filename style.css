@@ -401,19 +401,22 @@ padding-top: 120px; /* of wat je standaard section padding is */
   content: "";
   position: absolute;
   left: 50%;
-  top: -90px;
+  top: -120px;
   transform: translateX(-50%);
-  width: 5px;
-  height: 90px;
+  width: 7px;              /* iets breder */
+  height: 140px;           /* iets langer */
 
   background: linear-gradient(
     to bottom,
     rgba(255,255,255,0),
-    rgba(255,255,255,0.55),
+    rgba(255,255,255,0.85),   /* sterker midden */
     rgba(255,255,255,0)
   );
 
+  filter: blur(0.6px);     /* heel subtiele soft glow */
   animation: lineGlow 12s ease-in-out infinite;
+}
+
 }
 
 /* robust animation (no “top” bugs) */
