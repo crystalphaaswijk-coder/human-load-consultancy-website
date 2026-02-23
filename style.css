@@ -335,67 +335,90 @@ section{ padding: 120px 0; }
   .service-card{ padding: 44px 34px; }
 }
 
-/* ===== INTERLUDE SECTION ===== */
+/* ===== INTERLUDE (exact like your screenshot) ===== */
 
 .interlude{
   padding: 180px 0;
   position: relative;
-  overflow: visible;
 
-  /* zachte blauwe gloed achtergrond */
+  /* stronger, friendly blue glow (more present) */
   background:
-    radial-gradient(1200px 600px at 50% 0%, rgba(120, 180, 255, 0.12), transparent 60%),
-    linear-gradient(to bottom, #f9fbff, #ffffff);
-}.interlude-inner{
+    radial-gradient(1200px 700px at 45% 10%, rgba(120, 180, 255, 0.26), transparent 62%),
+    radial-gradient(900px 520px at 85% 60%, rgba(108, 99, 255, 0.12), transparent 60%),
+    linear-gradient(to bottom, #f6f9ff, #ffffff);
+}
+
+.interlude-inner{
   width: min(1200px, 90%);
   margin: 0 auto;
   display: grid;
 
-  /* lijn meer naar links */
+  /* line more to the left */
   grid-template-columns: 1fr 1px 1.6fr;
 
   align-items: start;
   column-gap: 70px;
 }
 
-/* Titel hoger (zoals screenshot) */
 .interlude-left{
-  padding-top: 10px;
+  padding-top: 10px; /* title higher */
 }
 
-/* Tekst lager (asymmetrie) */
+.interlude-left h2{
+  font-size: clamp(2.7rem, 3.6vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #1c1c1c;
+}
+
 .interlude-right{
-  padding-top: 95px;
+  padding-top: 95px; /* text lower (asymmetry) */
 }
 
-/* Divider hoogte & positie zoals screenshot */
+.interlude-right p{
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin-bottom: 18px;
+  color: #343a48;
+  max-width: 820px;
+}
+
+.interlude-right em{
+  font-style: italic;
+}
+
+/* beige vertical line */
 .interlude-divider{
+  position: relative;
   height: 360px;
   background: #d8cfc2;
+  overflow: hidden; /* needed so glow stays inside the line */
 }
 
-/* Moving glow */
-
+/* moving glow – slow, reading pace */
 .interlude-divider::after{
   content: "";
   position: absolute;
-  left: -1px;
-  width: 3px;
-  height: 80px;
+  left: 50%;
+  top: -90px;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 90px;
 
-background:
-  radial-gradient(1100px 650px at 45% 10%, rgba(120, 180, 255, 0.22), transparent 62%),
-  radial-gradient(900px 520px at 85% 60%, rgba(108, 99, 255, 0.10), transparent 60%),
-  linear-gradient(to bottom, #f7faff, #ffffff);
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0.55),
+    rgba(255,255,255,0)
   );
 
-  animation: glowMove 10s ease-in-out infinite;
+  animation: lineGlow 12s ease-in-out infinite;
 }
 
-/* Glow animation */
-
-@keyframes glowMove{
-  0% { top: -80px; }
-  50% { top: 100%; }
-  100% { top: -80px; }
+/* robust animation (no “top” bugs) */
+@keyframes lineGlow{
+  0%   { transform: translateX(-50%) translateY(0); }
+  50%  { transform: translateX(-50%) translateY(450px); }
+  100% { transform: translateX(-50%) translateY(0); }
 }
