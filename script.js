@@ -88,20 +88,6 @@ window.addEventListener(
 window.addEventListener("load", sectionParallax);
 window.addEventListener("resize", sectionParallax);
 
-// ===== Parallax for blocks with [data-parallax] =====
-(() => {
-  const parallaxEls = Array.from(document.querySelectorAll("[data-parallax]"));
-  if (!parallaxEls.length) return;
-
-  let ticking = false;
-
-  function updateParallax() {
-    const vh = window.innerHeight || 800;
-
-    parallaxEls.forEach((el) => {
-      const speed = parseFloat(el.getAttribute("data-parallax")) || 0.12;
-      const rect = el.getBoundingClientRect();
-
       // alleen rond viewport bewegen
       if (rect.bottom < -200 || rect.top > vh + 200) return;
 
@@ -140,3 +126,20 @@ window.addEventListener("resize", sectionParallax);
 
   reveals.forEach((el) => io.observe(el));
 })();
+
+// ===== Parallax (fixed) =====
+const parallaxElements = document.querySelectorAll("[data-parallax]");
+
+function updateParallax() {
+  const vh = window.innerHeight;
+
+  parallaxElements.forEach(el => {
+    const speed = parseFloat(el.dataset.parallax) || 0.15;
+    const rect = el.getBoundingClientRect();
+    const offset = rect.top - vh / 2;
+    el.style.setProperty("--parallax-y", `${offset * -speed}px`);
+  });
+}
+
+window.addEventListener("scroll", updateParallax);
+window.addEventListener("load", updateParallax);
