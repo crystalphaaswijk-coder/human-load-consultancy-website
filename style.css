@@ -388,42 +388,47 @@ padding-top: 120px; /* of wat je standaard section padding is */
   font-style: italic;
 }
 
-/* beige vertical line */
+/* ===== Beige vertical line ===== */
+
 .interlude-divider{
   position: relative;
+  width: 1px;
   height: 360px;
   background: #d8cfc2;
-  overflow: hidden; /* needed so glow stays inside the line */
+  overflow: hidden;
 }
 
-/* moving glow – slow, reading pace */
+/* Moving glow */
+
 .interlude-divider::after{
   content: "";
   position: absolute;
   left: 50%;
-  top: -120px;
-  transform: translateX(-50%);
-  width: 7px;              /* iets breder */
-  height: 140px;           /* iets langer */
+  top: 0;
+  transform: translateX(-50%) translateY(-120px);
+
+  width: 12px;         /* duidelijker zichtbaar */
+  height: 160px;
 
   background: linear-gradient(
     to bottom,
     rgba(255,255,255,0),
-    rgba(255,255,255,0.85),   /* sterker midden */
+    rgba(255,255,255,0.9),
     rgba(255,255,255,0)
   );
 
-  filter: blur(0.6px);     /* heel subtiele soft glow */
-  animation: lineGlow 12s ease-in-out infinite;
+  filter: blur(1.5px);
+  pointer-events: none;
+
+  animation: lineGlow 14s ease-in-out infinite;
 }
 
-}
+/* Smooth up-down movement */
 
-/* robust animation (no “top” bugs) */
 @keyframes lineGlow{
-  0%   { transform: translateX(-50%) translateY(0); }
-  50%  { transform: translateX(-50%) translateY(450px); }
-  100% { transform: translateX(-50%) translateY(0); }
+  0%   { transform: translateX(-50%) translateY(-120px); }
+  50%  { transform: translateX(-50%) translateY(380px); }
+  100% { transform: translateX(-50%) translateY(-120px); }
 }
 
 /* Interlude slides over hero (chapter feel) */
