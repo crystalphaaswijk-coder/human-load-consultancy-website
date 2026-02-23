@@ -225,8 +225,8 @@ section{ padding: 120px 0; }
 .services{
   position: relative;
   z-index: 10;
-  margin-top: -40vh;
-  padding-top: 40vh;
+margin-top: 0;
+padding-top: 120px; /* of wat je standaard section padding is */
   background: var(--sheet);
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;
