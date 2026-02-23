@@ -21,7 +21,6 @@ faders.forEach((el) => appearOnScroll.observe(el));
 // Hero parallax (within hero-wrap only)
 const heroWrap = document.querySelector(".hero-wrap");
 const heroBg = document.querySelector(".hero-bg");
-
 let ticking = false;
 
 function parallaxHero() {
@@ -30,27 +29,18 @@ function parallaxHero() {
   const y = window.scrollY || window.pageYOffset;
   const h = heroWrap.offsetHeight;
 
-  // 0..1 within hero-wrap
   const p = Math.min(Math.max(y / h, 0), 1);
-
-  // premium but visible
-  const offset = p * 220; // px
+  const offset = p * 220; // <-- dit was je “oude” premium setting
 
   heroBg.style.transform = `translateY(${offset}px)`;
   ticking = false;
 }
 
-window.addEventListener(
-  "scroll",
-  () => {
-    if (!ticking) {
-      requestAnimationFrame(parallaxHero);
-      ticking = true;
-    }
-  },
-  { passive: true }
-);
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    requestAnimationFrame(parallaxHero);
+    ticking = true;
+  }
+}, { passive: true });
 
-window.addEventListener("load", () => {
-  parallaxHero();
-});
+window.addEventListener("load", parallaxHero);
