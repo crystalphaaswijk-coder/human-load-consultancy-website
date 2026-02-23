@@ -523,3 +523,21 @@ padding-top: 120px; /* of wat je standaard section padding is */
 .services{
   background: transparent !important;
 }
+/* ===== Interlude kleur laten doorlopen ===== */
+
+.interlude,
+.services-intro-wrapper,
+.services-intro{
+  background: transparent !important;
+}
+
+.services{
+  background: transparent !important;
+}
+
+/* ===== Parallax fix (transform combineren) ===== */
+
+[data-parallax]{
+  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  will-change: transform;
+}
