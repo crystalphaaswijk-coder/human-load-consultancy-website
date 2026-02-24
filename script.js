@@ -19,127 +19,95 @@ const appearOnScroll = new IntersectionObserver(
 faders.forEach((el) => appearOnScroll.observe(el));
 
 // Hero parallax (within hero-wrap only)
-const heroWrap = document.querySelector(".hero-wrap");
-const heroBg = document.querySelector(".hero-bg");
-let ticking = false;
-
-function parallaxHero() {
+(() => {
+  const heroWrap = document.querySelector(".hero-wrap");
+  const heroBg = document.querySelector(".hero-bg");
   if (!heroWrap || !heroBg) return;
 
-  const y = window.scrollY || window.pageYOffset;
-  const h = heroWrap.offsetHeight;
+  let ticking = false;
 
-  const p = Math.min(Math.max(y / h, 0), 1);
-  const offset = p * 220; // <-- dit was je “oude” premium setting
+  function parallaxHero() {
+    const y = window.scrollY || window.pageYOffset;
+    const h = heroWrap.offsetHeight || 1;
 
-  heroBg.style.transform = `translateY(${offset}px)`;
-  ticking = false;
-}
+    const p = Math.min(Math.max(y / h, 0), 1);
+    const offset = p * 220;
 
-window.addEventListener("scroll", () => {
-  if (!ticking) {
-    requestAnimationFrame(parallaxHero);
-    ticking = true;
+    heroBg.style.transform = `translate3d(0, ${offset}px, 0)`;
+    ticking = false;
   }
-}, { passive: true });
 
-window.addEventListener("load", parallaxHero);
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(parallaxHero);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
 
-// Section parallax (text + image)
-const parallaxEls = Array.from(document.querySelectorAll("[data-parallax]"));
-let sectionTicking = false;
+  window.addEventListener("load", parallaxHero);
+})();
 
-function sectionParallax() {
-  const y = window.scrollY || window.pageYOffset;
-  const vh = window.innerHeight || 800;
+// Reveal on scroll
+(() => {
+  const reveals = Array.from(document.querySelectorAll(".reveal"));
+  if (!reveals.length) return;
 
-  parallaxEls.forEach((el) => {
-    const speed = parseFloat(el.getAttribute("data-parallax")) || 0.12;
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-inview");
+        io.unobserve(e.target);
+      });
+    },
+    { threshold: 0.18 }
+  );
 
-    // element position in viewport
-    const rect = el.getBoundingClientRect();
+  reveals.forEach((el) => io.observe(el));
+})();
 
-    // only animate when near viewport (performance + avoids weird jumps)
-    if (rect.bottom < -200 || rect.top > vh + 200) return;
+// Parallax for "Not a quick fix" section only
+(() => {
+  const els = Array.from(
+    document.querySelectorAll(".services-intro [data-parallax]")
+  );
+  if (!els.length) return;
 
-    // centered progress: 0 when element centered, negative above, positive below
-    const centerOffset = rect.top + rect.height / 2 - vh / 2;
+  let ticking = false;
 
-    // translate opposite direction for a premium feel
-    const translate = -centerOffset * speed;
+  function run() {
+    const vh = window.innerHeight || 800;
 
-    el.style.transform = `translate3d(0, ${translate}px, 0)`;
-  });
+    els.forEach((el) => {
+      const speed = parseFloat(el.dataset.parallax) || 0.12;
+      const rect = el.getBoundingClientRect();
 
-  sectionTicking = false;
-}
-
-window.addEventListener(
-  "scroll",
-  () => {
-    if (!sectionTicking) {
-      requestAnimationFrame(sectionParallax);
-      sectionTicking = true;
-    }
-  },
-  { passive: true }
-);
-
-window.addEventListener("load", sectionParallax);
-window.addEventListener("resize", sectionParallax);
-
-      // alleen rond viewport bewegen
       if (rect.bottom < -200 || rect.top > vh + 200) return;
 
       const centerOffset = rect.top + rect.height / 2 - vh / 2;
-      const translate = -centerOffset * speed;
+      const py = -centerOffset * speed;
 
-      el.style.transform = `translate3d(0, ${translate}px, 0)`;
+      el.style.setProperty("--py", `${py}px`);
     });
 
     ticking = false;
   }
 
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(run);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
 
-  window.addEventListener("load", updateParallax);
-  window.addEventListener("resize", updateParallax);
+  window.addEventListener("load", run);
+  window.addEventListener("resize", run);
 })();
-
-// ===== Reveal on scroll =====
-(() => {
-  const reveals = Array.from(document.querySelectorAll(".reveal"));
-  if (!reveals.length) return;
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add("is-inview");
-      io.unobserve(e.target);
-    });
-  }, { threshold: 0.18 });
-
-  reveals.forEach((el) => io.observe(el));
-})();
-
-// ===== Parallax (fixed) =====
-const parallaxElements = document.querySelectorAll("[data-parallax]");
-
-function updateParallax() {
-  const vh = window.innerHeight;
-
-  parallaxElements.forEach(el => {
-    const speed = parseFloat(el.dataset.parallax) || 0.15;
-    const rect = el.getBoundingClientRect();
-    const offset = rect.top - vh / 2;
-    el.style.setProperty("--parallax-y", `${offset * -speed}px`);
-  });
-}
-
-window.addEventListener("scroll", updateParallax);
-window.addEventListener("load", updateParallax);
