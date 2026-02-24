@@ -18,7 +18,7 @@ const appearOnScroll = new IntersectionObserver(
 
 faders.forEach((el) => appearOnScroll.observe(el));
 
-// Hero parallax (within hero-wrap only)
+// Hero parallax (OLD premium)
 (() => {
   const heroWrap = document.querySelector(".hero-wrap");
   const heroBg = document.querySelector(".hero-bg");
@@ -37,16 +37,12 @@ faders.forEach((el) => appearOnScroll.observe(el));
     ticking = false;
   }
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!ticking) {
-        requestAnimationFrame(parallaxHero);
-        ticking = true;
-      }
-    },
-    { passive: true }
-  );
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(parallaxHero);
+      ticking = true;
+    }
+  }, { passive: true });
 
   window.addEventListener("load", parallaxHero);
 })();
