@@ -107,3 +107,38 @@ faders.forEach((el) => appearOnScroll.observe(el));
   window.addEventListener("load", run);
   window.addEventListener("resize", run);
 })();
+
+// Parallax for intro-services only
+(() => {
+  const els = Array.from(document.querySelectorAll(".services-intro [data-parallax]"));
+  if (!els.length) return;
+
+  let ticking = false;
+
+  function run() {
+    const vh = window.innerHeight || 800;
+
+    els.forEach((el) => {
+      const speed = parseFloat(el.dataset.parallax) || 0.12;
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < -200 || rect.top > vh + 200) return;
+
+      const centerOffset = rect.top + rect.height / 2 - vh / 2;
+      const py = -centerOffset * speed;
+
+      el.style.setProperty("--py", `${py}px`);
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(run);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener("load", run);
+  window.addEventListener("resize", run);
+})();
