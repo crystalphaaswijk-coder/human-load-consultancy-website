@@ -30,11 +30,15 @@ body {
   margin: 0;
 font-family:"Plus Jakarta Sans",sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(circle at 15% 10%, rgba(84, 117, 187, 0.15), transparent 28%),
-    radial-gradient(circle at 85% 18%, rgba(73, 146, 189, 0.12), transparent 24%),
-    linear-gradient(180deg, #061019 0%, #08131d 36%, #09131d 100%);
-  overflow-x: hidden;
+body{
+background:
+linear-gradient(
+180deg,
+#132433 0%,
+#182c3d 40%,
+#1f3446 100%
+);
+}
 }
 
 .site-bg,
