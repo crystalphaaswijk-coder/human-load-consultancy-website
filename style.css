@@ -1016,3 +1016,70 @@ background:transparent;
 color:#e6edf3;
 
 }
+
+html,
+body {
+  background: linear-gradient(180deg, #1a2c3a 0%, #203445 45%, #263c4f 100%) !important;
+  color: #e9f0f6 !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 12% 14%, rgba(140, 190, 255, 0.16), transparent 28%),
+    radial-gradient(circle at 86% 10%, rgba(165, 210, 255, 0.12), transparent 24%),
+    radial-gradient(circle at 78% 72%, rgba(110, 160, 235, 0.10), transparent 28%);
+}
+
+main,
+section,
+.section,
+.section-intro,
+.problem-section,
+.method-section,
+.services-section,
+.approach-section,
+.trajectory-section,
+.faq-section,
+.cta-section,
+.editorial-grid,
+.split-feature,
+.method-shell,
+.trajectory-shell,
+.faq-wrap,
+.faq-list,
+.cta-shell {
+  background: transparent !important;
+}
+
+.editorial-left h2,
+.section-head h2,
+.feature-card h2,
+.method-head h2,
+.trajectory-copy h2,
+.cta-shell h2,
+.quote-text,
+.service-card h3,
+.approach-card h3,
+.faq-item summary,
+.hero h1 {
+  color: #eef4f9 !important;
+}
+
+.editorial-right p,
+.editorial-right .lead,
+.method-body p,
+.feature-card p,
+.trajectory-copy p,
+.service-card p,
+.approach-card p,
+.faq-item p,
+.quote-sub,
+.section-subtext,
+.cta-shell p {
+  color: #c9d6e2 !important;
+}
