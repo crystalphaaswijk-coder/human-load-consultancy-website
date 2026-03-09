@@ -58,3 +58,27 @@ threshold:0.2
 reveals.forEach(el=>{
 observer.observe(el);
 });
+
+const magnets = document.querySelectorAll(".magnetic");
+
+magnets.forEach(btn=>{
+
+btn.addEventListener("mousemove",(e)=>{
+
+const rect = btn.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+
+const moveX = (x - rect.width/2) * 0.25;
+const moveY = (y - rect.height/2) * 0.25;
+
+btn.style.transform =
+`translate(${moveX}px, ${moveY}px)`;
+
+});
+
+btn.addEventListener("mouseleave",()=>{
+btn.style.transform = "translate(0,0)";
+});
+
+});
