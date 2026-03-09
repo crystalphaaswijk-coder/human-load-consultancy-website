@@ -28,7 +28,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
+font-family:"Plus Jakarta Sans",sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at 15% 10%, rgba(84, 117, 187, 0.15), transparent 28%),
