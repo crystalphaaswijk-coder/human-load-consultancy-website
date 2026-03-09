@@ -82,3 +82,22 @@ btn.style.transform = "translate(0,0)";
 });
 
 });
+
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll",()=>{
+
+let scroll = window.scrollY;
+
+sections.forEach(section=>{
+
+let speed = section.dataset.speed;
+
+if(!speed) return;
+
+section.style.transform =
+`translateY(${scroll * speed}px)`;
+
+});
+
+});
