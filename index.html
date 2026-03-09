@@ -1,298 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Human Load Consultancy helps organizations prevent physical complaints in screen-based work through practical behavioral change and structured preventive training."
-    />
-    <title>Human Load Consultancy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="ambient-bg" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human Load Consultancy</title>
+  <meta
+    name="description"
+    content="Human Load helps organizations prevent physical complaints in screen-based work through practical behavioral change and structured preventive training."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="site-bg"></div>
+  <div class="site-noise"></div>
 
-    <header class="site-header" id="top">
-      <nav class="nav container" aria-label="Primary navigation">
-        <a class="brand" href="#top" aria-label="Human Load Consultancy home">
-          <img src="hlclogo.png" alt="Human Load Consultancy logo" />
-        </a>
+  <header class="topbar" id="topbar">
+    <div class="container nav-wrap">
+      <a href="#hero" class="brand" aria-label="Human Load Consultancy home">
+        <img src="hlclogo.png" alt="Human Load Consultancy logo" class="brand-logo" />
+        <span class="brand-text">Human Load Consultancy</span>
+      </a>
 
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
-          Menu
-        </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
 
-        <ul id="nav-links" class="nav-links">
-          <li><a href="#recognition">Recognition</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#approach">Approach</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a class="pill-link" href="#contact">Book a consultation</a></li>
-        </ul>
+      <nav class="nav" id="nav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#trajectory">Trajectory</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="nav-cta">Book a consultation</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-image" aria-hidden="true"></div>
-        <div class="hero-overlay" aria-hidden="true"></div>
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-media">
+        <img
+          src="front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg"
+          alt="Professional working environment"
+          class="hero-image"
+          id="heroImage"
+        />
+        <div class="hero-overlay"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+      </div>
 
-        <div class="container hero-inner">
-          <p class="eyebrow reveal" data-delay="0">Human Load Consultancy</p>
-          <h1 class="reveal" data-delay="120" id="hero-title">
-            Preventing physical complaints before they become sick leave
-          </h1>
-          <p class="hero-subline reveal" data-delay="220">
-            Human Load helps organizations reduce physical strain in screen-based work by improving
-            daily work behavior and introducing practical preventive routines.
-          </p>
-          <div class="hero-actions reveal" data-delay="340">
-            <a class="btn btn-primary" href="#contact">Book a consultation</a>
-            <a class="btn btn-secondary" href="#recognition">Learn more</a>
-          </div>
+      <div class="container hero-content">
+        <p class="eyebrow reveal">Preventive workplace culture</p>
+        <h1 class="hero-title reveal">
+          Preventing physical complaints before they become sick leave
+        </h1>
+        <p class="hero-text reveal">
+          Human Load helps organizations reduce physical strain in screen-based work
+          by improving daily work behavior and introducing practical preventive routines.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a href="#contact" class="btn btn-primary">Book a consultation</a>
+          <a href="#about" class="btn btn-secondary">Learn more</a>
         </div>
-      </section>
 
-      <section class="section" id="recognition">
-        <div class="container narrow">
-          <h2 class="reveal">Not a quick fix, but lasting change</h2>
-          <p class="lead reveal" data-delay="120">
-            Whether your organization is seeing rising complaints about neck, shoulder, or back
-            pain, employees working for hours without breaks, or teams struggling with the physical
-            impact of long screen days —
+        <div class="hero-note reveal">
+          <span></span>
+          Structured guidance for screen-based teams
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-intro" id="about">
+      <div class="container editorial-grid">
+        <div class="editorial-left reveal">
+          <p class="section-label">Recognize the pattern</p>
+          <h2>Not a quick fix, but lasting change</h2>
+        </div>
+
+        <div class="editorial-right reveal">
+          <p class="lead">
+            Whether your organization is seeing rising complaints about neck, shoulder,
+            or back pain, employees working for hours without breaks, or teams struggling
+            with the physical impact of long screen days —
           </p>
-          <p class="reveal" data-delay="220">
-            Human Load helps organizations prevent physical strain by improving everyday work
-            behavior.
+          <p>
+            Human Load helps organizations prevent physical strain by improving everyday
+            work behavior.
           </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section section-soft" id="problem">
-        <div class="container narrow">
-          <h2 class="reveal">Physical Load in Screen-Based Work</h2>
-          <div class="divider reveal" data-delay="80"></div>
-          <p class="reveal" data-delay="140">
-            Physical complaints in office environments rarely appear overnight.
+    <section class="section problem-section">
+      <div class="container split-feature">
+        <div class="feature-card reveal glass-card">
+          <p class="section-label">Physical Load in Screen-Based Work</p>
+          <h2>Complaints rarely appear overnight.</h2>
+          <p>
+            They develop gradually through prolonged static work and lack of variation
+            during the day.
           </p>
-          <p class="reveal" data-delay="200">
-            They develop gradually through prolonged static work and lack of variation during the
-            day.
-          </p>
-          <p class="reveal" data-delay="260">
-            Most employees do not notice the strain while working — they only feel it after weeks
-            or months.
-          </p>
-          <p class="reveal" data-delay="320">
-            Human Load helps organizations recognize these patterns early and introduce preventive
-            work habits before complaints develop.
+          <p>
+            Most employees do not notice the strain while working — they only feel it
+            after weeks or months.
           </p>
         </div>
-      </section>
 
-      <section class="section" id="method">
-        <div class="container split">
-          <article>
-            <h2 class="reveal">A preventive approach to physical workload</h2>
-            <p class="reveal" data-delay="120">
-              Every trajectory starts with a structured intake to understand workload patterns,
-              organizational context, and existing risk factors.
-            </p>
-            <p class="reveal" data-delay="180">
-              Based on this assessment, we design a tailored 12-week preventive trajectory aligned
-              with your team’s daily realities.
-            </p>
-            <p class="reveal" data-delay="240">
-              The goal is not temporary relief, but lasting behavioral change embedded in daily
-              routines.
+        <div class="feature-quote reveal">
+          <div class="quote-line"></div>
+          <p class="quote-text">
+            The issue is rarely intensity. It is duration.
+          </p>
+          <p class="quote-sub">
+            Human Load helps organizations recognize these patterns early and introduce
+            preventive work habits before complaints develop.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method-section">
+      <div class="container method-shell reveal">
+        <div class="method-head">
+          <p class="section-label">A preventive approach</p>
+          <h2>A structured trajectory, designed around daily reality</h2>
+        </div>
+
+        <div class="method-body">
+          <p>
+            Every trajectory starts with a structured intake to understand workload
+            patterns, organizational context, and existing risk factors.
+          </p>
+          <p>
+            Based on this assessment, we design a tailored 12-week preventive trajectory
+            aligned with your team’s daily realities.
+          </p>
+          <p>
+            The goal is not temporary relief, but lasting behavioral change embedded in
+            daily routines.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services-section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-label">Our services include</p>
+          <h2>Focused support for sustainable change</h2>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="service-index">01</div>
+            <h3>Workload Risk Assessment</h3>
+            <p>
+              Identifying patterns of prolonged static load and physical risk factors in
+              screen-based work.
             </p>
           </article>
 
-          <aside class="focus-card reveal" data-delay="260">
-            <h3>Intake with context</h3>
-            <p>Workload patterns, team cadence, and risk factors mapped with structure.</p>
-            <h3>Tailored 12-week route</h3>
-            <p>A pragmatic trajectory tuned to real workflows, not idealized assumptions.</p>
-          </aside>
+          <article class="service-card reveal">
+            <div class="service-index">02</div>
+            <h3>Behavior Change Training</h3>
+            <p>
+              Practical modules that help employees recognize physical signals and
+              introduce variation into their workday.
+            </p>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-index">03</div>
+            <h3>Organizational Integration</h3>
+            <p>
+              Embedding preventive work habits into daily routines and workplace culture.
+            </p>
+          </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section section-soft" id="services">
-        <div class="container">
-          <h2 class="reveal">Our services include</h2>
-          <div class="cards services-grid">
-            <article class="card reveal" data-delay="80">
-              <h3>Workload Risk Assessment</h3>
-              <p>
-                Identifying patterns of prolonged static load and physical risk factors in
-                screen-based work.
-              </p>
-            </article>
+    <section class="section approach-section" id="approach">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-label">Our approach</p>
+          <h2>Behavioral patterns in everyday work</h2>
+          <p class="section-subtext">
+            Human Load focuses on practical change that becomes part of how teams work.
+          </p>
+        </div>
 
-            <article class="card reveal" data-delay="160">
-              <h3>Behavior Change Training</h3>
-              <p>
-                Practical modules that help employees recognize physical signals and introduce
-                variation into their workday.
-              </p>
-            </article>
+        <div class="approach-grid">
+          <article class="approach-card reveal">
+            <div class="approach-number">Assess</div>
+            <h3>Understand the workload reality</h3>
+            <p>
+              We analyze workload patterns, daily routines, and potential physical risk
+              factors.
+            </p>
+          </article>
 
-            <article class="card reveal" data-delay="240">
-              <h3>Organizational Integration</h3>
-              <p>
-                Embedding preventive work habits into daily routines and workplace culture.
-              </p>
-            </article>
+          <article class="approach-card reveal featured-card">
+            <div class="approach-number">Activate</div>
+            <h3>Introduce practical variation</h3>
+            <p>
+              Employees learn practical strategies to introduce variation and recovery
+              during their workday.
+            </p>
+          </article>
+
+          <article class="approach-card reveal">
+            <div class="approach-number">Embed</div>
+            <h3>Make prevention part of culture</h3>
+            <p>
+              Preventive behavior becomes part of the team’s daily work culture.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section trajectory-section" id="trajectory">
+      <div class="container trajectory-shell reveal">
+        <div class="trajectory-copy">
+          <p class="section-label">12-week trajectory</p>
+          <h2>A structured 12-week trajectory</h2>
+          <p>
+            Human Load programs always run for 12 weeks.
+          </p>
+          <p>
+            Through short modules, practical exercises, and visual reminders in the
+            workplace, employees gradually learn to recognize physical signals and
+            introduce healthier work habits.
+          </p>
+          <p>
+            By the end of the trajectory, preventive behavior becomes part of everyday
+            work routines.
+          </p>
+        </div>
+
+        <div class="trajectory-steps">
+          <div class="trajectory-step reveal">
+            <span>Week 1–2</span>
+            <strong>Insight</strong>
+          </div>
+          <div class="trajectory-step reveal">
+            <span>Week 3–6</span>
+            <strong>Practice</strong>
+          </div>
+          <div class="trajectory-step reveal">
+            <span>Week 7–10</span>
+            <strong>Reinforce</strong>
+          </div>
+          <div class="trajectory-step reveal">
+            <span>Week 11–12</span>
+            <strong>Embed</strong>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section" id="approach">
-        <div class="container">
-          <h2 class="reveal">Our approach</h2>
-          <p class="lead reveal" data-delay="120">
-            Human Load focuses on behavioral patterns in everyday work.
-          </p>
-          <p class="reveal" data-delay="180">Our method is built around three steps.</p>
-
-          <div class="cards approach-grid">
-            <article class="card approach-step reveal" data-delay="120">
-              <span class="step-number">01</span>
-              <h3>Assess</h3>
-              <p>
-                We analyze workload patterns, daily routines, and potential physical risk factors.
-              </p>
-            </article>
-
-            <article class="card approach-step reveal" data-delay="210">
-              <span class="step-number">02</span>
-              <h3>Activate</h3>
-              <p>
-                Employees learn practical strategies to introduce variation and recovery during
-                their workday.
-              </p>
-            </article>
-
-            <article class="card approach-step reveal" data-delay="300">
-              <span class="step-number">03</span>
-              <h3>Embed</h3>
-              <p>Preventive behavior becomes part of the team’s daily work culture.</p>
-            </article>
-          </div>
+    <section class="section faq-section" id="faq">
+      <div class="container faq-wrap">
+        <div class="section-head reveal">
+          <p class="section-label">Frequently Asked Questions</p>
+          <h2>Clarity for HR and leadership teams</h2>
         </div>
-      </section>
 
-      <section class="section section-soft" id="trajectory">
-        <div class="container narrow">
-          <h2 class="reveal">A structured 12-week trajectory</h2>
-          <p class="reveal" data-delay="100">Human Load programs always run for 12 weeks.</p>
-          <p class="reveal" data-delay="180">
-            Through short modules, practical exercises, and visual reminders in the workplace,
-            employees gradually learn to recognize physical signals and introduce healthier work
-            habits.
-          </p>
-          <p class="reveal" data-delay="260">
-            By the end of the trajectory, preventive behavior becomes part of everyday work
-            routines.
-          </p>
-          <div class="timeline-line reveal" data-delay="320"></div>
+        <div class="faq-list">
+          <details class="faq-item reveal">
+            <summary>What makes Human Load different from ergonomic assessments?</summary>
+            <p>
+              Human Load focuses on behavior in daily work routines, not only on setup.
+              The emphasis is on prevention, variation, and lasting behavioral change.
+            </p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>How much time does the program require from employees?</summary>
+            <p>
+              The trajectory is designed to be practical and manageable, with short
+              modules and low-threshold exercises that fit into the workday.
+            </p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Is the program suitable for remote or hybrid teams?</summary>
+            <p>
+              Yes. The approach can be applied in office, hybrid, and remote work
+              environments as long as screen-based work is part of the daily routine.
+            </p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>How do you measure the impact of the program?</summary>
+            <p>
+              We look at workload patterns, behavioral adoption, practical implementation,
+              and the extent to which preventive routines are embedded in daily work.
+            </p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>What happens after the 12-week trajectory?</summary>
+            <p>
+              By the end of the program, teams should be able to continue preventive
+              behavior more independently, with routines that remain usable after the
+              trajectory ends.
+            </p>
+          </details>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section" id="faq">
-        <div class="container narrow">
-          <h2 class="reveal">Frequently asked questions</h2>
-
-          <div class="faq-list">
-            <article class="faq-item reveal" data-delay="80">
-              <button class="faq-question" type="button" aria-expanded="false">
-                What makes Human Load different from ergonomic assessments?
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="faq-answer">
-                <p>
-                  Human Load focuses on sustainable behavioral routines across teams, rather than a
-                  one-time workstation adjustment moment.
-                </p>
-              </div>
-            </article>
-
-            <article class="faq-item reveal" data-delay="140">
-              <button class="faq-question" type="button" aria-expanded="false">
-                How much time does the program require from employees?
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="faq-answer">
-                <p>
-                  The modules are intentionally short and practical, designed to fit smoothly into
-                  normal work schedules.
-                </p>
-              </div>
-            </article>
-
-            <article class="faq-item reveal" data-delay="200">
-              <button class="faq-question" type="button" aria-expanded="false">
-                Is the program suitable for remote or hybrid teams?
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="faq-answer">
-                <p>
-                  Yes. The trajectory is adapted to on-site, hybrid, and remote contexts while
-                  keeping the same preventive framework.
-                </p>
-              </div>
-            </article>
-
-            <article class="faq-item reveal" data-delay="260">
-              <button class="faq-question" type="button" aria-expanded="false">
-                How do you measure the impact of the program?
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="faq-answer">
-                <p>
-                  We track behavior adoption and strain indicators through intake and follow-up, with
-                  practical reporting aligned to organizational goals.
-                </p>
-              </div>
-            </article>
-
-            <article class="faq-item reveal" data-delay="320">
-              <button class="faq-question" type="button" aria-expanded="false">
-                What happens after the 12-week trajectory?
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="faq-answer">
-                <p>
-                  We deliver continuation guidance so preventive behavior remains embedded and owned
-                  by the organization.
-                </p>
-              </div>
-            </article>
-          </div>
+    <section class="section cta-section" id="contact">
+      <div class="container cta-shell reveal">
+        <p class="section-label">Take the next step</p>
+        <h2>Discover what Human Load can do for your organization</h2>
+        <p>
+          Schedule an online consultation and explore how preventive behavioral change
+          can support healthier screen-based work.
+        </p>
+        <div class="hero-actions">
+          <a href="mailto:info@humanloadconsultancy.com" class="btn btn-primary">
+            Book a consultation
+          </a>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
 
-      <section class="section final-cta" id="contact">
-        <div class="container narrow center">
-          <h2 class="reveal">Discover what Human Load can do for your organization</h2>
-          <p class="reveal" data-delay="120">
-            Schedule an online consultation with one of our consultants.
-          </p>
-          <a class="btn btn-primary reveal" data-delay="220" href="mailto:info@humanloadconsultancy.com"
-            >Book a consultation</a
-          >
-        </div>
-      </section>
-    </main>
-
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
-script.js
