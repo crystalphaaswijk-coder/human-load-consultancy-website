@@ -1,92 +1,62 @@
-const header = document.querySelector('.site-header');
-const heroImage = document.querySelector('.hero-image');
-const revealItems = document.querySelectorAll('.reveal');
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-const faqItems = document.querySelectorAll('.faq-item');
+const topbar = document.getElementById("topbar");
+const heroImage = document.getElementById("heroImage");
+const navToggle = document.getElementById("navToggle");
+const nav = document.getElementById("nav");
 
-const mobileQuery = window.matchMedia('(max-width: 760px)');
-
-const handleHeader = () => {
-  if (!header) return;
-  header.classList.toggle('scrolled', window.scrollY > 30);
-};
-
-const handleParallax = () => {
-  if (!heroImage) return;
-  const intensity = mobileQuery.matches ? 0.08 : 0.14;
-  const scale = mobileQuery.matches ? 1.02 : 1.04;
-  heroImage.style.transform = `translateY(${window.scrollY * intensity}px) scale(${scale})`;
-};
-
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('in-view');
-      revealObserver.unobserve(entry.target);
-    });
-  },
-  {
-    threshold: 0.14,
-    rootMargin: '0px 0px -8% 0px',
+function handleTopbar() {
+  if (window.scrollY > 24) {
+    topbar.classList.add("scrolled");
+  } else {
+    topbar.classList.remove("scrolled");
   }
-);
+}
 
-revealItems.forEach((item) => {
-  const delay = Number(item.dataset.delay || 0);
-  item.style.setProperty('--delay', `${delay}ms`);
-  revealObserver.observe(item);
-});
+function handleParallax() {
+  if (!heroImage) return;
+  const offset = Math.min(window.scrollY * 0.18, 80);
+  heroImage.style.transform = `translate3d(0, ${offset}px, 0) scale(1.04)`;
+}
 
-const closeMobileMenu = () => {
-  if (!navLinks || !navToggle) return;
-  navLinks.classList.remove('open');
-  navToggle.setAttribute('aria-expanded', 'false');
-};
+handleTopbar();
+handleParallax();
 
-navToggle?.addEventListener('click', () => {
-  const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-  navToggle.setAttribute('aria-expanded', String(!isExpanded));
-  navLinks?.classList.toggle('open');
-});
-
-navLinks?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    if (mobileQuery.matches) closeMobileMenu();
-  });
-});
-
-faqItems.forEach((item) => {
-  const question = item.querySelector('.faq-question');
-  const answer = item.querySelector('.faq-answer');
-
-  question?.addEventListener('click', () => {
-    const alreadyOpen = item.classList.contains('active');
-
-    faqItems.forEach((entry) => {
-      entry.classList.remove('active');
-      const button = entry.querySelector('.faq-question');
-      const panel = entry.querySelector('.faq-answer');
-
-      button?.setAttribute('aria-expanded', 'false');
-      if (panel) panel.style.maxHeight = null;
-    });
-
-    if (!alreadyOpen) {
-      item.classList.add('active');
-      question.setAttribute('aria-expanded', 'true');
-      if (answer) answer.style.maxHeight = `${answer.scrollHeight}px`;
-    }
-  });
-});
-
-window.addEventListener('scroll', () => {
-  handleHeader();
+window.addEventListener("scroll", () => {
+  handleTopbar();
   handleParallax();
 });
 
-window.addEventListener('resize', handleParallax);
+if (navToggle && nav) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
 
-handleHeader();
-handleParallax();
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+const revealItems = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.16,
+    rootMargin: "0px 0px -40px 0px",
+  }
+);
+
+revealItems.forEach((item, index) => {
+  item.style.transitionDelay = `${Math.min(index % 3, 2) * 90}ms`;
+  observer.observe(item);
+});
