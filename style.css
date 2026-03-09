@@ -424,11 +424,10 @@ gap:16px;
   padding-top: clamp(90px, 12vw, 150px);
 }
 
-.editorial-grid {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: clamp(30px, 6vw, 90px);
-  align-items: start;
+.editorial-grid{
+display:grid;
+grid-template-columns:1.4fr .6fr;
+gap:90px;
 }
 
 .editorial-left h2,
