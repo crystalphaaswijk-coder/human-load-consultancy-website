@@ -1013,3 +1013,13 @@ section,
 .cta-shell p {
   color: #c9d6e2 !important;
 }
+
+.smooth-wrapper{
+position:fixed;
+inset:0;
+overflow:hidden;
+}
+
+.smooth-content{
+will-change:transform;
+}
