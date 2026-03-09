@@ -133,11 +133,8 @@ a {
   min-width: 0;
 }
 
-.brand-logo {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 18px rgba(125, 163, 255, 0.18));
+.brand-logo{
+width:70px;
 }
 
 .brand-text {
