@@ -1023,3 +1023,9 @@ overflow:hidden;
 .smooth-content{
 will-change:transform;
 }
+
+.magnetic{
+display:inline-flex;
+transition:transform .25s ease;
+will-change:transform;
+}
