@@ -1,82 +1,65 @@
-/* SMOOTH SCROLL */
-
-const wrapper = document.querySelector("#smooth-wrapper");
-const content = document.querySelector("#smooth-content");
-
-let current = 0;
-let target = 0;
-let ease = 0.08;
-
-function setHeight(){
-document.body.style.height = content.scrollHeight + "px";
-}
-
-function smoothScroll(){
-
-target = window.scrollY;
-
-current += (target - current) * ease;
-
-content.style.transform = `translateY(${-current}px)`;
-
-requestAnimationFrame(smoothScroll);
-
-}
-
-setHeight();
-window.addEventListener("resize", setHeight);
-smoothScroll();
-
-
-
 /* HERO PARALLAX */
 
 const heroMid = document.querySelector(".hero-mid img");
+const heroBack = document.querySelector(".hero-back");
+const heroFront = document.querySelector(".hero-front");
 
-function heroParallax(){
+window.addEventListener("scroll",()=>{
 
-let scroll = current;
+const scroll = window.scrollY;
 
-heroMid.style.transform =
-`translateY(${scroll * .35}px) scale(1.1)`;
-
-requestAnimationFrame(heroParallax);
-
+if(heroBack){
+heroBack.style.transform = `translateY(${scroll * 0.1}px)`;
 }
 
-heroParallax();
+if(heroMid){
+heroMid.style.transform = `translateY(${scroll * 0.35}px) scale(1.1)`;
+}
+
+if(heroFront){
+heroFront.style.transform = `translateY(${scroll * 0.05}px)`;
+}
+
+});
 
 
-
-/* REVEAL */
+/* REVEAL ANIMATION */
 
 const reveals = document.querySelectorAll(".reveal");
 
-const observer = new IntersectionObserver((entries)=>{
+const observer = new IntersectionObserver(entries => {
 
-entries.forEach(entry=>{
+entries.forEach(entry => {
 
 if(entry.isIntersecting){
 
-entry.target.classList.add("visible");
+entry.target.classList.add("in-view");
 
 }
 
 });
 
+},{
+threshold:0.2
 });
 
-reveals.forEach(el=>observer.observe(el));
+reveals.forEach(el => observer.observe(el));
 
 
+/* NAVBAR BLUR */
 
-/* CURSOR */
+const topbar = document.getElementById("topbar");
 
-const glow = document.querySelector(".cursor-glow");
+window.addEventListener("scroll",()=>{
 
-window.addEventListener("mousemove",(e)=>{
+if(window.scrollY > 60){
 
-glow.style.left = e.clientX + "px";
-glow.style.top = e.clientY + "px";
+topbar.classList.add("scrolled");
+
+}else{
+
+topbar.classList.remove("scrolled");
+
+}
 
 });
