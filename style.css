@@ -26,11 +26,11 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  margin: 0;
-font-family:"Plus Jakarta Sans",sans-serif;
-  color: var(--text);
 body{
+margin:0;
+font-family:"Plus Jakarta Sans",sans-serif;
+color:var(--text);
+
 background:
 linear-gradient(
 180deg,
@@ -38,7 +38,6 @@ linear-gradient(
 #182c3d 40%,
 #1f3446 100%
 );
-}
 }
 
 .site-bg,
@@ -288,77 +287,8 @@ max-width:480px;
 margin-top:30px;
 display:flex;
 gap:16px;
-}.hero{
-height:100vh;
-width:100vw;
-position:relative;
-overflow:hidden;
-display:flex;
-align-items:center;
 }
 
-.hero-layer{
-position:absolute;
-inset:0;
-pointer-events:none;
-}
-
-.hero-back{
-background:
-radial-gradient(circle at 20% 20%,rgba(120,170,255,.15),transparent 40%),
-radial-gradient(circle at 80% 10%,rgba(140,200,255,.1),transparent 40%);
-}
-
-.hero-mid img{
-width:110%;
-height:110%;
-object-fit:cover;
-position:absolute;
-left:-5%;
-top:-5%;
-}
-
-.hero-front{
-background:linear-gradient(
-90deg,
-rgba(10,20,30,.9) 0%,
-rgba(10,20,30,.7) 40%,
-rgba(10,20,30,.1) 75%,
-transparent 100%
-);
-}
-
-.hero-content{
-position:relative;
-z-index:3;
-max-width:600px;
-margin-left:8vw;
-}
-
-.hero-logo{
-width:110px;
-margin-bottom:40px;
-}
-
-.hero h1{
-font-size:72px;
-line-height:1;
-letter-spacing:-2px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:18px;
-line-height:1.7;
-color:#cfd9e3;
-max-width:480px;
-}
-
-.hero-buttons{
-margin-top:30px;
-display:flex;
-gap:16px;
-}
 .btn {
   display: inline-flex;
   align-items: center;
