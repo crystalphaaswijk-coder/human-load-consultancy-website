@@ -901,3 +901,49 @@ gap:16px;
     padding-right: 52px;
   }
 }
+
+.services-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:32px;
+perspective:1200px;
+}
+
+.service-card{
+height:240px;
+}
+
+.service-inner{
+position:relative;
+height:100%;
+transition:transform .7s;
+transform-style:preserve-3d;
+}
+
+.service-card:hover .service-inner{
+transform:rotateY(180deg);
+}
+
+.service-front,
+.service-back{
+position:absolute;
+inset:0;
+border-radius:22px;
+padding:32px;
+backface-visibility:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+border:1px solid rgba(255,255,255,.1);
+background:rgba(255,255,255,.04);
+}
+
+.service-front h3{
+font-size:22px;
+}
+
+.service-back{
+transform:rotateY(180deg);
+background:rgba(255,255,255,.07);
+}
