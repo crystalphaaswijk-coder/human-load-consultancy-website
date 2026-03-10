@@ -1051,3 +1051,61 @@ main{
     padding: 0 24px 24px;
   }
 }
+
+/* --- hero text fully left + better readability --- */
+
+.hero .container.hero-content{
+  margin-left: 0;
+  padding-left: 0;
+  max-width: 760px;
+}
+
+.hero-content{
+  width: min(760px, 46vw);
+}
+
+.hero-front{
+  background: linear-gradient(
+    90deg,
+    rgba(237,244,248,.97) 0%,
+    rgba(237,244,248,.92) 26%,
+    rgba(237,244,248,.72) 44%,
+    rgba(237,244,248,.30) 66%,
+    rgba(237,244,248,.06) 100%
+  );
+}
+
+.hero h1{
+  max-width: 8.6ch;
+  color: #173040;
+}
+
+.hero-text,
+.eyebrow{
+  max-width: 34rem;
+}
+
+.hero-buttons{
+  justify-content: flex-start;
+}
+
+/* keep hero copy hard-left on small screens too */
+@media (max-width: 860px){
+  .hero .container.hero-content{
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .hero-content{
+    width: min(760px, 100%);
+  }
+
+  .hero-front{
+    background: linear-gradient(
+      180deg,
+      rgba(237,244,248,.90) 0%,
+      rgba(237,244,248,.72) 46%,
+      rgba(237,244,248,.20) 100%
+    );
+  }
+}
