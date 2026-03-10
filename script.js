@@ -1,65 +1,49 @@
-/* HERO PARALLAX */
-
 const heroMid = document.querySelector(".hero-mid img");
 const heroBack = document.querySelector(".hero-back");
 const heroFront = document.querySelector(".hero-front");
-
-window.addEventListener("scroll",()=>{
-
-const scroll = window.scrollY;
-
-if(heroBack){
-heroBack.style.transform = `translateY(${scroll * 0.1}px)`;
-}
-
-if(heroMid){
-heroMid.style.transform = `translateY(${scroll * 0.35}px) scale(1.1)`;
-}
-
-if(heroFront){
-heroFront.style.transform = `translateY(${scroll * 0.05}px)`;
-}
-
-});
-
-
-/* REVEAL ANIMATION */
-
+const topbar = document.getElementById("topbar");
 const reveals = document.querySelectorAll(".reveal");
 
-const observer = new IntersectionObserver(entries => {
+/* HERO PARALLAX + NAVBAR */
+function handleScroll() {
+  const scroll = window.scrollY;
 
-entries.forEach(entry => {
+  if (heroBack) {
+    heroBack.style.transform = `translateY(${scroll * 0.1}px)`;
+  }
 
-if(entry.isIntersecting){
+  if (heroMid) {
+    heroMid.style.transform = `translateY(${scroll * 0.35}px) scale(1.1)`;
+  }
 
-entry.target.classList.add("in-view");
+  if (heroFront) {
+    heroFront.style.transform = `translateY(${scroll * 0.05}px)`;
+  }
 
+  if (topbar) {
+    if (scroll > 60) {
+      topbar.classList.add("scrolled");
+    } else {
+      topbar.classList.remove("scrolled");
+    }
+  }
 }
 
-});
+window.addEventListener("scroll", handleScroll);
+window.addEventListener("load", handleScroll);
 
-},{
-threshold:0.2
-});
+/* REVEAL ANIMATION */
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+      }
+    });
+  },
+  {
+    threshold: 0.15,
+  }
+);
 
-reveals.forEach(el => observer.observe(el));
-
-
-/* NAVBAR BLUR */
-
-const topbar = document.getElementById("topbar");
-
-window.addEventListener("scroll",()=>{
-
-if(window.scrollY > 60){
-
-topbar.classList.add("scrolled");
-
-}else{
-
-topbar.classList.remove("scrolled");
-
-}
-
-});
+reveals.forEach((el) => observer.observe(el));
