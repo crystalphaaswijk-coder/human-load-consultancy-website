@@ -1145,3 +1145,36 @@ main{
     background .3s ease,
     border-color .3s ease;
 }
+
+/* --- rebalance hero position --- */
+
+.hero h1,
+.hero-text,
+.hero-buttons,
+.eyebrow{
+  left: 28px;
+}
+
+.hero-content{
+  max-width: 700px;
+}
+
+.hero-front{
+  background: linear-gradient(
+    90deg,
+    rgba(231,239,245,.90) 0%,
+    rgba(231,239,245,.82) 24%,
+    rgba(231,239,245,.62) 42%,
+    rgba(231,239,245,.28) 62%,
+    rgba(231,239,245,.06) 100%
+  );
+}
+
+@media (max-width: 860px){
+  .hero h1,
+  .hero-text,
+  .hero-buttons,
+  .eyebrow{
+    left: 0;
+  }
+}
