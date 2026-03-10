@@ -75,43 +75,56 @@ if (glow) {
   });
 }
 
-/* SUPPORT SCROLL TIMELINE */
-
 const steps = document.querySelectorAll(".support-step");
 const number = document.getElementById("supportNumber");
 const progress = document.getElementById("supportProgress");
+const section = document.querySelector(".support-section");
 
-window.addEventListener("scroll", () => {
+function updateSupportScroll(){
 
-let scrollPosition = window.scrollY;
+const sectionTop = section.offsetTop;
+const sectionHeight = section.offsetHeight;
+const scroll = window.scrollY;
+const viewport = window.innerHeight;
 
-steps.forEach((step,index)=>{
-
-const rect = step.getBoundingClientRect();
-const offset = window.innerHeight * 0.5;
-
-if(rect.top < offset && rect.bottom > offset){
-
-steps.forEach(s => s.classList.remove("active"));
-step.classList.add("active");
-
-let current = index + 1;
-
-number.textContent = "0" + current;
-
-}
-
-});
-
-let section = document.querySelector(".support-section");
-let rect = section.getBoundingClientRect();
-let height = section.offsetHeight;
-
-let progressValue = Math.min(
-Math.max((window.innerHeight - rect.top) / height,0),
+const progressValue = Math.min(
+Math.max((scroll - sectionTop + viewport*0.5) / sectionHeight,0),
 1
 );
 
 progress.style.height = progressValue * 100 + "%";
 
+steps.forEach((step,index)=>{
+
+const rect = step.getBoundingClientRect();
+const trigger = window.innerHeight * 0.55;
+
+if(rect.top < trigger && rect.bottom > trigger){
+
+steps.forEach(s=>s.classList.remove("active"));
+step.classList.add("active");
+
+let newNumber = "0" + (index + 1);
+
+if(number.textContent !== newNumber){
+
+number.style.opacity = 0;
+
+setTimeout(()=>{
+
+number.textContent = newNumber;
+number.style.opacity = .85;
+
+},200);
+
+}
+
+}
+
+});
+
+}
+
+window.addEventListener("scroll",updateSupportScroll);
+window.addEventListener("load",updateSupportScroll);
 });
