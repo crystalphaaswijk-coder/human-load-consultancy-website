@@ -127,4 +127,3 @@ number.style.opacity = .85;
 
 window.addEventListener("scroll",updateSupportScroll);
 window.addEventListener("load",updateSupportScroll);
-});
