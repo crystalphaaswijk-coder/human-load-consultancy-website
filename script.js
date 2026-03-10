@@ -5,34 +5,22 @@ const topbar = document.getElementById("topbar");
 const reveals = document.querySelectorAll(".reveal");
 const glow = document.querySelector(".cursor-glow");
 
-/* sections that should get layered movement */
-const parallaxItems = [
-  { el: document.querySelector(".editorial-grid"), speed: 0.035 },
-  { el: document.querySelector(".feature-card"), speed: 0.028 },
-  { el: document.querySelector(".feature-quote"), speed: 0.02 },
-  { el: document.querySelector(".method-shell"), speed: 0.024 },
-  { el: document.querySelector(".services-section .section-head"), speed: 0.018 },
-  { el: document.querySelectorAll(".service-card"), speed: 0.02, step: 0.008 },
-  { el: document.querySelector(".approach-section .section-head"), speed: 0.018 },
-  { el: document.querySelectorAll(".approach-card"), speed: 0.022, step: 0.009 },
-  { el: document.querySelector(".trajectory-shell"), speed: 0.024 },
-  { el: document.querySelectorAll(".trajectory-step"), speed: 0.02, step: 0.007 },
-  { el: document.querySelectorAll(".faq-item"), speed: 0.014, step: 0.004 },
-  { el: document.querySelector(".cta-shell"), speed: 0.018 }
+const layeredItems = [
+  [document.querySelector(".editorial-grid"), 0.028],
+  [document.querySelector(".feature-card"), 0.022],
+  [document.querySelector(".feature-quote"), 0.016],
+  [document.querySelector(".method-shell"), 0.02],
+  [document.querySelector(".services-section .section-head"), 0.014],
+  ...Array.from(document.querySelectorAll(".service-card")).map((el, i) => [el, 0.012 + i * 0.004]),
+  [document.querySelector(".approach-section .section-head"), 0.014],
+  ...Array.from(document.querySelectorAll(".approach-card")).map((el, i) => [el, 0.014 + i * 0.004]),
+  [document.querySelector(".trajectory-shell"), 0.02],
+  ...Array.from(document.querySelectorAll(".trajectory-step")).map((el, i) => [el, 0.012 + i * 0.003]),
+  ...Array.from(document.querySelectorAll(".faq-item")).map((el, i) => [el, 0.008 + i * 0.002]),
+  [document.querySelector(".cta-shell"), 0.014]
 ];
 
-function applyParallax(el, amount) {
-  if (!el) return;
-
-  const rect = el.getBoundingClientRect();
-  const viewportCenter = window.innerHeight * 0.5;
-  const elementCenter = rect.top + rect.height * 0.5;
-  const distance = elementCenter - viewportCenter;
-
-  el.style.transform = `translate3d(0, ${distance * amount * -1}px, 0)`;
-}
-
-function handleScroll() {
+function updateParallax() {
   const scroll = window.scrollY;
 
   if (heroBack) {
@@ -47,31 +35,25 @@ function handleScroll() {
     heroFront.style.transform = `translate3d(0, ${scroll * 0.05}px, 0)`;
   }
 
-  parallaxItems.forEach((item) => {
-    if (!item.el) return;
+  layeredItems.forEach(([el, speed]) => {
+    if (!el) return;
 
-    if (NodeList.prototype.isPrototypeOf(item.el)) {
-      item.el.forEach((node, index) => {
-        const speed = item.speed + ((item.step || 0) * index);
-        applyParallax(node, speed);
-      });
-    } else {
-      applyParallax(item.el, item.speed);
-    }
+    const rect = el.getBoundingClientRect();
+    const viewportCenter = window.innerHeight / 2;
+    const elementCenter = rect.top + rect.height / 2;
+    const offset = (elementCenter - viewportCenter) * speed * -1;
+
+    el.style.transform = `translate3d(0, ${offset}px, 0)`;
   });
 
   if (topbar) {
-    if (scroll > 40) {
-      topbar.classList.add("scrolled");
-    } else {
-      topbar.classList.remove("scrolled");
-    }
+    topbar.classList.toggle("scrolled", scroll > 40);
   }
 }
 
-window.addEventListener("scroll", handleScroll, { passive: true });
-window.addEventListener("resize", handleScroll);
-window.addEventListener("load", handleScroll);
+window.addEventListener("scroll", updateParallax, { passive: true });
+window.addEventListener("resize", updateParallax);
+window.addEventListener("load", updateParallax);
 
 const observer = new IntersectionObserver(
   (entries) => {
@@ -81,9 +63,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  {
-    threshold: 0.14,
-  }
+  { threshold: 0.14 }
 );
 
 reveals.forEach((el) => observer.observe(el));
