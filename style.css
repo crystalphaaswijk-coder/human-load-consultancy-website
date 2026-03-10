@@ -1305,9 +1305,14 @@ justify-content:center;
 
 content:"";
 width:2px;
-background:#d7c8a5;
+background:linear-gradient(
+180deg,
+#e6d7b3,
+#cbb58c
+);
 height:100%;
 position:absolute;
+opacity:.6;
 
 }
 
@@ -1315,9 +1320,15 @@ position:absolute;
 
 position:absolute;
 width:4px;
-background:#d7c8a5;
+background:linear-gradient(
+180deg,
+#e6d7b3,
+#cbb58c
+);
+
 top:0;
 height:0;
+border-radius:4px;
 
 }
 
