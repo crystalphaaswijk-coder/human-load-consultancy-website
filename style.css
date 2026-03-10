@@ -1178,3 +1178,51 @@ main{
     left: 0;
   }
 }
+
+/* --- subtle blue glow across site --- */
+
+body{
+  background:
+    radial-gradient(circle at 14% 16%, rgba(177,205,227,.34), transparent 24%),
+    radial-gradient(circle at 82% 12%, rgba(164,196,222,.22), transparent 22%),
+    radial-gradient(circle at 76% 70%, rgba(154,188,214,.16), transparent 24%),
+    linear-gradient(180deg, #e6eef4 0%, #edf3f6 34%, #e9f0f4 68%, #edf3f5 100%);
+}
+
+.section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(167,198,221,.10), transparent 26%),
+    radial-gradient(circle at 80% 60%, rgba(150,186,214,.08), transparent 24%);
+}
+
+.section > .container{
+  position:relative;
+  z-index:2;
+}
+
+.feature-card,
+.method-shell,
+.service-card,
+.approach-card,
+.trajectory-shell,
+.faq-item,
+.cta-shell{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.62), rgba(248,251,253,.36));
+  border:1px solid rgba(112,145,170,.12);
+}
+
+.problem-section,
+.method-section,
+.services-section,
+.approach-section,
+.trajectory-section,
+.faq-section,
+.cta-section{
+  position:relative;
+}
