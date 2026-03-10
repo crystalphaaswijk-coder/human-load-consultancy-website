@@ -74,3 +74,44 @@ if (glow) {
     glow.style.top = `${e.clientY}px`;
   });
 }
+
+/* SUPPORT SCROLL TIMELINE */
+
+const steps = document.querySelectorAll(".support-step");
+const number = document.getElementById("supportNumber");
+const progress = document.getElementById("supportProgress");
+
+window.addEventListener("scroll", () => {
+
+let scrollPosition = window.scrollY;
+
+steps.forEach((step,index)=>{
+
+const rect = step.getBoundingClientRect();
+const offset = window.innerHeight * 0.5;
+
+if(rect.top < offset && rect.bottom > offset){
+
+steps.forEach(s => s.classList.remove("active"));
+step.classList.add("active");
+
+let current = index + 1;
+
+number.textContent = "0" + current;
+
+}
+
+});
+
+let section = document.querySelector(".support-section");
+let rect = section.getBoundingClientRect();
+let height = section.offsetHeight;
+
+let progressValue = Math.min(
+Math.max((window.innerHeight - rect.top) / height,0),
+1
+);
+
+progress.style.height = progressValue * 100 + "%";
+
+});
