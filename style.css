@@ -1278,10 +1278,16 @@ margin-bottom:40px;
 
 .support-number{
 
-font-size:200px;
+font-size:220px;
 font-weight:700;
-color:#d7c8a5;
-line-height:1;
+color:#cbb58c;
+line-height:.9;
+transition:all .45s ease;
+
+opacity:.85;
+letter-spacing:-4px;
+
+}
 
 }
 
@@ -1357,5 +1363,21 @@ margin-top:20px;
 
 color:#556b7c;
 line-height:1.7;
+
+}
+
+.support-step{
+
+margin-bottom:220px;
+opacity:.25;
+transform:translateY(40px);
+transition:all .55s cubic-bezier(.19,1,.22,1);
+
+}
+
+.support-step.active{
+
+opacity:1;
+transform:translateY(0);
 
 }
