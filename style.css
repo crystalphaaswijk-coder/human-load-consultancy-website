@@ -1226,3 +1226,16 @@ body{
 .cta-section{
   position:relative;
 }
+
+/* HERO TEXT POSITION FIX */
+
+.hero-content{
+  margin-left: 120px !important;
+}
+
+.hero h1,
+.hero-text,
+.hero-buttons,
+.eyebrow{
+  left: 0 !important;
+}
