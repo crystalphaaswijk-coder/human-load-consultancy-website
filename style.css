@@ -1310,13 +1310,23 @@ overflow:hidden;
 .support-line-progress{
 
 position:absolute;
+
 top:0;
 left:50%;
+
 transform:translateX(-50%);
+
 width:4px;
+
 background:#d2b98b;
+
 height:0;
+
 border-radius:4px;
+
+box-shadow:
+0 0 20px rgba(210,185,139,.25),
+0 0 40px rgba(210,185,139,.15);
 
 }
 
