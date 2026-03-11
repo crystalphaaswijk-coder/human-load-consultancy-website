@@ -1303,18 +1303,6 @@ overflow:hidden;
 
 }
 
-.support-line::before{
-
-content:"";
-position:absolute;
-top:0;
-bottom:0;
-width:2px;
-background:#d2b98b;
-opacity:.6;
-
-}
-
 .support-line-progress{
 
 position:absolute;
