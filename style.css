@@ -1280,14 +1280,18 @@ margin-bottom:40px;
 
 font-size:220px;
 font-weight:700;
-color:#cbb58c;
-line-height:.9;
-transition:all .45s ease;
+color:#d2b98b;
 
-opacity:.85;
+line-height:.9;
+
 letter-spacing:-4px;
 
-}
+opacity:.85;
+
+transform:translateY(0);
+transition:transform .3s ease;
+
+will-change:transform;
 
 }
 
