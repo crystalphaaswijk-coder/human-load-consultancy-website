@@ -1330,9 +1330,22 @@ padding-top:40px;
 
 .support-step{
 
-margin-bottom:200px;
-opacity:.35;
-transition:all .4s ease;
+margin-bottom:220px;
+
+opacity:.2;
+
+transform:translateY(60px);
+
+transition:
+opacity .6s ease,
+transform .6s cubic-bezier(.19,1,.22,1);
+
+}
+
+.support-step.active{
+
+opacity:1;
+transform:translateY(0);
 
 }
 
