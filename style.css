@@ -1298,20 +1298,27 @@ letter-spacing:-4px;
 position:relative;
 display:flex;
 justify-content:center;
+height:100%;
+overflow:hidden;
 
 }
 
 .support-line::before{
 
 content:"";
+position:absolute;
+
+top:0;
+bottom:0;
+
 width:2px;
+
 background:linear-gradient(
 180deg,
 #e6d7b3,
 #cbb58c
 );
-height:100%;
-position:absolute;
+
 opacity:.6;
 
 }
@@ -1319,15 +1326,21 @@ opacity:.6;
 .support-line-progress{
 
 position:absolute;
+
+top:0;
+left:50%;
+transform:translateX(-50%);
+
 width:4px;
+
 background:linear-gradient(
 180deg,
 #e6d7b3,
 #cbb58c
 );
 
-top:0;
 height:0;
+
 border-radius:4px;
 
 }
