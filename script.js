@@ -82,6 +82,17 @@ const section = document.querySelector(".support-section");
 
 function updateSupportScroll(){
 
+  const supportNumber = document.querySelector(".support-number");
+
+if(supportNumber){
+
+const rect = section.getBoundingClientRect();
+const offset = rect.top * -0.15;
+
+supportNumber.style.transform = `translateY(${offset}px)`;
+
+}
+  
 const sectionTop = section.offsetTop;
 const sectionHeight = section.offsetHeight;
 const scroll = window.scrollY;
