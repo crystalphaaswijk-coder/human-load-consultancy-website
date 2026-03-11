@@ -1307,18 +1307,10 @@ overflow:hidden;
 
 content:"";
 position:absolute;
-
 top:0;
 bottom:0;
-
 width:2px;
-
-background:linear-gradient(
-180deg,
-#e6d7b3,
-#cbb58c
-);
-
+background:#d2b98b;
 opacity:.6;
 
 }
@@ -1326,21 +1318,12 @@ opacity:.6;
 .support-line-progress{
 
 position:absolute;
-
 top:0;
 left:50%;
 transform:translateX(-50%);
-
 width:4px;
-
-background:linear-gradient(
-180deg,
-#e6d7b3,
-#cbb58c
-);
-
+background:#d2b98b;
 height:0;
-
 border-radius:4px;
 
 }
@@ -1403,5 +1386,41 @@ transition:all .55s cubic-bezier(.19,1,.22,1);
 
 opacity:1;
 transform:translateY(0);
+
+}
+
+.support-step{
+
+position:relative;
+
+}
+
+.support-step::before{
+
+content:"";
+position:absolute;
+
+left:-42px;
+top:12px;
+
+width:10px;
+height:10px;
+
+background:#d2b98b;
+
+border-radius:50%;
+
+opacity:.4;
+
+transition:all .35s ease;
+
+}
+
+.support-step.active::before{
+
+opacity:1;
+transform:scale(1.4);
+
+box-shadow:0 0 0 6px rgba(210,185,139,.15);
 
 }
