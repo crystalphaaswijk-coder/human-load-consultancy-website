@@ -1439,3 +1439,9 @@ transform:scale(1.4);
 box-shadow:0 0 0 6px rgba(210,185,139,.15);
 
 }
+
+.support-number{
+
+filter:blur(.2px);
+
+}
