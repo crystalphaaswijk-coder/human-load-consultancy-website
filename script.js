@@ -87,7 +87,9 @@ function updateSupportScroll(){
 if(supportNumber){
 
 const rect = section.getBoundingClientRect();
-const offset = rect.top * -0.15;
+let offset = rect.top * -0.08;
+
+offset = Math.max(Math.min(offset, 40), -40);
 
 supportNumber.style.transform = `translateY(${offset}px)`;
 
