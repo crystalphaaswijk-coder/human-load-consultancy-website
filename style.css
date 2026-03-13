@@ -1445,3 +1445,67 @@ box-shadow:0 0 0 6px rgba(210,185,139,.15);
 filter:blur(.2px);
 
 }
+
+/* TRAJECTORY */
+
+.trajectory-section {
+padding:120px 0;
+}
+
+.trajectory-shell {
+max-width:1200px;
+margin:auto;
+}
+
+.trajectory-cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:40px;
+margin-top:60px;
+}
+
+.trajectory-card{
+position:relative;
+padding:40px;
+background:#ffffff;
+border-radius:14px;
+box-shadow:0 15px 40px rgba(0,0,0,0.05);
+transition:all .35s ease;
+}
+
+.trajectory-card:hover{
+transform:translateY(-8px);
+box-shadow:0 25px 60px rgba(0,0,0,0.12);
+}
+
+.trajectory-number{
+position:absolute;
+top:20px;
+left:24px;
+font-size:14px;
+letter-spacing:2px;
+color:#d2b98b;
+font-weight:600;
+}
+
+.trajectory-card h3{
+margin-top:30px;
+margin-bottom:10px;
+font-weight:700;
+font-size:20px;
+}
+
+.trajectory-card p{
+opacity:0.8;
+line-height:1.6;
+}
+
+/* responsive */
+
+@media (max-width:900px){
+
+.trajectory-cards{
+grid-template-columns:1fr;
+}
+
+}
