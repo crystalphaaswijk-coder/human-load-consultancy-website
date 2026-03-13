@@ -1509,3 +1509,29 @@ grid-template-columns:1fr;
 }
 
 }
+
+/* TRAJECTORY PROGRESS LINE */
+
+.trajectory-shell{
+position:relative;
+}
+
+.trajectory-shell::before{
+content:"";
+position:absolute;
+left:-40px;
+top:0;
+height:100%;
+width:2px;
+background:#e6e6e6;
+}
+
+.trajectory-progress{
+position:absolute;
+left:-40px;
+top:0;
+width:2px;
+height:0%;
+background:#d2b98b;
+transition:height .3s ease;
+}
