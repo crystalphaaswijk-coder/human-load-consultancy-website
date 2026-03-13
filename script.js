@@ -140,3 +140,24 @@ number.style.opacity = .85;
 
 window.addEventListener("scroll",updateSupportScroll);
 window.addEventListener("load",updateSupportScroll);
+
+/* trajectory progress line */
+
+const trajectory = document.querySelector("#trajectory");
+const progress = document.querySelector("#trajectoryProgress");
+
+window.addEventListener("scroll", () => {
+
+if(!trajectory) return;
+
+const rect = trajectory.getBoundingClientRect();
+const height = trajectory.offsetHeight;
+
+const scrolled = Math.min(
+Math.max((window.innerHeight - rect.top) / height, 0),
+1
+);
+
+progress.style.height = scrolled * 100 + "%";
+
+});
