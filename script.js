@@ -178,3 +178,25 @@ function revealOnScroll(){
 
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+
+  const windowHeight = window.innerHeight;
+
+  reveals.forEach(el => {
+
+    const elementTop = el.getBoundingClientRect().top;
+
+    if(elementTop < windowHeight - 100){
+      el.classList.add("visible");
+    }
+
+  });
+
+}
+
+window.addEventListener("scroll", revealOnScroll);
+
+revealOnScroll();
