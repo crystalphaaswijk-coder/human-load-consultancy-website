@@ -161,3 +161,20 @@ Math.max((window.innerHeight - rect.top) / height, 0),
 progress.style.height = scrolled * 100 + "%";
 
 });
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll(){
+  const windowHeight = window.innerHeight;
+
+  reveals.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+
+    if(elementTop < windowHeight - 80){
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
