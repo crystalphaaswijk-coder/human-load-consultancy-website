@@ -1540,3 +1540,9 @@ height:0%;
 background:#d2b98b;
 transition:height .3s ease;
 }
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
