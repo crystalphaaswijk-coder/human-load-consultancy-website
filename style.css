@@ -103,7 +103,7 @@ main{
   overflow:hidden;
   display:flex;
   align-items:center;
-  padding:146px 0 108px;
+  padding:0;
 }
 
 .hero-back{
