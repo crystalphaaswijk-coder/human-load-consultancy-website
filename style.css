@@ -1550,3 +1550,10 @@ transition:height .3s ease;
   display:flex;
   align-items:center;
 }
+
+.hero .container{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0 40px;
+}
