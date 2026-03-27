@@ -42,7 +42,7 @@ body::before {
 }
 .container { width: min(1200px, calc(100% - 56px)); margin: 0 auto; }
 .section { padding: 140px 0; }
-.statement, .about-section, .about-hlc, .services-section, .approach-section, .faq-section, .cta-section, footer {
+.statement, .statement, .differentiator, .about-section, .about-hlc, .services-section, .approach-section, .faq-section, .cta-section, footer {
   position: relative;
   z-index: 2;
   background: var(--warm-white);
@@ -236,6 +236,65 @@ footer { background: var(--ink); }
 .services-section .section-header { max-width: 680px; margin-bottom: 80px; }
 .services-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -.03em; color: var(--ink); margin-bottom: 16px; }
 .services-section .section-sub { font-size: 17px; color: rgba(74,59,44,.6); max-width: 50ch; line-height: 1.8; }
+
+/* DIFFERENTIATOR STRIP */
+.differentiator {
+  background: var(--ink);
+  padding: 100px 0;
+  position: relative;
+  z-index: 2;
+}
+.differentiator .section-tag::before { background: rgba(245,240,232,.25); }
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(245,240,232,.07);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-top: 48px;
+}
+.diff-item {
+  padding: 40px 36px;
+  background: var(--ink);
+  transition: background .4s;
+}
+.diff-item:hover { background: rgba(255,255,255,.03); }
+.diff-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  color: var(--sand);
+  margin-bottom: 16px;
+}
+.diff-text {
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(245,240,232,.5);
+}
+.diff-footer {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(245,240,232,.08);
+  max-width: 680px;
+}
+.diff-footer p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -.02em;
+  color: var(--cream);
+}
+.diff-footer p em {
+  font-style: italic;
+  color: var(--sand);
+}
+
+@media (max-width: 1080px) {
+  .diff-grid { grid-template-columns: 1fr; }
+}
 
 /* SCROLL TRACKER LAYOUT */
 .svc-tracker { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; }
@@ -690,6 +749,29 @@ footer { background: var(--ink); padding: 60px 0 40px; }
   </div>
 </section>
 
+<section class="differentiator">
+  <div class="container">
+    <p class="section-tag reveal" style="color:rgba(245,240,232,.45)">Where others stop</p>
+    <div class="diff-grid">
+      <div class="diff-item reveal">
+        <p class="diff-label">Physiotherapy</p>
+        <p class="diff-text">Treats the individual. Cannot change the organizational patterns that keep sending people back.</p>
+      </div>
+      <div class="diff-item reveal delay-1">
+        <p class="diff-label">Ergonomics</p>
+        <p class="diff-text">Optimizes the environment. Does not address the behavior that happens within it.</p>
+      </div>
+      <div class="diff-item reveal delay-2">
+        <p class="diff-label">Wellness programs</p>
+        <p class="diff-text">Individual and voluntary. No organizational embedding. No measurable behavioral change.</p>
+      </div>
+    </div>
+    <div class="diff-footer reveal delay-3">
+      <p>Human Load operates where none of these do — at the intersection of <em>organizational structure</em> and <em>individual behavior.</em></p>
+    </div>
+  </div>
+</section>
+  
 <section class="about-hlc section" id="about-hlc">
   <div class="container">
     <div class="about-hlc-grid">
