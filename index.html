@@ -348,6 +348,155 @@ footer { background: var(--ink); }
 .approach-step p { font-size: 15px; line-height: 1.85; color: rgba(74,59,44,.65); margin-bottom: 24px; }
 .approach-step .how-label { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(124,106,82,.5); margin-bottom: 8px; }
 .approach-step .how-text { font-size: 14px; line-height: 1.8; color: rgba(74,59,44,.5); font-style: italic; }
+/* METHOD FLIP CARDS */
+.approach-section { background: var(--warm-white); }
+.approach-section .section-header { margin-bottom: 72px; }
+.approach-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -.03em; color: var(--ink); max-width: 18ch; margin-bottom: 0; }
+.approach-section h2 em { font-style: italic; color: var(--bark); }
+
+.flip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.flip-card {
+  height: 480px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .7s cubic-bezier(.4,0,.2,1);
+}
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-lg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* FRONT */
+.flip-front {
+  background: var(--parchment);
+  border: 1px solid rgba(180,162,130,.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 36px;
+}
+.flip-front-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 110% 0%, rgba(201,185,154,.5) 0%, transparent 60%);
+  pointer-events: none;
+}
+.flip-front-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.06em;
+  color: rgba(180,162,130,.15);
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+.flip-front-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--bark);
+  margin-bottom: 12px;
+}
+.flip-front h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.flip-front-hint {
+  margin-top: 20px;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(124,106,82,.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.flip-front-hint::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: rgba(124,106,82,.3);
+}
+
+/* BACK */
+.flip-back {
+  background: var(--umber);
+  border: 1px solid rgba(180,162,130,.15);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px 36px;
+}
+.flip-back-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 20px;
+}
+.flip-back p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(245,240,232,.75);
+  margin-bottom: 28px;
+}
+.flip-back-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(201,185,154,.3);
+  margin-bottom: 24px;
+}
+.flip-back-org-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(201,185,154,.5);
+  margin-bottom: 12px;
+}
+.flip-back-org {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--sand);
+}
+
+@media (max-width: 1080px) {
+  .flip-grid { grid-template-columns: 1fr; }
+  .flip-card { height: auto; perspective: none; }
+  .flip-card-inner { transform: none !important; }
+  .flip-back { position: relative; transform: none; backface-visibility: visible; -webkit-backface-visibility: visible; margin-top: 8px; border-radius: var(--r-lg); }
+  .flip-front { position: relative; backface-visibility: visible; -webkit-backface-visibility: visible; }
+}
 .trajectory-section { background: var(--ink); position: relative; }
 .trajectory-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(124,106,82,.18) 0%, transparent 60%); }
 .trajectory-scroll-wrapper { height: 700vh; position: relative; }
@@ -577,37 +726,76 @@ footer { background: var(--ink); padding: 60px 0 40px; }
 </section>
 <section class="approach-section section" id="approach">
   <div class="container">
-    <p class="section-tag reveal">The Human Load Method</p>
-    <h2 class="reveal delay-1">Behavior-first.<br>Not <em>environment-first.</em></h2>
-    <div class="approach-steps">
-      <div class="approach-step reveal">
-        <span class="step-number">01</span>
-        <p class="what-label">Assess</p>
-        <h3>Identify the behavioral risk</h3>
-        <p>We analyze where physical load accumulates in daily work routines — not just in workstation setup, but in how people actually work: how long, how often, and how they respond to physical signals.</p>
-        <p class="how-label">What this means for your organization</p>
-        <p class="how-text">A clear picture of behavioral risk patterns across your workforce — before complaints become visible on sick leave reports.</p>
+    <div class="section-header">
+      <p class="section-tag reveal">The Human Load Method</p>
+      <h2 class="reveal delay-1">Behavior-first.<br>Not <em>environment-first.</em></h2>
+    </div>
+    <div class="flip-grid">
+
+      <!-- CARD 1 -->
+      <div class="flip-card reveal">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-bg"></div>
+            <div class="flip-front-num">01</div>
+            <p class="flip-front-label">Assess</p>
+            <h3>Identify the behavioral risk</h3>
+            <p class="flip-front-hint">Hover to learn more</p>
+          </div>
+          <div class="flip-back">
+            <p class="flip-back-label">Assess</p>
+            <p>We analyze where physical load accumulates in daily work routines — not just in workstation setup, but in how people actually work: how long, how often, and how they respond to physical signals.</p>
+            <div class="flip-back-divider"></div>
+            <p class="flip-back-org-label">What this means for your organization</p>
+            <p class="flip-back-org">A clear picture of behavioral risk patterns across your workforce — before complaints become visible on sick leave reports.</p>
+          </div>
+        </div>
       </div>
-      <div class="approach-step reveal delay-1">
-        <span class="step-number">02</span>
-        <p class="what-label">Activate</p>
-        <h3>Build capability at the individual level</h3>
-        <p>Employees develop practical skills: recognizing early physical signals, interrupting static load, and integrating variation into their existing work rhythm — without reducing productivity.</p>
-        <p class="how-label">What this means for your organization</p>
-        <p class="how-text">A workforce that can self-regulate physical load as part of daily routine — reducing dependency on reactive occupational health interventions.</p>
+
+      <!-- CARD 2 -->
+      <div class="flip-card reveal delay-1">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-bg"></div>
+            <div class="flip-front-num">02</div>
+            <p class="flip-front-label">Activate</p>
+            <h3>Build capability at the individual level</h3>
+            <p class="flip-front-hint">Hover to learn more</p>
+          </div>
+          <div class="flip-back">
+            <p class="flip-back-label">Activate</p>
+            <p>Employees develop practical skills: recognizing early physical signals, interrupting static load, and integrating variation into their existing work rhythm — without reducing productivity.</p>
+            <div class="flip-back-divider"></div>
+            <p class="flip-back-org-label">What this means for your organization</p>
+            <p class="flip-back-org">A workforce that self-regulates physical load as part of daily routine — reducing dependency on reactive occupational health interventions.</p>
+          </div>
+        </div>
       </div>
-      <div class="approach-step reveal delay-2">
-        <span class="step-number">03</span>
-        <p class="what-label">Embed</p>
-        <h3>Make prevention part of work culture</h3>
-        <p>Through structured repetition, behavioral reminders, and data-informed check-ins, preventive habits become embedded in how your organization works — not dependent on individual motivation.</p>
-        <p class="how-label">What this means for your organization</p>
-        <p class="how-text">Measurable behavioral adoption, reduced musculoskeletal risk, and a demonstrable duty-of-care investment that HR and leadership can report on.</p>
+
+      <!-- CARD 3 -->
+      <div class="flip-card reveal delay-2">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-front-bg"></div>
+            <div class="flip-front-num">03</div>
+            <p class="flip-front-label">Embed</p>
+            <h3>Make prevention part of work culture</h3>
+            <p class="flip-front-hint">Hover to learn more</p>
+          </div>
+          <div class="flip-back">
+            <p class="flip-back-label">Embed</p>
+            <p>Through structured repetition, behavioral reminders, and data-informed check-ins, preventive habits become embedded in how your organization works — not dependent on individual motivation.</p>
+            <div class="flip-back-divider"></div>
+            <p class="flip-back-org-label">What this means for your organization</p>
+            <p class="flip-back-org">Measurable behavioral adoption, reduced musculoskeletal risk, and a demonstrable duty-of-care investment that HR and leadership can report on.</p>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
-
+  
 <section class="trajectory-section" id="trajectory">
   <div class="trajectory-scroll-wrapper">
     <div class="trajectory-sticky">
@@ -862,6 +1050,13 @@ var svcObserver = new IntersectionObserver(function(entries) {
 
 svcItems.forEach(function(el) { svcObserver.observe(el); });
 
+  // FLIP CARDS — tap support for mobile
+document.querySelectorAll('.flip-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    card.classList.toggle('flipped');
+  });
+});
+  
 if (cards.length > 0) goTo(0, false);
 </script>
 </body>
