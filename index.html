@@ -3,413 +3,675 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Human Load Consultancy</title>
-
-<meta
-name="description"
-content="Human Load helps organizations prevent physical complaints in screen-based work through practical behavioral change and structured preventive training."
->
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-
+<title>Human Load Consultancy — Preventive Work Culture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:      #f5f0e8;
+  --parchment:  #ede6d6;
+  --warm-white: #faf8f4;
+  --sand:       #c9b99a;
+  --sand-mid:   #b3a085;
+  --bark:       #7c6a52;
+  --umber:      #4a3b2c;
+  --ink:        #2b2218;
+  --fog-mid:    rgba(75,59,44,.14);
+  --r-md: 28px;
+  --r-lg: 40px;
+  --ease-out: cubic-bezier(.16,1,.3,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--warm-white);
+  color: var(--umber);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  z-index: 999; pointer-events: none; opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+.container { width: min(1200px, calc(100% - 56px)); margin: 0 auto; }
+.section { padding: 140px 0; }
+.cursor {
+  position: fixed; width: 10px; height: 10px;
+  background: var(--bark); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .35s var(--ease-out), height .35s var(--ease-out);
+  mix-blend-mode: multiply;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(124,106,82,.35); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .35s var(--ease-out), height .35s var(--ease-out);
+}
+.nav-wrap {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  transition: background .4s, backdrop-filter .4s, box-shadow .4s;
+}
+.nav-wrap.scrolled {
+  background: rgba(250,248,244,.88);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 1px 0 var(--fog-mid);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0; transition: padding .4s var(--ease-out);
+}
+.nav-wrap.scrolled .nav { padding: 14px 0; }
+.logo { display: flex; align-items: center; }
+.logo-img { height: 52px; width: auto; display: block; transition: height .4s var(--ease-out), opacity .25s; }
+.nav-wrap.scrolled .logo-img { height: 40px; }
+.logo:hover .logo-img { opacity: .82; }
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 400; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--bark); transition: color .25s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 24px; background: var(--umber);
+  color: var(--cream) !important; border-radius: 999px;
+  font-size: 13px !important; font-weight: 500 !important;
+  letter-spacing: .04em !important; text-transform: none !important;
+  transition: background .3s, transform .3s, box-shadow .3s !important;
+}
+.nav-cta:hover {
+  background: var(--ink) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 24px rgba(43,34,24,.18) !important;
+}
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden; background: var(--cream);
+}
+.hero-layer { position: absolute; inset: -15%; will-change: transform; }
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,185,154,.55) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 80% at 15% 80%, rgba(179,160,133,.3) 0%, transparent 55%),
+    linear-gradient(160deg, #ede6d6 0%, #f5f0e8 40%, #faf8f4 100%);
+}
+.hero-shape { position: absolute; border-radius: 50%; will-change: transform; }
+.hero-shape-1 { width: 700px; height: 700px; right: -100px; top: -200px; background: radial-gradient(circle, rgba(201,185,154,.28) 0%, transparent 70%); }
+.hero-shape-2 { width: 400px; height: 400px; right: 200px; bottom: -100px; background: radial-gradient(circle, rgba(179,160,133,.2) 0%, transparent 70%); }
+.hero-shape-3 { width: 200px; height: 200px; left: 55%; top: 20%; background: rgba(212,200,178,.12); border: 1px solid rgba(180,162,130,.18); }
+.hero-line {
+  position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+  width: 1px; height: 0;
+  background: linear-gradient(180deg, transparent, rgba(124,106,82,.25), transparent);
+  transition: height 1.8s var(--ease-out) .8s;
+}
+.hero-line.visible { height: 280px; }
+.hero-content { position: relative; z-index: 2; padding: 160px 0 120px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 500; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--bark); margin-bottom: 36px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .8s var(--ease-out) .2s, transform .8s var(--ease-out) .2s;
+}
+.eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--sand); }
+.hero-content.loaded .eyebrow { opacity: 1; transform: none; }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(62px, 8.5vw, 130px); line-height: .9;
+  letter-spacing: -.03em; color: var(--ink); max-width: 11ch; margin-bottom: 40px;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 1s var(--ease-out) .4s, transform 1s var(--ease-out) .4s;
+}
+.hero h1 em { font-style: italic; font-weight: 300; color: var(--bark); }
+.hero-content.loaded h1 { opacity: 1; transform: none; }
+.hero-body {
+  max-width: 500px; font-size: 17px; line-height: 1.85;
+  color: rgba(74,59,44,.72); margin-bottom: 52px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .9s var(--ease-out) .65s, transform .9s var(--ease-out) .65s;
+}
+.hero-content.loaded .hero-body { opacity: 1; transform: none; }
+.hero-actions {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .8s var(--ease-out) .85s, transform .8s var(--ease-out) .85s;
+}
+.hero-content.loaded .hero-actions { opacity: 1; transform: none; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; background: var(--umber); color: var(--cream);
+  border-radius: 999px; font-size: 14px; font-weight: 500; letter-spacing: .02em;
+  transition: background .3s, transform .3s var(--ease-out), box-shadow .3s;
+}
+.btn-primary:hover { background: var(--ink); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(43,34,24,.22); }
+.btn-primary svg { transition: transform .3s var(--ease-out); }
+.btn-primary:hover svg { transform: translate(3px,-3px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; color: var(--bark); letter-spacing: .04em;
+  border-bottom: 1px solid rgba(124,106,82,.3); padding-bottom: 2px;
+  transition: color .25s, border-color .25s;
+}
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+.scroll-indicator {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  opacity: 0; animation: fadeInUp .8s var(--ease-out) 1.6s forwards;
+}
+.scroll-indicator span { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--sand-mid); writing-mode: vertical-rl; }
+.scroll-line { width: 1px; height: 48px; background: linear-gradient(180deg, var(--sand-mid), transparent); animation: scrollPulse 2.4s ease-in-out infinite 1.8s; }
+@keyframes scrollPulse { 0%,100%{opacity:.4;}50%{opacity:1;} }
+@keyframes fadeInUp { from{opacity:0;transform:translateX(-50%) translateY(12px);}to{opacity:1;transform:translateX(-50%) translateY(0);} }
+.statement { background: var(--umber); padding: 100px 0; position: relative; overflow: hidden; }
+.statement::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 100% at 80% 50%, rgba(124,106,82,.3) 0%, transparent 60%); }
+.statement-inner { position: relative; max-width: 900px; }
+.statement-label { font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: rgba(245,240,232,.45); margin-bottom: 32px; }
+.statement blockquote { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(32px, 4.5vw, 58px); line-height: 1.15; letter-spacing: -.02em; color: var(--cream); }
+.statement blockquote em { font-style: italic; color: var(--sand); }
+.section-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--bark); margin-bottom: 28px; }
+.section-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--sand); }
+.about-section { background: var(--warm-white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+.about-left h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(40px, 5vw, 68px); line-height: 1.0; letter-spacing: -.03em; color: var(--ink); }
+.about-left h2 em { font-style: italic; color: var(--bark); }
+.about-right { padding-top: 8px; }
+.about-right .lead { font-size: 20px; line-height: 1.75; color: var(--umber); margin-bottom: 24px; font-weight: 300; }
+.about-right p { font-size: 16px; line-height: 1.9; color: rgba(74,59,44,.7); margin-bottom: 18px; }
+.about-stats { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat-card { padding: 28px; background: var(--parchment); border-radius: var(--r-md); border: 1px solid rgba(180,162,130,.2); transition: transform .4s var(--ease-out), box-shadow .4s; }
+.stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(74,59,44,.08); }
+.stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; line-height: 1; color: var(--ink); letter-spacing: -.04em; }
+.stat-label { font-size: 13px; color: var(--bark); margin-top: 6px; line-height: 1.4; }
+.services-section { background: var(--cream); }
+.services-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -.03em; color: var(--ink); max-width: 16ch; margin-bottom: 16px; }
+.services-section .section-sub { font-size: 17px; color: rgba(74,59,44,.6); max-width: 50ch; line-height: 1.8; margin-bottom: 72px; }
+.services-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; align-items: start; }
+.svc-card { padding: 40px 36px; border-radius: var(--r-lg); border: 1px solid rgba(180,162,130,.18); background: var(--warm-white); transition: transform .5s var(--ease-out), box-shadow .5s, border-color .4s; }
+.svc-card:hover { transform: translateY(-8px); box-shadow: 0 28px 60px rgba(74,59,44,.1); border-color: rgba(180,162,130,.36); }
+.svc-card:nth-child(1) { background: var(--umber); }
+.svc-card:nth-child(1) .svc-num, .svc-card:nth-child(1) .svc-label { color: var(--sand); }
+.svc-card:nth-child(1) h3 { color: var(--cream); }
+.svc-card:nth-child(1) p { color: rgba(245,240,232,.65); }
+.svc-card:nth-child(2) { margin-top: 40px; }
+.svc-card:nth-child(3) { margin-top: 80px; }
+.svc-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .14em; color: var(--sand-mid); margin-bottom: 40px; display: block; }
+.svc-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--bark); margin-bottom: 14px; }
+.svc-card h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 32px; line-height: 1.05; letter-spacing: -.02em; color: var(--ink); margin-bottom: 18px; }
+.svc-card p { font-size: 15px; line-height: 1.85; color: rgba(74,59,44,.65); }
+.svc-card-detail { font-size: 13px; line-height: 1.8; margin-top: 16px; color: rgba(74,59,44,.55); }
+.approach-section { background: var(--warm-white); }
+.approach-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -.03em; color: var(--ink); max-width: 18ch; margin-bottom: 72px; }
+.approach-section h2 em { font-style: italic; color: var(--bark); }
+.approach-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(180,162,130,.18); border-radius: var(--r-lg); overflow: hidden; }
+.approach-step { background: var(--warm-white); padding: 48px 40px; transition: background .4s; }
+.approach-step:hover { background: var(--cream); }
+.step-number { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; line-height: 1; color: rgba(180,162,130,.25); letter-spacing: -.05em; margin-bottom: 24px; display: block; }
+.approach-step h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; letter-spacing: -.02em; color: var(--ink); margin-bottom: 16px; }
+.approach-step .what-label { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--bark); margin-bottom: 8px; }
+.approach-step p { font-size: 15px; line-height: 1.85; color: rgba(74,59,44,.65); margin-bottom: 24px; }
+.approach-step .how-label { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(124,106,82,.5); margin-bottom: 8px; }
+.approach-step .how-text { font-size: 14px; line-height: 1.8; color: rgba(74,59,44,.5); font-style: italic; }
+.trajectory-section { background: var(--ink); position: relative; }
+.trajectory-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(124,106,82,.18) 0%, transparent 60%); }
+.trajectory-scroll-wrapper { height: 700vh; position: relative; }
+.trajectory-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+.trajectory-sticky .container { position: relative; z-index: 2; }
+.trajectory-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 56px; }
+.trajectory-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(36px, 4.5vw, 60px); line-height: 1.0; letter-spacing: -.03em; color: var(--cream); }
+.trajectory-header h2 em { font-style: italic; color: var(--sand); }
+.trajectory-header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 20px; }
+.trajectory-header p { font-size: 15px; line-height: 1.9; color: rgba(245,240,232,.5); max-width: 44ch; text-align: right; }
+.traj-progress-bar { width: 140px; height: 1px; background: rgba(245,240,232,.1); position: relative; border-radius: 999px; overflow: hidden; }
+.traj-progress-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: var(--sand); border-radius: 999px; transition: width .3s linear; }
+.traj-counter { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(245,240,232,.35); letter-spacing: .1em; }
+.traj-counter span { color: var(--sand); font-size: 18px; }
+.trajectory-track-outer { overflow: hidden; }
+.trajectory-track { display: flex; gap: 20px; will-change: transform; padding-right: 80px; }
+.traj-card { flex: 0 0 360px; min-height: 300px; padding: 40px 36px; border: 1px solid rgba(245,240,232,.07); border-radius: var(--r-lg); background: rgba(255,255,255,.03); transition: border-color .4s, background .4s; }
+.traj-card.active { border-color: rgba(201,185,154,.25); background: rgba(255,255,255,.055); }
+.traj-card:hover { border-color: rgba(245,240,232,.14); background: rgba(255,255,255,.05); }
+.traj-card-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; line-height: 1; color: rgba(201,185,154,.12); letter-spacing: -.05em; margin-bottom: 20px; display: block; }
+.traj-card-week { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--sand-mid); margin-bottom: 14px; display: block; }
+.traj-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; letter-spacing: -.02em; color: var(--cream); margin-bottom: 14px; line-height: 1.1; }
+.traj-card p { font-size: 14px; line-height: 1.9; color: rgba(245,240,232,.45); }
+.traj-nav { display: flex; gap: 10px; margin-top: 40px; }
+.traj-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(245,240,232,.14); background: rgba(255,255,255,.04); color: rgba(245,240,232,.6); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .3s, border-color .3s, color .3s, transform .3s var(--ease-out); }
+.traj-btn:hover { background: rgba(201,185,154,.12); border-color: rgba(201,185,154,.3); color: var(--cream); transform: scale(1.08); }
+.traj-btn:disabled { opacity: .2; pointer-events: none; }
+.faq-section { background: var(--warm-white); }
+.faq-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 4.5vw, 60px); letter-spacing: -.03em; color: var(--ink); margin-bottom: 64px; }
+.faq-section h2 em { font-style: italic; color: var(--bark); }
+.faq-list { max-width: 860px; }
+.faq-item { border-bottom: 1px solid rgba(180,162,130,.22); }
+.faq-item summary { list-style: none; cursor: pointer; padding: 28px 0; display: flex; justify-content: space-between; align-items: center; font-size: 17px; font-weight: 400; color: var(--ink); letter-spacing: -.01em; transition: color .25s; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--bark); }
+.faq-icon { width: 24px; height: 24px; border: 1px solid rgba(180,162,130,.35); border-radius: 50%; flex-shrink: 0; transition: background .3s, border-color .3s; position: relative; }
+.faq-item[open] .faq-icon { background: var(--umber); border-color: var(--umber); }
+.faq-icon::before, .faq-icon::after { content: ''; position: absolute; width: 10px; height: 1px; background: var(--bark); top: 50%; left: 50%; transform: translate(-50%,-50%); transition: transform .3s var(--ease-out); }
+.faq-item[open] .faq-icon::before, .faq-item[open] .faq-icon::after { background: var(--cream); }
+.faq-icon::after { transform: translate(-50%,-50%) rotate(90deg); }
+.faq-item[open] .faq-icon::after { transform: translate(-50%,-50%) rotate(0deg); }
+.faq-item p { font-size: 15px; line-height: 1.9; color: rgba(74,59,44,.65); padding-bottom: 28px; max-width: 64ch; }
+.cta-section { background: var(--parchment); }
+.cta-inner { text-align: center; max-width: 800px; margin: 0 auto; }
+.cta-inner .section-tag { justify-content: center; }
+.cta-inner h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(44px, 6vw, 82px); line-height: .95; letter-spacing: -.04em; color: var(--ink); margin-bottom: 28px; }
+.cta-inner h2 em { font-style: italic; color: var(--bark); }
+.cta-inner p { font-size: 17px; line-height: 1.85; color: rgba(74,59,44,.65); margin-bottom: 48px; }
+.cta-actions { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+footer { background: var(--ink); padding: 60px 0 40px; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-logo-img { height: 52px; width: auto; filter: brightness(0) invert(1); opacity: .7; }
+.footer-copy { font-size: 12px; color: rgba(245,240,232,.3); letter-spacing: .04em; }
+.footer-links { display: flex; gap: 28px; list-style: none; }
+.footer-links a { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: rgba(245,240,232,.4); transition: color .25s; }
+.footer-links a:hover { color: var(--sand); }
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal.delay-1 { transition-delay: .1s; }
+.reveal.delay-2 { transition-delay: .22s; }
+.reveal.delay-3 { transition-delay: .36s; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 1s var(--ease-out), transform 1s var(--ease-out); }
+.reveal-left.visible { opacity: 1; transform: none; }
+@media (max-width: 1080px) {
+  .about-grid, .services-grid { grid-template-columns: 1fr; gap: 48px; }
+  .svc-card:nth-child(2), .svc-card:nth-child(3) { margin-top: 0; }
+  .trajectory-header { grid-template-columns: 1fr; gap: 24px; }
+  .trajectory-header-right { align-items: flex-start; }
+  .trajectory-header p { text-align: left; }
+  .approach-steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .container { width: calc(100% - 32px); }
+  .nav-links { display: none; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .hero-line { display: none; }
+  .section { padding: 100px 0; }
+  .statement { padding: 72px 0; }
+  .cursor, .cursor-ring { display: none; }
+}
+</style>
 </head>
-
 <body>
 
-<div class="cursor-glow"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-<header class="topbar" id="topbar">
-
-<div class="container nav">
-
-<a href="#hero" class="brand" aria-label="Human Load Consultancy home">
-<img src="hlclogo.png" class="logo" alt="Human Load Consultancy logo">
-</a>
-
-<nav class="nav-links">
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#approach">Approach</a>
-<a href="#trajectory">Trajectory</a>
-<a href="#faq">FAQ</a>
-<a href="#contact">Contact</a>
-</nav>
-
-</div>
+<header class="nav-wrap" id="navWrap">
+  <div class="container">
+    <nav class="nav">
+      <a href="#" class="logo">
+        <img src="hlclogo.png" alt="Human Load Consultancy" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#trajectory">Trajectory</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="mailto:info@humanloadconsultancy.com" class="nav-cta">Book a consultation <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<main>
-
-<!-- HERO -->
-
 <section class="hero" id="hero">
-
-<div class="hero-back"></div>
-
-<div class="hero-mid">
-<img src="front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg" alt="Human Load hero image">
-</div>
-
-<div class="hero-front"></div>
-
-<div class="container hero-content">
-
-<p class="eyebrow">Preventive work culture for screen-based work</p>
-
-<h1>Preventing physical complaints before they become sick leave</h1>
-
-<p class="hero-text">
-Human Load helps organizations reduce physical strain in screen-based work
-through practical behavioral change, preventive training, and structured support.
-</p>
-
-<div class="hero-buttons">
-<a class="btn-primary" href="#contact">Book a consultation</a>
-<a class="btn-secondary" href="#about">Learn more</a>
-</div>
-
-</div>
+  <div class="hero-bg"></div>
+  <div class="hero-layer" id="heroLayer1">
+    <div class="hero-shape hero-shape-1"></div>
+    <div class="hero-shape hero-shape-2"></div>
+    <div class="hero-shape hero-shape-3"></div>
+  </div>
+  <div class="hero-line" id="heroLine"></div>
+  <div class="container">
+    <div class="hero-content" id="heroContent">
+      <p class="eyebrow">B2B Behavioral Consultancy</p>
+      <h1>Prevent the<br><em>overload</em><br>before it starts.</h1>
+      <p class="hero-body">Most physical complaints in office environments are not caused by the workstation itself — but by how people work within it. We help organizations change that behavior.</p>
+      <div class="hero-actions">
+        <a href="mailto:info@humanloadconsultancy.com" class="btn-primary">Book a consultation <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#about" class="btn-ghost">Discover our approach</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
 </section>
 
-<!-- ABOUT -->
-
-<section class="section section-intro" id="about">
-
-<div class="container editorial-grid reveal">
-
-<div class="editorial-left">
-<p class="section-label">Recognize the pattern</p>
-<h2>Not a quick fix, but lasting change</h2>
-</div>
-
-<div class="editorial-right">
-
-<p class="lead">
-Whether your organization is seeing rising complaints about neck, shoulder,
-or back pain, employees working for hours without breaks, or teams struggling
-with the physical impact of long screen days.
-</p>
-
-<p>
-Human Load helps organizations prevent physical strain by improving
-everyday work behavior before discomfort becomes absence.
-</p>
-
-</div>
-</div>
+<section class="statement">
+  <div class="container">
+    <div class="statement-inner">
+      <p class="statement-label reveal-left">The Human Load philosophy</p>
+      <blockquote class="reveal-left" style="transition-delay:.12s">
+        Ergonomics focuses on the setup.<br>
+        We focus on <em>behavior</em> — enabling employees to prevent physical overload during their workday.
+      </blockquote>
+    </div>
+  </div>
 </section>
 
-<!-- PROBLEM -->
-
-<section class="section problem-section">
-
-<div class="container split-feature">
-
-<div class="feature-card reveal">
-
-<p class="section-label">Physical Load in Screen-Based Work</p>
-
-<h2>Complaints rarely appear overnight.</h2>
-
-<p>
-They develop gradually through prolonged static work and too little
-variation during the day.
-</p>
-
-<p>
-Most employees do not notice the strain while working. They often only
-recognize it after weeks or months of repeating the same patterns.
-</p>
-
-</div>
-
-<div class="feature-quote reveal">
-
-<div class="quote-line"></div>
-
-<p class="quote-text">The issue is rarely intensity. It is duration.</p>
-
-<p class="quote-sub">
-Human Load helps organizations recognize these patterns early and introduce
-preventive work habits before complaints become persistent.
-</p>
-
-</div>
-</div>
+<section class="about-section section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="section-tag reveal">About</p>
+        <h2 class="reveal delay-1">Complaints<br>rarely appear<br><em>overnight.</em></h2>
+        <div class="about-stats reveal delay-2">
+          <div class="stat-card">
+            <div class="stat-number">12</div>
+            <div class="stat-label">Week structured trajectory</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3x</div>
+            <div class="stat-label">Focus areas: assess, activate, embed</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <p class="lead reveal">They develop gradually through prolonged static work and too little variation during the day.</p>
+        <p class="reveal delay-1">Most employees do not notice the strain while working. They often only recognize it after weeks or months of repeating the same patterns.</p>
+        <p class="reveal delay-2">The issue is rarely intensity. It is duration. Human Load helps organizations recognize these patterns early and introduce preventive work habits before complaints become persistent.</p>
+        <p class="reveal delay-3">While ergonomics focuses on the workstation, we focus on what happens within it — the daily behaviors, rhythms, and habits that either protect employees or gradually wear them down.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- HOW WE SUPPORT -->
-
-<section class="support-section" id="services">
-
-<div class="support-wrapper">
-
-<div class="support-left">
-
-<h2>How we support organizations</h2>
-
-<div class="support-number" id="supportNumber">01</div>
-
-</div>
-
-<div class="support-line">
-
-<div class="support-line-progress" id="supportProgress"></div>
-
-</div>
-
-<div class="support-right">
-
-<div class="support-step active" data-step="1">
-
-<h3>Assess</h3>
-
-<h4>What we do</h4>
-
-<p>
-We identify patterns of physical workload in screen-based work environments and assess where prolonged static load may gradually lead to complaints.
-</p>
-
-<h4>How we approach it</h4>
-
-<p>
-We analyze daily work routines, observe real work behavior, and identify how tasks, posture, and duration of work contribute to physical strain throughout the day.
-</p>
-
-</div>
-
-<div class="support-step" data-step="2">
-
-<h3>Activate</h3>
-
-<h4>What we do</h4>
-
-<p>
-Employees learn practical ways to introduce variation, recovery, and healthier movement patterns into their daily work routines.
-</p>
-
-<h4>How we approach it</h4>
-
-<p>
-Through short modules, practical exercises, and simple behavioral guidance, employees learn to recognize physical signals and actively adjust how they work.
-</p>
-
-</div>
-
-<div class="support-step" data-step="3">
-
-<h3>Embed</h3>
-
-<h4>What we do</h4>
-
-<p>
-Preventive work habits become part of everyday work routines, reducing the risk of long-term physical complaints.
-</p>
-
-<h4>How we approach it</h4>
-
-<p>
-We reinforce new behavior through repetition, visual reminders, and integration into existing workflows so that healthier work patterns become sustainable over time.
-</p>
-
-</div>
-
-</div>
-</div>
+<section class="services-section section" id="services">
+  <div class="container">
+    <p class="section-tag reveal">How we support organizations</p>
+    <h2 class="reveal delay-1">Three levers for<br>lasting change.</h2>
+    <p class="section-sub reveal delay-2">A structured, behavior-first approach that moves organizations from reactive to preventive — before complaints become sick leave.</p>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <span class="svc-num">01</span>
+        <p class="svc-label">Assess</p>
+        <h3>Identify where overload hides.</h3>
+        <p>We analyze daily work routines, observe real work behavior, and identify how tasks, posture, and duration of work contribute to physical strain throughout the day.</p>
+        <p class="svc-card-detail">Patterns of physical workload are mapped across your screen-based work environment — revealing where prolonged static load may gradually lead to complaints.</p>
+      </div>
+      <div class="svc-card reveal delay-1">
+        <span class="svc-num">02</span>
+        <p class="svc-label">Activate</p>
+        <h3>Equip employees with practical tools.</h3>
+        <p>Through short modules, practical exercises, and simple behavioral guidance, employees learn to recognize physical signals and actively adjust how they work.</p>
+      </div>
+      <div class="svc-card reveal delay-2">
+        <span class="svc-num">03</span>
+        <p class="svc-label">Embed</p>
+        <h3>Make prevention a habit, not a project.</h3>
+        <p>We reinforce new behavior through repetition, visual reminders, and integration into existing workflows so that healthier work patterns become sustainable over time.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- APPROACH -->
-
-<section class="section method-section" id="approach">
-
-<div class="container method-shell reveal">
-
-<div class="method-head">
-
-<p class="section-label">A preventive approach</p>
-
-<h2>A structured trajectory, designed around daily reality</h2>
-
-</div>
-
-<div class="method-body">
-
-<p>
-Every trajectory starts with a structured intake to understand workload
-patterns, organizational context, and existing risk factors.
-</p>
-
-<p>
-Based on this assessment, we design a tailored 12-week preventive trajectory
-aligned with your team’s daily realities.
-</p>
-
-<p>
-The goal is not temporary relief, but lasting behavioral change embedded in
-daily routines.
-</p>
-
-</div>
-</div>
+<section class="approach-section section" id="approach">
+  <div class="container">
+    <p class="section-tag reveal">Our approach</p>
+    <h2 class="reveal delay-1">Assess. Activate.<br><em>Embed.</em></h2>
+    <div class="approach-steps">
+      <div class="approach-step reveal">
+        <span class="step-number">01</span>
+        <p class="what-label">Assess</p>
+        <h3>Physical Load Mapping</h3>
+        <p>We identify patterns of physical workload in screen-based work environments and assess where prolonged static load may gradually lead to complaints.</p>
+        <p class="how-label">How</p>
+        <p class="how-text">We analyze daily work routines, observe real work behavior, and identify how tasks, posture, and duration contribute to physical strain.</p>
+      </div>
+      <div class="approach-step reveal delay-1">
+        <span class="step-number">02</span>
+        <p class="what-label">Activate</p>
+        <h3>Behavioral Change Modules</h3>
+        <p>Employees learn practical ways to introduce variation, recovery, and healthier movement patterns into their daily work routines.</p>
+        <p class="how-label">How</p>
+        <p class="how-text">Short modules, practical exercises, and simple behavioral guidance — employees learn to recognize physical signals and actively adjust how they work.</p>
+      </div>
+      <div class="approach-step reveal delay-2">
+        <span class="step-number">03</span>
+        <p class="what-label">Embed</p>
+        <h3>Sustainable Integration</h3>
+        <p>Preventive work habits become part of everyday work routines, reducing the risk of long-term physical complaints.</p>
+        <p class="how-label">How</p>
+        <p class="how-text">Reinforcement through repetition, visual reminders, and integration into existing workflows — so healthier work patterns become self-sustaining.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- TRAJECTORY -->
-
-<section class="section trajectory-section" id="trajectory">
-
-<div class="container trajectory-shell">
-<div class="trajectory-progress" id="trajectoryProgress"></div>
-
-<p class="section-label">Trajectory</p>
-<h2>The preventive trajectory</h2>
-
-<div class="trajectory-cards">
-
-<div class="trajectory-card">
-<span class="trajectory-number">01</span>
-<h3>Awareness</h3>
-<p>Employees discover how physical load can develop during concentrated screen work.</p>
-</div>
-
-<div class="trajectory-card">
-<span class="trajectory-number">02</span>
-<h3>Static Load</h3>
-<p>The program explains why static muscle activation creates risk over time.</p>
-</div>
-
-<div class="trajectory-card">
-<span class="trajectory-number">03</span>
-<h3>Work Rhythm</h3>
-<p>Participants learn how work rhythm influences recovery and physical strain.</p>
-</div>
-
-<div class="trajectory-card">
-<span class="trajectory-number">04</span>
-<h3>Early Signals</h3>
-<p>Employees learn to recognize subtle warning signals before complaints develop.</p>
-</div>
-
-<div class="trajectory-card">
-<span class="trajectory-number">05</span>
-<h3>Micro Variation</h3>
-<p>Small posture changes and brief resets reduce continuous physical load.</p>
-</div>
-
-<div class="trajectory-card">
-<span class="trajectory-number">06</span>
-<h3>Prevention</h3>
-<p>Preventive behavior becomes integrated into everyday work routines.</p>
-</div>
-
-</div>
-</div>
+<section class="trajectory-section" id="trajectory">
+  <div class="trajectory-scroll-wrapper">
+    <div class="trajectory-sticky">
+      <div class="container">
+        <div class="trajectory-header">
+          <h2>A 12-week trajectory <em>built around daily reality.</em></h2>
+          <div class="trajectory-header-right">
+            <p>Every trajectory starts with a structured intake to understand workload patterns and existing risk factors. The goal is not temporary relief — but lasting behavioral change.</p>
+            <div class="traj-progress-bar"><div class="traj-progress-fill" id="trajProgressFill"></div></div>
+            <div class="traj-counter"><span id="trajCurrent">1</span> / 6</div>
+          </div>
+        </div>
+        <div class="trajectory-track-outer">
+          <div class="trajectory-track" id="trajTrack">
+            <div class="traj-card active">
+              <span class="traj-card-num">01</span>
+              <span class="traj-card-week">Week 1-2</span>
+              <h4>Awareness</h4>
+              <p>Employees discover how physical load can develop during concentrated screen work and why static posture accumulates over time.</p>
+            </div>
+            <div class="traj-card">
+              <span class="traj-card-num">02</span>
+              <span class="traj-card-week">Week 3-4</span>
+              <h4>Static Load</h4>
+              <p>The program explains why static muscle activation creates risk over time — and how to interrupt the pattern before it builds.</p>
+            </div>
+            <div class="traj-card">
+              <span class="traj-card-num">03</span>
+              <span class="traj-card-week">Week 5-6</span>
+              <h4>Work Rhythm</h4>
+              <p>Participants learn how work rhythm influences recovery and physical strain — and begin to experiment with micro-breaks.</p>
+            </div>
+            <div class="traj-card">
+              <span class="traj-card-num">04</span>
+              <span class="traj-card-week">Week 7-8</span>
+              <h4>Early Signals</h4>
+              <p>Employees learn to recognize subtle warning signals before complaints develop — building a new kind of body awareness at work.</p>
+            </div>
+            <div class="traj-card">
+              <span class="traj-card-num">05</span>
+              <span class="traj-card-week">Week 9-10</span>
+              <h4>Micro Variation</h4>
+              <p>Small posture changes and brief resets reduce continuous physical load throughout the workday without disrupting productivity.</p>
+            </div>
+            <div class="traj-card">
+              <span class="traj-card-num">06</span>
+              <span class="traj-card-week">Week 11-12</span>
+              <h4>Prevention Embedded</h4>
+              <p>Preventive behavior becomes integrated into everyday work routines. Teams are equipped to continue independently after the trajectory ends.</p>
+            </div>
+          </div>
+        </div>
+        <div class="traj-nav">
+          <button class="traj-btn" id="trajPrev" disabled aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="traj-btn" id="trajNext" aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- FAQ -->
-
-<section class="section faq-section" id="faq">
-
-<div class="container faq-wrap">
-
-<div class="section-head reveal">
-
-<p class="section-label">Frequently Asked Questions</p>
-
-<h2>Clarity for HR and leadership teams</h2>
-
-</div>
-
-<div class="faq-list">
-
-<details class="faq-item reveal">
-
-<summary>What makes Human Load different from ergonomic assessments?</summary>
-
-<p>
-Human Load focuses on behavior in daily work routines, not only on setup.
-The emphasis is on prevention, variation, and lasting behavioral change.
-</p>
-
-</details>
-
-<details class="faq-item reveal">
-
-<summary>How much time does the program require from employees?</summary>
-
-<p>
-The trajectory is designed to be practical and manageable, with short
-modules and low-threshold exercises that fit into the workday.
-</p>
-
-</details>
-
-<details class="faq-item reveal">
-
-<summary>Is the program suitable for remote or hybrid teams?</summary>
-
-<p>
-Yes. The approach can be applied in office, hybrid, and remote work
-environments as long as screen-based work is part of the daily routine.
-</p>
-
-</details>
-
-<details class="faq-item reveal">
-
-<summary>How do you measure the impact of the program?</summary>
-
-<p>
-We look at workload patterns, behavioral adoption, practical implementation,
-and the extent to which preventive routines are embedded in daily work.
-</p>
-
-</details>
-
-<details class="faq-item reveal">
-
-<summary>What happens after the 12-week trajectory?</summary>
-
-<p>
-By the end of the program, teams should be able to continue preventive
-behavior more independently, with routines that remain usable after the
-trajectory ends.
-</p>
-
-</details>
-
-</div>
-</div>
+<section class="faq-section section" id="faq">
+  <div class="container">
+    <p class="section-tag reveal">FAQ</p>
+    <h2 class="reveal delay-1">Clarity for HR<br>and <em>leadership teams.</em></h2>
+    <div class="faq-list">
+      <details class="faq-item reveal delay-1">
+        <summary>What makes Human Load different from ergonomic assessments?<span class="faq-icon"></span></summary>
+        <p>Human Load focuses on behavior in daily work routines, not only on setup. The emphasis is on prevention, variation, and lasting behavioral change — not a one-off workstation adjustment.</p>
+      </details>
+      <details class="faq-item reveal delay-2">
+        <summary>How much time does the program require from employees?<span class="faq-icon"></span></summary>
+        <p>The trajectory is designed to be practical and manageable. Short modules and low-threshold exercises fit into the existing workday without requiring significant disruption.</p>
+      </details>
+      <details class="faq-item reveal delay-2">
+        <summary>Is the program suitable for remote or hybrid teams?<span class="faq-icon"></span></summary>
+        <p>Yes. The approach can be applied in office, hybrid, and remote work environments as long as screen-based work is part of the daily routine.</p>
+      </details>
+      <details class="faq-item reveal delay-3">
+        <summary>How do you measure the impact of the program?<span class="faq-icon"></span></summary>
+        <p>We look at workload patterns, behavioral adoption, practical implementation, and the extent to which preventive routines are embedded in daily work.</p>
+      </details>
+      <details class="faq-item reveal delay-3">
+        <summary>What happens after the 12-week trajectory?<span class="faq-icon"></span></summary>
+        <p>By the end of the program, teams should be able to continue preventive behavior more independently — the goal is self-sufficiency, not dependency.</p>
+      </details>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-
-<section class="section cta-section" id="contact">
-
-<div class="container cta-shell reveal">
-
-<p class="section-label">Take the next step</p>
-
-<h2>Discover what Human Load can do for your organization</h2>
-
-<p>
-Schedule an online consultation and explore how preventive behavioral change
-can support healthier screen-based work.
-</p>
-
-<div class="cta-actions">
-<a href="mailto:info@humanloadconsultancy.com" class="btn-primary">
-Book a consultation
-</a>
-</div>
-
-</div>
+<section class="cta-section section">
+  <div class="container">
+    <div class="cta-inner">
+      <p class="section-tag reveal">Take the next step</p>
+      <h2 class="reveal delay-1">Start before the<br>complaints <em>begin.</em></h2>
+      <p class="reveal delay-2">Schedule an online consultation and explore how preventive behavioral change can support healthier screen-based work across your organization.</p>
+      <div class="cta-actions reveal delay-3">
+        <a href="mailto:info@humanloadconsultancy.com" class="btn-primary">Book a consultation <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="mailto:info@humanloadconsultancy.com" class="btn-ghost">info@humanloadconsultancy.com</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-</main>
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <img src="hlclogo.png" alt="Human Load Consultancy" class="footer-logo-img">
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#trajectory">Trajectory</a></li>
+        <li><a href="mailto:info@humanloadconsultancy.com">Contact</a></li>
+      </ul>
+      <p class="footer-copy">2026 Human Load Consultancy</p>
+    </div>
+  </div>
+</footer>
 
-<script src="script.js"></script>
+<script>
+var nav = document.getElementById('navWrap');
+window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
 
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('heroContent').classList.add('loaded');
+    document.getElementById('heroLine').classList.add('visible');
+  }, 100);
+});
+
+var heroLayer = document.getElementById('heroLayer1');
+window.addEventListener('scroll', function() {
+  if (heroLayer) heroLayer.style.transform = 'translateY(' + (window.scrollY * 0.28) + 'px)';
+}, { passive: true });
+
+var cursor = document.getElementById('cursor');
+var ring = document.getElementById('cursorRing');
+var mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', function(e) {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+});
+function animateRing() {
+  rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+document.querySelectorAll('a, button, summary, .svc-card, .stat-card').forEach(function(el) {
+  el.addEventListener('mouseenter', function() { cursor.style.width = '18px'; cursor.style.height = '18px'; ring.style.width = '54px'; ring.style.height = '54px'; });
+  el.addEventListener('mouseleave', function() { cursor.style.width = '10px'; cursor.style.height = '10px'; ring.style.width = '36px'; ring.style.height = '36px'; });
+});
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .reveal-left').forEach(function(el) { observer.observe(el); });
+
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  item.addEventListener('toggle', function() {
+    if (item.open) document.querySelectorAll('.faq-item[open]').forEach(function(o) { if (o !== item) o.open = false; });
+  });
+});
+
+var wrapper = document.querySelector('.trajectory-scroll-wrapper');
+var track = document.getElementById('trajTrack');
+var fill = document.getElementById('trajProgressFill');
+var counter = document.getElementById('trajCurrent');
+var btnPrev = document.getElementById('trajPrev');
+var btnNext = document.getElementById('trajNext');
+var cards = track ? Array.from(track.querySelectorAll('.traj-card')) : [];
+var TOTAL = cards.length;
+var current = 0;
+
+function getStep() { return cards[0].getBoundingClientRect().width + 20; }
+
+function goTo(i, smooth) {
+  i = Math.max(0, Math.min(TOTAL - 1, i));
+  current = i;
+  track.style.transition = smooth ? 'transform .7s cubic-bezier(.16,1,.3,1)' : 'none';
+  track.style.transform = 'translateX(-' + (getStep() * i) + 'px)';
+  cards.forEach(function(c, idx) { c.classList.toggle('active', idx === i); });
+  if (fill) fill.style.width = (i / (TOTAL - 1) * 100) + '%';
+  if (counter) counter.textContent = i + 1;
+  if (btnPrev) btnPrev.disabled = i === 0;
+  if (btnNext) btnNext.disabled = i === TOTAL - 1;
+}
+
+window.addEventListener('scroll', function() {
+  if (!wrapper) return;
+  var r = wrapper.getBoundingClientRect();
+  var tot = r.height - window.innerHeight;
+  if (tot <= 0) return;
+  var p = Math.max(0, Math.min(1, -r.top / tot));
+  var t = Math.round(p * (TOTAL - 1));
+  if (t !== current) goTo(t, true);
+  else if (fill) fill.style.width = (p * 100) + '%';
+}, { passive: true });
+
+btnPrev.addEventListener('click', function() { goTo(current - 1, true); });
+btnNext.addEventListener('click', function() { goTo(current + 1, true); });
+
+var dragStart = null;
+if (track) {
+  track.addEventListener('pointerdown', function(e) { dragStart = e.clientX; });
+  track.addEventListener('pointerup', function(e) {
+    if (dragStart === null) return;
+    if (Math.abs(e.clientX - dragStart) > 40) goTo(e.clientX < dragStart ? current + 1 : current - 1, true);
+    dragStart = null;
+  });
+}
+
+if (cards.length > 0) goTo(0, false);
+</script>
 </body>
 </html>
