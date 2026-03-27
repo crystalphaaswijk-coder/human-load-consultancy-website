@@ -204,6 +204,24 @@ footer { background: var(--ink); }
 .about-right .lead { font-size: 20px; line-height: 1.75; color: var(--umber); margin-bottom: 24px; font-weight: 300; }
 .about-right p { font-size: 16px; line-height: 1.9; color: rgba(74,59,44,.7); margin-bottom: 18px; }
 .about-stats { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ABOUT HLC */
+.about-hlc { background: var(--parchment); }
+.about-hlc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+.about-hlc-left h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(36px, 4.5vw, 58px); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); }
+.about-hlc-left h2 em { font-style: italic; color: var(--bark); }
+.about-hlc-right .lead { font-size: 20px; line-height: 1.75; color: var(--umber); margin-bottom: 24px; font-weight: 300; }
+.about-hlc-right p { font-size: 16px; line-height: 1.9; color: rgba(74,59,44,.7); margin-bottom: 18px; }
+.about-credentials { display: flex; gap: 0; margin-top: 48px; border-top: 1px solid rgba(180,162,130,.3); padding-top: 36px; }
+.credential { flex: 1; padding-right: 24px; border-right: 1px solid rgba(180,162,130,.2); margin-right: 24px; }
+.credential:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.credential-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; letter-spacing: -.02em; color: var(--ink); margin-bottom: 4px; }
+.credential-sub { font-size: 12px; color: var(--bark); letter-spacing: .04em; }
+
+@media (max-width: 1080px) {
+  .about-hlc-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+  
 .stat-card { padding: 28px; background: var(--parchment); border-radius: var(--r-md); border: 1px solid rgba(180,162,130,.2); transition: transform .4s var(--ease-out), box-shadow .4s; }
 .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(74,59,44,.08); }
 .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; line-height: 1; color: var(--ink); letter-spacing: -.04em; }
@@ -591,7 +609,7 @@ footer { background: var(--ink); padding: 60px 0 40px; }
         <img src="hlclogo.png" alt="Human Load Consultancy" class="logo-img">
       </a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="#about-hlc">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#approach">Method</a></li>
         <li><a href="#trajectory">Program</a></li>
@@ -666,6 +684,38 @@ footer { background: var(--ink); padding: 60px 0 40px; }
   </div>
 </section>
 
+<section class="about-hlc section" id="about-hlc">
+  <div class="container">
+    <div class="about-hlc-grid">
+      <div class="about-hlc-left">
+        <p class="section-tag reveal">About</p>
+        <h2 class="reveal delay-1">Founded by a physical therapist<br>who got tired of<br><em>treating the same problem.</em></h2>
+      </div>
+      <div class="about-hlc-right">
+        <p class="lead reveal">After eight years as a physical therapist, I kept seeing the same patients — different names, same complaints. Neck pain. Shoulder tension. Back problems. Arm issues. All from screen-based work.</p>
+        <p class="reveal delay-1">By the time people came to me, the damage was already done. The pattern had been building for months — sometimes years. And every time, the conversation was the same: adjust your chair, sit up straight, take breaks. Ergonomics. The tip of the iceberg.</p>
+        <p class="reveal delay-2">What nobody was addressing was behavior. Not the workstation — but what happens within it. How long people work without variation. How they ignore the early signals their body sends. How their work rhythm keeps them static for hours without them even noticing.</p>
+        <p class="reveal delay-3">Human Load Consultancy exists because I believe physical complaints from screen-based work are largely preventable — and that prevention is more effective, more humane, and more economical than treatment. As a physical therapist and lifestyle therapist, I bring clinical expertise to a problem that has always been treated too late, by the wrong people, at the wrong moment.</p>
+        <p class="reveal delay-3">The goal is simple: fewer people in my waiting room. More organizations that never need to send them there.</p>
+        <div class="about-credentials reveal delay-3">
+          <div class="credential">
+            <p class="credential-title">Physical Therapist</p>
+            <p class="credential-sub">8 years clinical practice</p>
+          </div>
+          <div class="credential">
+            <p class="credential-title">Lifestyle Therapist</p>
+            <p class="credential-sub">Behavioral change specialist</p>
+          </div>
+          <div class="credential">
+            <p class="credential-title">Founder</p>
+            <p class="credential-sub">Human Load Consultancy</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
 <section class="services-section section" id="services">
   <div class="container">
     <div class="section-header">
