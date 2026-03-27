@@ -42,6 +42,15 @@ body::before {
 }
 .container { width: min(1200px, calc(100% - 56px)); margin: 0 auto; }
 .section { padding: 140px 0; }
+.statement, .about-section, .services-section, .approach-section, .faq-section, .cta-section, footer {
+  position: relative;
+  z-index: 2;
+  background: var(--warm-white);
+}
+.statement { background: var(--umber); }
+.services-section { background: var(--cream); }
+.cta-section { background: var(--parchment); }
+footer { background: var(--ink); }
 .cursor {
   position: fixed; width: 10px; height: 10px;
   background: var(--bark); border-radius: 50%;
@@ -95,17 +104,20 @@ body::before {
   box-shadow: 0 8px 24px rgba(43,34,24,.18) !important;
 }
 .hero {
-  position: relative; min-height: 100vh;
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
   display: flex; align-items: center;
   overflow: hidden; background: var(--cream);
+  z-index: 0;
 }
 .hero-layer { position: absolute; inset: -15%; will-change: transform; }
 .hero-bg {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,185,154,.45) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 80% at 15% 80%, rgba(179,160,133,.25) 0%, transparent 55%),
-    linear-gradient(160deg, rgba(237,230,214,.92) 0%, rgba(245,240,232,.88) 40%, rgba(250,248,244,.82) 100%),
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,185,154,.25) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 80% at 15% 80%, rgba(179,160,133,.15) 0%, transparent 55%),
+    linear-gradient(160deg, rgba(237,230,214,.62) 0%, rgba(245,240,232,.55) 40%, rgba(250,248,244,.45) 100%),
     url('front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg') center/cover no-repeat;
 }
 .hero-shape { position: absolute; border-radius: 50%; will-change: transform; }
