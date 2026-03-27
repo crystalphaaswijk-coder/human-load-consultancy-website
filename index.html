@@ -828,6 +828,40 @@ if (track) {
   });
 }
 
+// ... all your existing JS above ...
+
+// SERVICES SCROLL TRACKER
+var svcItems = document.querySelectorAll('.svc-item');
+var svcNum = document.getElementById('svcNum');
+var svcLabel = document.getElementById('svcLabel');
+var svcTitle = document.getElementById('svcTitle');
+var svcDots = document.querySelectorAll('.svc-dot');
+var svcDivLine = document.getElementById('svcDividerLine');
+
+var svcData = [
+  { num: '01', label: 'Intake & Assessment',    title: 'We map the load before we intervene.' },
+  { num: '02', label: 'Kick-off Workshop',       title: 'On-site. Practical. No theory overload.' },
+  { num: '03', label: 'Six Bi-weekly Modules',   title: 'One behavior. Two weeks. Sustained repetition.' },
+  { num: '04', label: 'Reporting & Data',        title: 'Evidence HR and leadership can act on.' }
+];
+
+var svcObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var idx = parseInt(entry.target.getAttribute('data-index'));
+      svcItems.forEach(function(el) { el.classList.remove('active'); });
+      entry.target.classList.add('active');
+      svcDots.forEach(function(d) { d.classList.remove('active'); });
+      if (svcDots[idx]) svcDots[idx].classList.add('active');
+      if (svcNum) svcNum.textContent = svcData[idx].num;
+      if (svcLabel) svcLabel.textContent = svcData[idx].label;
+      if (svcTitle) svcTitle.textContent = svcData[idx].title;
+    }
+  });
+}, { threshold: 0.5 });
+
+svcItems.forEach(function(el) { svcObserver.observe(el); });
+
 if (cards.length > 0) goTo(0, false);
 </script>
 </body>
