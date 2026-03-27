@@ -209,22 +209,133 @@ footer { background: var(--ink); }
 .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; line-height: 1; color: var(--ink); letter-spacing: -.04em; }
 .stat-label { font-size: 13px; color: var(--bark); margin-top: 6px; line-height: 1.4; }
 .services-section { background: var(--cream); }
-.services-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -.03em; color: var(--ink); max-width: 16ch; margin-bottom: 16px; }
-.services-section .section-sub { font-size: 17px; color: rgba(74,59,44,.6); max-width: 50ch; line-height: 1.8; margin-bottom: 72px; }
-.services-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; align-items: start; }
-.svc-card { padding: 40px 36px; border-radius: var(--r-lg); border: 1px solid rgba(180,162,130,.18); background: var(--warm-white); transition: transform .5s var(--ease-out), box-shadow .5s, border-color .4s; }
-.svc-card:hover { transform: translateY(-8px); box-shadow: 0 28px 60px rgba(74,59,44,.1); border-color: rgba(180,162,130,.36); }
-.svc-card:nth-child(1) { background: var(--umber); }
-.svc-card:nth-child(1) .svc-num, .svc-card:nth-child(1) .svc-label { color: var(--sand); }
-.svc-card:nth-child(1) h3 { color: var(--cream); }
-.svc-card:nth-child(1) p { color: rgba(245,240,232,.65); }
-.svc-card:nth-child(2) { margin-top: 40px; }
-.svc-card:nth-child(3) { margin-top: 80px; }
-.svc-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .14em; color: var(--sand-mid); margin-bottom: 40px; display: block; }
-.svc-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--bark); margin-bottom: 14px; }
-.svc-card h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 32px; line-height: 1.05; letter-spacing: -.02em; color: var(--ink); margin-bottom: 18px; }
-.svc-card p { font-size: 15px; line-height: 1.85; color: rgba(74,59,44,.65); }
-.svc-card-detail { font-size: 13px; line-height: 1.8; margin-top: 16px; color: rgba(74,59,44,.55); }
+.services-section .section-header { max-width: 680px; margin-bottom: 80px; }
+.services-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -.03em; color: var(--ink); margin-bottom: 16px; }
+.services-section .section-sub { font-size: 17px; color: rgba(74,59,44,.6); max-width: 50ch; line-height: 1.8; }
+
+/* SCROLL TRACKER LAYOUT */
+.svc-tracker { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; }
+
+/* LEFT — sticky number panel */
+.svc-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 80px;
+}
+.svc-big-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(120px, 18vw, 220px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.06em;
+  color: var(--ink);
+  transition: opacity .4s var(--ease-out);
+}
+.svc-big-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--bark);
+  margin-top: 24px;
+  transition: opacity .4s var(--ease-out);
+}
+.svc-big-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-top: 12px;
+  line-height: 1.1;
+  transition: opacity .4s var(--ease-out);
+}
+
+/* DIVIDER LINE with glow */
+.svc-divider {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.svc-divider-line {
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(180,162,130,.4) 20%,
+    rgba(201,185,154,.9) 50%,
+    rgba(180,162,130,.4) 80%,
+    transparent 100%
+  );
+  position: relative;
+}
+.svc-divider-line::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: var(--sand);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(201,185,154,.2), 0 0 24px 8px rgba(201,185,154,.35), 0 0 48px 16px rgba(201,185,154,.15);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+.svc-divider-line::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1px;
+  background: var(--sand);
+  height: 0%;
+  transition: height .1s linear;
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(201,185,154,.2), 0 0 24px 8px rgba(201,185,154,.35), 0 0 48px 16px rgba(201,185,154,.15); }
+  50% { box-shadow: 0 0 0 4px rgba(201,185,154,.3), 0 0 32px 12px rgba(201,185,154,.5), 0 0 64px 24px rgba(201,185,154,.25); }
+}
+
+/* RIGHT — scrolling items */
+.svc-items { padding-left: 80px; }
+.svc-item {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 0;
+  opacity: .3;
+  transform: translateY(20px);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+}
+.svc-item.active { opacity: 1; transform: translateY(0); }
+.svc-item-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--bark); margin-bottom: 20px; }
+.svc-item h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(28px, 3.5vw, 44px); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); margin-bottom: 24px; }
+.svc-item p { font-size: 16px; line-height: 1.9; color: rgba(74,59,44,.7); margin-bottom: 16px; max-width: 48ch; }
+.svc-item-detail { font-size: 14px; line-height: 1.8; color: rgba(74,59,44,.5); max-width: 46ch; font-style: italic; }
+
+/* Progress dots */
+.svc-dots { display: flex; flex-direction: column; gap: 8px; margin-top: 48px; }
+.svc-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(180,162,130,.3); transition: background .4s, transform .4s; }
+.svc-dot.active { background: var(--bark); transform: scale(1.4); }
+
+@media (max-width: 1080px) {
+  .svc-tracker { grid-template-columns: 1fr; }
+  .svc-sticky { position: relative; height: auto; padding-right: 0; padding-bottom: 40px; }
+  .svc-divider { display: none; }
+  .svc-items { padding-left: 0; }
+  .svc-item { min-height: auto; opacity: 1; transform: none; padding: 48px 0; border-bottom: 1px solid rgba(180,162,130,.18); }
+}
+13px; line-height: 1.8; margin-top: 16px; color: rgba(74,59,44,.55); }
 .approach-section { background: var(--warm-white); }
 .approach-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -.03em; color: var(--ink); max-width: 18ch; margin-bottom: 72px; }
 .approach-section h2 em { font-style: italic; color: var(--bark); }
@@ -408,33 +519,62 @@ footer { background: var(--ink); padding: 60px 0 40px; }
 
 <section class="services-section section" id="services">
   <div class="container">
-    <p class="section-tag reveal">What organizations receive</p>
-    <h2 class="reveal delay-1">A structured intervention.<br>Not a workshop.</h2>
-    <p class="section-sub reveal delay-2">The Human Load program is a 12-week behavioral implementation — delivered in four concrete phases that fit within the existing workday without disrupting output.</p>
-    <div class="services-grid">
-      <div class="svc-card reveal">
-        <span class="svc-num">01</span>
-        <p class="svc-label">Intake & Assessment</p>
-        <h3>We map the load before we intervene.</h3>
-        <p>Every engagement begins with a structured intake. We analyze work routines, identify risk patterns in daily behavior, and establish a baseline against which we measure change.</p>
-        <p class="svc-card-detail">The intake informs a tailored 12-week implementation roadmap — aligned to your team's schedule, work culture, and existing workflows.</p>
+    <div class="section-header">
+      <p class="section-tag reveal">What organizations receive</p>
+      <h2 class="reveal delay-1">A structured intervention.<br>Not a workshop.</h2>
+      <p class="section-sub reveal delay-2">The Human Load program is a 12-week behavioral implementation — delivered in four concrete phases that fit within the existing workday without disrupting output.</p>
+    </div>
+    <div class="svc-tracker">
+
+      <!-- LEFT: sticky number -->
+      <div class="svc-sticky">
+        <div class="svc-big-num" id="svcNum">01</div>
+        <div class="svc-big-label" id="svcLabel">Intake & Assessment</div>
+        <div class="svc-big-title" id="svcTitle">We map the load before we intervene.</div>
+        <div class="svc-dots">
+          <div class="svc-dot active" data-index="0"></div>
+          <div class="svc-dot" data-index="1"></div>
+          <div class="svc-dot" data-index="2"></div>
+          <div class="svc-dot" data-index="3"></div>
+        </div>
       </div>
-      <div class="svc-card reveal delay-1">
-        <span class="svc-num">02</span>
-        <p class="svc-label">Kick-off Workshop</p>
-        <h3>On-site. Practical. No theory overload.</h3>
-        <p>A facilitated on-site session introduces the program principles to employees. Participants learn to recognize early physical signals, understand how static load accumulates, and take ownership of their first behavioral experiment.</p>
+
+      <!-- MIDDLE: divider with glow -->
+      <div class="svc-divider">
+        <div class="svc-divider-line" id="svcDividerLine"></div>
       </div>
-      <div class="svc-card reveal delay-2">
-        <span class="svc-num">03</span>
-        <p class="svc-label">6 Bi-weekly Modules</p>
-        <h3>One behavior. Two weeks. Sustained repetition.</h3>
-        <p>Six structured modules — each introducing a single behavioral principle and a concrete weekly experiment. Employees apply changes directly within their workday. Bi-weekly reminders and a 30-second check-in reinforce adoption without adding friction.</p>
+
+      <!-- RIGHT: scrolling items -->
+      <div class="svc-items" id="svcItems">
+        <div class="svc-item active" data-index="0">
+          <p class="svc-item-label">01 — Intake & Assessment</p>
+          <h3>We map the load before we intervene.</h3>
+          <p>Every engagement begins with a structured intake. We analyze work routines, identify behavioral risk patterns, and establish a clear baseline — against which we measure change throughout the 12 weeks.</p>
+          <p class="svc-item-detail">The intake informs a tailored implementation roadmap aligned to your team's schedule, work culture, and existing workflows.</p>
+        </div>
+        <div class="svc-item" data-index="1">
+          <p class="svc-item-label">02 — Kick-off Workshop</p>
+          <h3>On-site. Practical. No theory overload.</h3>
+          <p>A facilitated on-site session that launches the program. Employees learn to recognize early physical signals, understand how static load accumulates, and take ownership of their first behavioral experiment.</p>
+          <p class="svc-item-detail">Designed around adult learning principles — immediate, applicable, and built around real workplace situations rather than abstract theory.</p>
+        </div>
+        <div class="svc-item" data-index="2">
+          <p class="svc-item-label">03 — Six Bi-weekly Modules</p>
+          <h3>One behavior. Two weeks. Sustained repetition.</h3>
+          <p>Six structured video modules — each introducing a single behavioral principle and a concrete weekly experiment. Bi-weekly reminders and a 30-second check-in reinforce adoption without adding friction to the workday.</p>
+          <p class="svc-item-detail">Each module is limited to five minutes. One core message. One actionable behavior per week. Designed to integrate into work without productivity loss.</p>
+        </div>
+        <div class="svc-item" data-index="3">
+          <p class="svc-item-label">04 — Reporting & Behavioral Data</p>
+          <h3>Evidence HR and leadership can act on.</h3>
+          <p>At program close, you receive a structured report covering behavioral adoption rates, self-reported physical awareness, and habit integration across your workforce.</p>
+          <p class="svc-item-detail">Concrete evidence of organizational impact — and the foundation for a duty-of-care conversation with leadership.</p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
-
 <section class="approach-section section" id="approach">
   <div class="container">
     <p class="section-tag reveal">The Human Load Method</p>
