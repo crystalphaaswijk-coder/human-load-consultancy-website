@@ -94,17 +94,37 @@ body::before {
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 11px 24px; background: var(--umber);
-  color: var(--cream) !important; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 0;
+  padding: 6px 6px 6px 22px;
+  background: linear-gradient(90deg, #3a2a1c 0%, #6b4f35 50%, #f3f3f2 100%);
+  color: var(--ink) !important; border-radius: 999px;
   font-size: 13px !important; font-weight: 500 !important;
   letter-spacing: .04em !important; text-transform: none !important;
-  transition: background .3s, transform .3s, box-shadow .3s !important;
+  transition: box-shadow .3s, transform .3s !important;
+  box-shadow: 0 2px 16px rgba(43,34,24,.18);
 }
 .nav-cta:hover {
-  background: var(--ink) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 8px 24px rgba(43,34,24,.18) !important;
+  box-shadow: 0 8px 28px rgba(43,34,24,.28) !important;
+}
+.nav-cta svg { display: none; }
+.nav-cta::after {
+  content: '↗';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  background: #f3f3f2;
+  border-radius: 50%;
+  font-size: 14px;
+  color: var(--ink);
+  margin-left: 16px;
+  flex-shrink: 0;
+  transition: background .3s, transform .3s;
+}
+.nav-cta:hover::after {
+  background: var(--cream);
+  transform: rotate(45deg);
 }
 .hero {
   position: sticky; top: 0;
@@ -443,7 +463,7 @@ footer::before {
         <li><a href="#approach">Method</a></li>
         <li><a href="#trajectory">Program</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="mailto:info@humanloadconsultancy.com" class="nav-cta">Request an intake <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="mailto:info@humanloadconsultancy.com" class="nav-cta">Request an intake</a></li>
       </ul>
     </nav>
   </div>
