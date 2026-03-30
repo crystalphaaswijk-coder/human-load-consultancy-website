@@ -197,7 +197,7 @@ body::before {
 .statement::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 96px 96px; opacity: .06; mix-blend-mode: overlay;
+  background-size: 96px 96px; opacity: .12; mix-blend-mode: overlay;
 }
 .statement::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 100% at 80% 50%, rgba(124,106,82,.3) 0%, transparent 60%); }
 .statement-inner { position: relative; max-width: 900px; }
@@ -222,13 +222,13 @@ body::before {
 
 /* DIFFERENTIATOR */
 .differentiator {
-  background: linear-gradient(150deg, #2b2218 0%, #1e1610 50%, #2b2218 100%);
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, #5a3f28 0%, #2b2018 50%, #1a1009 100%);
   padding: 100px 0;
 }
 .differentiator::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 96px 96px; opacity: .055; mix-blend-mode: overlay;
+  background-size: 96px 96px; opacity: .12; mix-blend-mode: overlay;
 }
 .differentiator .section-tag::before { background: rgba(245,240,232,.25); }
 .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(245,240,232,.07); border-radius: var(--r-lg); overflow: hidden; margin-top: 48px; }
@@ -308,7 +308,7 @@ body::before {
 
 /* TRAJECTORY */
 .trajectory-section {
-  background: linear-gradient(160deg, #1e1610 0%, #2b2218 35%, #231c13 65%, #1a1209 100%);
+  background: radial-gradient(ellipse 80% 50% at 50% 30%, #4a3020 0%, #231810 50%, #110c06 100%);
   position: relative;
 }
 .trajectory-section::after {
@@ -374,13 +374,13 @@ body::before {
 .cta-actions { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
 
 footer {
-  background: linear-gradient(135deg, #1a1209 0%, #2b2218 50%, #1e1610 100%);
+  background: radial-gradient(ellipse 100% 80% at 50% 0%, #3d2a18 0%, #1a1009 60%, #0d0804 100%);
   padding: 60px 0 40px; position: relative;
 }
 footer::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 96px 96px; opacity: .055; mix-blend-mode: overlay;
+  background-size: 96px 96px; opacity: .12; mix-blend-mode: overlay;
 }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; z-index: 1; }
 .footer-logo-img { height: 52px; width: auto; filter: brightness(0) invert(1); opacity: .7; }
