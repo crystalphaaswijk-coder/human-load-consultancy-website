@@ -54,7 +54,7 @@ body::before {
 .approach-section { background: var(--warm-white); }
 .faq-section { background: var(--warm-white); }
 .cta-section { background: var(--parchment); position: relative; overflow: hidden; }
-.cta-section::before { content: ''; position: absolute; inset: 0; background: url('services.jpg') center/cover no-repeat; opacity: .07; filter: sepia(30%); pointer-events: none; z-index: 0; }
+.cta-section::before { content: ''; position: absolute; inset: -15%; background: url('services.jpg') center/cover no-repeat; opacity: .09; filter: sepia(30%); pointer-events: none; z-index: 0; transform: translateY(var(--parallax-y, 0px)); transition: transform 0s linear; }
 .cta-section .container { position: relative; z-index: 1; }
 
 .cursor {
@@ -441,6 +441,77 @@ footer::before {
 .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 1s var(--ease-out), transform 1s var(--ease-out); }
 .reveal-left.visible { opacity: 1; transform: none; }
 
+/* PARALLAX & DEPTH */
+.parallax-img { 
+  position: relative; overflow: hidden; 
+}
+.parallax-img img { 
+  width: 100%; height: 100%; object-fit: cover; 
+  will-change: transform; 
+  transition: transform 0s linear;
+}
+
+/* Hero sectie over de statement heen schuiven */
+.statement { 
+  position: sticky; top: 0; z-index: 1; 
+}
+.about-section { z-index: 3; }
+.differentiator { z-index: 4; }
+.about-hlc { z-index: 5; }
+.services-section { z-index: 6; }
+.approach-section { z-index: 7; }
+.trajectory-section { z-index: 8; }
+.faq-section { z-index: 9; }
+.cta-section { z-index: 10; }
+footer { z-index: 11; }
+
+/* Kaartdiepte-effect bij binnenscroll */
+.about-section, .about-hlc, .services-section, .approach-section, .faq-section, .cta-section {
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -8px 40px rgba(43,34,24,.10);
+}
+
+/* Foto parallax blok in about-hlc — sticky terwijl tekst scrolt */
+.about-hlc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+.about-hlc-left {
+  position: sticky;
+  top: 120px;
+}
+
+/* Parallax op ergo.jpg */
+.about-img-block {
+  overflow: hidden;
+  border-radius: var(--r-lg);
+}
+.about-img-block img {
+  transform: scale(1.15);
+  transition: transform 0s linear;
+  will-change: transform;
+}
+
+/* Scale-in op stat cards */
+.stat-card {
+  transition: transform .6s var(--ease-out), box-shadow .6s, opacity .6s;
+  opacity: 0;
+  transform: translateY(24px) scale(.97);
+}
+.stat-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* CTA foto dieper verankerd */
+.cta-section::before {
+  transform: scale(1.12);
+  transition: transform 0s linear;
+  will-change: transform;
+}
+  
 @media (max-width: 1080px) {
   .about-grid, .about-hlc-grid { grid-template-columns: 1fr; gap: 48px; }
   .trajectory-header { grid-template-columns: 1fr; gap: 24px; }
@@ -1025,6 +1096,67 @@ document.querySelectorAll('.flip-card').forEach(function(card) {
 });
 
 if (cards.length > 0) goTo(0, false);
+
+// PARALLAX ENGINE
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+var parallaxTargets = [];
+
+// ergo.jpg parallax
+var ergoImg = document.querySelector('.about-img-block img');
+if (ergoImg) parallaxTargets.push({ el: ergoImg, speed: 0.18, type: 'img' });
+
+// lifestyle.jpg parallax
+var lifestyleImg = document.querySelector('.about-hlc-img img');
+if (lifestyleImg) parallaxTargets.push({ el: lifestyleImg, speed: 0.14, type: 'img' });
+
+// CTA background parallax
+var ctaSection = document.querySelector('.cta-section');
+if (ctaSection) parallaxTargets.push({ el: ctaSection, speed: 0.08, type: 'bg' });
+
+function updateParallax() {
+  var scrollY = window.scrollY;
+  parallaxTargets.forEach(function(t) {
+    var rect = t.el.parentElement ? t.el.parentElement.getBoundingClientRect() : t.el.getBoundingClientRect();
+    var centerY = rect.top + rect.height / 2 - window.innerHeight / 2;
+    var offset = centerY * t.speed;
+    if (t.type === 'img') {
+      t.el.style.transform = 'scale(1.15) translateY(' + offset + 'px)';
+    } else {
+      t.el.style.setProperty('--parallax-y', offset + 'px');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateParallax, { passive: true });
+updateParallax();
+
+// STAT CARDS — staggered reveal met IntersectionObserver
+var statCards = document.querySelectorAll('.stat-card');
+var cardObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry, i) {
+    if (entry.isIntersecting) {
+      setTimeout(function() {
+        entry.target.classList.add('visible');
+      }, Array.from(statCards).indexOf(entry.target) * 80);
+      cardObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+statCards.forEach(function(c) { cardObserver.observe(c); });
+
+// SECTIE DIEPTE — schaal weg als volgende sectie erover schuift
+var depthSections = document.querySelectorAll('.about-section, .differentiator, .about-hlc, .services-section');
+window.addEventListener('scroll', function() {
+  depthSections.forEach(function(sec) {
+    var rect = sec.getBoundingClientRect();
+    var progress = Math.max(0, Math.min(1, -rect.bottom / 200));
+    var scale = 1 - progress * 0.03;
+    var blur = progress * 4;
+    sec.style.transform = 'scale(' + scale + ')';
+    sec.style.filter = blur > 0.2 ? 'blur(' + blur + 'px)' : '';
+  });
+}, { passive: true });
 </script>
 
 <script>
