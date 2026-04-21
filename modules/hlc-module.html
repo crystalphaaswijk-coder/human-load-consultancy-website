@@ -31,15 +31,8 @@
     padding: 2rem 1rem;
   }
 
-  .logo-wrap {
-    margin-bottom: 2.5rem;
-    text-align: center;
-  }
-
-  .logo-wrap img {
-    height: 64px;
-    width: auto;
-  }
+  .logo-wrap { margin-bottom: 2.5rem; text-align: center; }
+  .logo-wrap img { height: 64px; width: auto; }
 
   .container { width: 100%; max-width: 620px; }
 
@@ -125,12 +118,7 @@
     line-height: 1.7;
   }
 
-  .divider {
-    width: 40px;
-    height: 0.5px;
-    background: var(--sand-mid);
-    margin: 0 0 2rem;
-  }
+  .divider { width: 40px; height: 0.5px; background: var(--sand-mid); margin: 0 0 2rem; }
 
   .checkin-intro {
     font-size: 12px;
@@ -151,12 +139,7 @@
 
   .scale { display: flex; gap: 8px; }
 
-  .scale-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 6px;
-  }
-
+  .scale-labels { display: flex; justify-content: space-between; margin-top: 6px; }
   .scale-label { font-size: 11px; color: var(--sand-mid); }
 
   .scale button {
@@ -176,12 +159,7 @@
   .scale button:hover { border-color: var(--bark); color: var(--ink); background: rgba(255,255,255,0.8); }
   .scale button.selected { background: var(--umber); border-color: var(--umber); color: var(--cream); }
 
-  .sub-label {
-    font-size: 12px;
-    color: var(--sand-mid);
-    margin-top: 8px;
-    line-height: 1.5;
-  }
+  .sub-label { font-size: 12px; color: var(--sand-mid); margin-top: 8px; line-height: 1.5; }
 
   .radio-group { display: flex; flex-direction: column; gap: 10px; }
 
@@ -293,8 +271,8 @@
     <div class="gate-module-label" id="gate-module-label"></div>
     <div class="field-label">Your personal code</div>
     <div class="code-hint">
-      How to reconstruct it: <strong>first two letters of a friend's name + the day you were born.</strong><br>
-      Example: friend's name is Maria, born on the 14th → <strong>MA14</strong>
+      How to reconstruct it: <strong>first two letters of your mother's name + the day you were born.</strong><br>
+      Example: mother's name is Maria, born on the 14th → <strong>MA14</strong>
     </div>
     <input type="text" id="code-input" placeholder="YOUR CODE" autocomplete="off" maxlength="10" />
     <button class="btn" onclick="enterCheckin()">Continue</button>
@@ -390,6 +368,7 @@
 const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSfrFQuB-KMpDegCkWQ_0KBeW0Q1HTSN0DQAMntqMPo8FJrNNw/formResponse";
 
 const FIELDS = {
+  client:       "entry.2041052026",
   personalCode: "entry.952320979",
   module:       "entry.1092776172",
   q1:           "entry.658025627",
@@ -435,10 +414,12 @@ const MODULES = {
 let answers = { q1: null, q2: null, q3: null };
 let currentModule = null;
 let personalCode = '';
+let clientName = '';
 
 window.onload = function() {
   const params = new URLSearchParams(window.location.search);
   const key = (params.get('mod') || '').toUpperCase();
+  clientName = params.get('client') || 'Unknown';
   const mod = MODULES[key];
 
   if (!mod) {
@@ -492,6 +473,7 @@ function submitCheckin() {
   const openField = document.getElementById('open-field').value.trim();
 
   const params = new URLSearchParams();
+  params.append(FIELDS.client, clientName);
   params.append(FIELDS.personalCode, personalCode);
   params.append(FIELDS.module, currentModule.label);
   params.append(FIELDS.q1, answers.q1);
