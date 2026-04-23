@@ -92,7 +92,9 @@
   }
 
   input[type="text"]:focus { border-color: var(--bark); }
-  input[type="text"]::placeholder { color: var(--sand-mid); letter-spacing: 0.05em; }
+  input[type="text"]::placeholder { color: var(--sand-mid); letter-spacing: 0.05em; text-transform: none; }
+
+  #team-field { display: none; }
 
   #checkin { display: none; }
 
@@ -139,7 +141,6 @@
   }
 
   .scale { display: flex; gap: 8px; }
-
   .scale-labels { display: flex; justify-content: space-between; margin-top: 6px; }
   .scale-label { font-size: 11px; color: var(--sand-mid); }
 
@@ -218,6 +219,7 @@
   }
 
   .btn:hover { background: var(--ink); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   #video-section { display: none; }
 
@@ -275,8 +277,14 @@
       How to reconstruct it: <strong>first two letters of your mother's name + the day you were born.</strong><br>
       Example: mother's name is Maria, born on the 14th → <strong>MA14</strong>
     </div>
-    <input type="text" id="code-input" placeholder="YOUR CODE" autocomplete="off" maxlength="10" />
-    <button class="btn" onclick="enterCheckin()">Continue</button>
+    <input type="text" id="code-input" placeholder="Your code" autocomplete="off" maxlength="10" />
+
+    <div id="team-field">
+      <div class="field-label" style="margin-top: 0.5rem;">Your team</div>
+      <input type="text" id="team-input" placeholder="Team name" autocomplete="off" style="text-transform: none; letter-spacing: 0.02em;" />
+    </div>
+
+    <button class="btn" id="continue-btn" onclick="handleContinue()">Continue</button>
   </div>
 
   <div id="not-found">
@@ -366,6 +374,9 @@
 </div>
 
 <script>
+const SUPABASE_URL = "https://horkotkzleohpyrzzujx.supabase.co";
+const SUPABASE_KEY = "sb_publishable_sjOrsfYMUvBypX1KuVlSRQ_x9pBciSB";
+
 const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSfrFQuB-KMpDegCkWQ_0KBeW0Q1HTSN0DQAMntqMPo8FJrNNw/formResponse";
 
 const FIELDS = {
@@ -416,6 +427,23 @@ let answers = { q1: null, q2: null, q3: null };
 let currentModule = null;
 let personalCode = '';
 let clientName = '';
+let teamName = '';
+let isNewParticipant = false;
+
+async function supabaseFetch(path, options = {}) {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    ...options,
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': options.prefer || 'return=minimal',
+      ...(options.headers || {})
+    }
+  });
+  if (options.returnData) return res.json();
+  return res;
+}
 
 window.onload = function() {
   const params = new URLSearchParams(window.location.search);
@@ -443,13 +471,63 @@ window.onload = function() {
 };
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && document.getElementById('gate').style.display !== 'none') enterCheckin();
+  if (e.key === 'Enter' && document.getElementById('gate').style.display !== 'none') handleContinue();
 });
 
-function enterCheckin() {
-  const code = document.getElementById('code-input').value.trim();
+async function handleContinue() {
+  const code = document.getElementById('code-input').value.trim().toUpperCase();
   if (!code) { document.getElementById('code-input').focus(); return; }
-  personalCode = code.toUpperCase();
+
+  const teamFieldVisible = document.getElementById('team-field').style.display !== 'none';
+
+  if (teamFieldVisible) {
+    const team = document.getElementById('team-input').value.trim();
+    if (!team) { document.getElementById('team-input').focus(); return; }
+    teamName = team;
+    personalCode = code;
+    await saveParticipant(code, team);
+    showCheckin();
+    return;
+  }
+
+  const btn = document.getElementById('continue-btn');
+  btn.disabled = true;
+  btn.textContent = 'Checking...';
+
+  try {
+    const data = await supabaseFetch(
+      `participant_codes?personal_code=eq.${encodeURIComponent(code)}&client=eq.${encodeURIComponent(clientName)}&select=team`,
+      { returnData: true }
+    );
+
+    if (data && data.length > 0) {
+      personalCode = code;
+      teamName = data[0].team;
+      showCheckin();
+    } else {
+      personalCode = code;
+      isNewParticipant = true;
+      document.getElementById('team-field').style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Continue';
+      document.getElementById('team-input').focus();
+    }
+  } catch (e) {
+    personalCode = code;
+    teamName = '';
+    showCheckin();
+  }
+}
+
+async function saveParticipant(code, team) {
+  await supabaseFetch('participant_codes', {
+    method: 'POST',
+    prefer: 'return=minimal',
+    body: JSON.stringify({ personal_code: code, team: team, client: clientName })
+  });
+}
+
+function showCheckin() {
   document.getElementById('gate').style.display = 'none';
   document.getElementById('module-label').textContent = currentModule.label;
   document.getElementById('module-title').textContent = currentModule.title;
@@ -475,7 +553,7 @@ function submitCheckin() {
 
   const params = new URLSearchParams();
   params.append(FIELDS.client, clientName);
-  params.append(FIELDS.personalCode, personalCode);
+  params.append(FIELDS.personalCode, personalCode + (teamName ? ' (' + teamName + ')' : ''));
   params.append(FIELDS.module, currentModule.label);
   params.append(FIELDS.q1, answers.q1);
   params.append(FIELDS.q2, answers.q2);
