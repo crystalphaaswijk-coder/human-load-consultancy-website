@@ -44,7 +44,7 @@ body::before {
 .container { width: min(1200px, calc(100% - 56px)); margin: 0 auto; }
 .section { padding: 140px 0; }
 
-.statement, .differentiator, .about-section, .about-hlc, .services-section, .approach-section, .faq-section, .cta-section, footer {
+.statement, .about-section, .about-hlc, .services-section, .approach-section, .faq-section, .cta-section, footer {
   position: relative;
   z-index: 2;
 }
@@ -216,6 +216,32 @@ body::before {
   transition: color .25s, border-color .25s;
 }
 .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+@property --btn-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes btn-border-spin {
+  to { --btn-angle: 360deg; }
+}
+.btn-intake {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#2b2218, #2b2218) padding-box,
+    conic-gradient(from var(--btn-angle), #c9b99a 0%, #4a3b2c 40%, #c9b99a 70%, #b3a085 100%) border-box;
+  color: #f5f0e8; border-radius: 999px;
+  font-size: 14px; font-weight: 500; letter-spacing: .02em;
+  animation: btn-border-spin 3s linear infinite;
+  transition: transform .3s var(--ease-out), box-shadow .3s;
+}
+.btn-intake:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(43,34,24,.3); }
+.btn-intake svg { transition: transform .3s var(--ease-out); }
+.btn-intake:hover svg { transform: translate(3px,-3px); }
+.nav-links .btn-intake { padding: 7px 18px; font-size: 13px; border-width: 1.5px; }
+
 .scroll-indicator {
   position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -265,23 +291,6 @@ body::before {
 .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(74,59,44,.08); }
 .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1; color: var(--ink); letter-spacing: -.04em; }
 .stat-label { font-size: 13px; color: var(--bark); margin-top: 6px; line-height: 1.5; }
-
-/* DIFFERENTIATOR */
-.differentiator {
-  background: #faf8f4;
-  padding: 100px 0;
-}
-.differentiator::after { content: none; }
-.differentiator .section-tag { color: var(--bark); }
-.differentiator .section-tag::before { background: var(--sand); }
-.diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(74,59,44,.08); border-radius: var(--r-lg); overflow: hidden; margin-top: 48px; }
-.diff-item { padding: 40px 36px; background: #faf8f4; transition: background .4s; }
-.diff-item:hover { background: var(--parchment); }
-.diff-label { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; color: var(--ink); margin-bottom: 16px; }
-.diff-text { font-size: 15px; line-height: 1.85; color: rgba(74,59,44,.65); }
-.diff-footer { margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(74,59,44,.12); max-width: 680px; }
-.diff-footer p { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3vw, 36px); font-weight: 300; line-height: 1.3; letter-spacing: -.02em; color: var(--ink); }
-.diff-footer p em { font-style: italic; color: var(--bark); }
 
 /* ABOUT HLC */
 .about-hlc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
@@ -415,6 +424,24 @@ body::before {
 .cta-inner h2 em { font-style: italic; color: var(--bark); }
 .cta-inner p { font-size: 17px; line-height: 1.85; color: rgba(74,59,44,.65); margin-bottom: 48px; }
 .cta-actions { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.cta-form { width: 100%; max-width: 640px; margin: 0 auto; text-align: left; }
+.cta-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cta-form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.cta-form-row .cta-form-field { margin-bottom: 0; }
+.cta-form-field label { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--bark); }
+.cta-form-optional { font-weight: 400; text-transform: none; letter-spacing: 0; color: rgba(124,106,82,.5); }
+.cta-form-field input,
+.cta-form-field select,
+.cta-form-field textarea {
+  background: rgba(255,255,255,.7); border: 1px solid rgba(180,162,130,.3); border-radius: 10px;
+  padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink);
+  outline: none; transition: border-color .25s, box-shadow .25s; -webkit-appearance: none;
+}
+.cta-form-field input:focus,
+.cta-form-field select:focus,
+.cta-form-field textarea:focus { border-color: var(--bark); box-shadow: 0 0 0 3px rgba(124,106,82,.12); }
+.cta-form-field textarea { resize: vertical; min-height: 100px; }
+.cta-form .btn-intake { margin-top: 8px; }
 
 footer {
   background: #faf8f4;
@@ -450,7 +477,6 @@ footer::before { content: none; }
 /* Card-stacking z-index volgorde */
 .statement { z-index: 2; }
 .about-section { z-index: 3; }
-.differentiator { z-index: 4; }
 .about-hlc { z-index: 5; }
 .services-section { z-index: 6; }
 .approach-section { z-index: 7; }
@@ -460,7 +486,7 @@ footer::before { content: none; }
 footer { z-index: 11; }
 
 /* Kaartdiepte-effect bij binnenscroll */
-.statement, .about-section, .differentiator, .about-hlc, .services-section, .approach-section, .trajectory-section, .faq-section, .cta-section, footer {
+.statement, .about-section, .about-hlc, .services-section, .approach-section, .trajectory-section, .faq-section, .cta-section, footer {
   border-radius: 28px 28px 0 0;
   margin-top: -28px;
   box-shadow: 0 -8px 40px rgba(43,34,24,.08);
@@ -532,6 +558,7 @@ footer { z-index: 11; }
   .section { padding: 100px 0; }
   .statement { padding: 72px 0; }
   .cursor, .cursor-ring { display: none; }
+  .cta-form-row { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -554,7 +581,7 @@ footer { z-index: 11; }
         <li><a href="#approach">Method</a></li>
         <li><a href="#trajectory">Program</a></li>
         <li><a href="#faq">FAQ</a></li>
-      <li><a href="mailto:info@humanloadconsultancy.com" class="nav-cta">Request an intake</a></li>
+      <li><a href="mailto:info@humanloadconsultancy.com" class="btn-intake">Request an intake</a></li>
       </ul>
     </nav>
   </div>
@@ -574,7 +601,7 @@ footer { z-index: 11; }
       <h1>Before absence<br>becomes <em>the answer.</em></h1>
       <p class="hero-body">Musculoskeletal complaints in screen-based work are predictable — and preventable. Human Load Consultancy helps organizations intervene before physical strain turns into sick leave, reduced performance, and rising absenteeism costs.</p>
       <div class="hero-actions">
-        <a href="mailto:info@humanloadconsultancy.com" class="btn-primary">Request an intake <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="mailto:info@humanloadconsultancy.com" class="btn-intake">Request an intake <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a href="#about" class="btn-ghost">Discover the method</a>
       </div>
     </div>
@@ -892,10 +919,39 @@ footer { z-index: 11; }
       <p class="section-tag reveal">Take the next step</p>
       <h2 class="reveal delay-1">The right time to act<br>is <em>before the data arrives.</em></h2>
       <p class="reveal delay-2">Most organizations contact us after complaints have already surfaced. The intake conversation is free, takes 45 minutes, and gives you a clear picture of where behavioral risk sits in your organization — and what a structured intervention would look like.</p>
-      <div class="cta-actions reveal delay-3">
-        <a href="mailto:info@humanloadconsultancy.com" class="btn-primary">Request an intake <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="mailto:info@humanloadconsultancy.com" class="btn-ghost">info@humanloadconsultancy.com</a>
-      </div>
+      <form class="cta-form reveal delay-3" action="https://formspree.io/f/xzdyyoyy" method="POST">
+        <div class="cta-form-row">
+          <div class="cta-form-field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" required placeholder="Your name">
+          </div>
+          <div class="cta-form-field">
+            <label for="cf-company">Company</label>
+            <input type="text" id="cf-company" name="company" required placeholder="Your company">
+          </div>
+        </div>
+        <div class="cta-form-row">
+          <div class="cta-form-field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="cta-form-field">
+            <label for="cf-employees">Team size</label>
+            <select id="cf-employees" name="employees" required>
+              <option value="" disabled selected>Select…</option>
+              <option>25–50</option>
+              <option>50–100</option>
+              <option>100–250</option>
+              <option>250+</option>
+            </select>
+          </div>
+        </div>
+        <div class="cta-form-field">
+          <label for="cf-message">Message <span class="cta-form-optional">(optional)</span></label>
+          <textarea id="cf-message" name="message" rows="4" placeholder="Any specific context or questions…"></textarea>
+        </div>
+        <button type="submit" class="btn-intake">Request an intake <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
     </div>
   </div>
 </section>
@@ -1115,7 +1171,7 @@ var cardObserver = new IntersectionObserver(function(entries) {
 statCards.forEach(function(c) { cardObserver.observe(c); });
 
 // SECTIE DIEPTE — schaal weg als volgende sectie erover schuift
-var depthSections = document.querySelectorAll('.about-section, .differentiator, .about-hlc, .services-section');
+var depthSections = document.querySelectorAll('.about-section, .about-hlc, .services-section');
 window.addEventListener('scroll', function() {
   depthSections.forEach(function(sec) {
     var rect = sec.getBoundingClientRect();
