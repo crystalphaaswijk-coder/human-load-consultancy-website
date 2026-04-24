@@ -478,7 +478,7 @@ async function handleContinue() {
   const code = document.getElementById('code-input').value.trim().toUpperCase();
   if (!code) { document.getElementById('code-input').focus(); return; }
  
-  const teamFieldVisible = document.getElementById('team-field').style.display !== 'none';
+  const teamFieldVisible = document.getElementById('team-field').style.display === 'block';
  
   if (teamFieldVisible) {
     const team = document.getElementById('team-input').value.trim();
