@@ -462,7 +462,6 @@ footer::before { content: none; }
   width: 100%; height: 100%;
   pointer-events: none;
   z-index: 998;
-  mix-blend-mode: multiply;
 }
 .reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
 .reveal.delay-1 { transition-delay: .1s; }
@@ -1202,30 +1201,45 @@ window.addEventListener('scroll', function() {
 <script>
 (function() {
   var canvas = document.getElementById('grain-canvas');
+  if (!canvas) { console.warn('[grain] canvas element not found'); return; }
   var ctx = canvas.getContext('2d');
+  console.log('[grain] canvas found in DOM, initialising');
+
   var W, H, imgData, d, tick = 0;
+  var DENSITY = 0.22;    // 22% of pixels get a grain dot
+  var ALPHA_MIN = 15;    // min alpha (~0.059)
+  var ALPHA_RANGE = 11;  // max alpha 26 (~0.10), avg ~0.08
+
+  function fill(data, w, h) {
+    var count = Math.floor(w * h * DENSITY);
+    for (var i = 0; i < count; i++) {
+      var p = Math.floor(Math.random() * w * h) * 4;
+      data[p]   = 201;
+      data[p+1] = 185;
+      data[p+2] = 154;
+      data[p+3] = ALPHA_MIN + (Math.random() * ALPHA_RANGE | 0);
+    }
+  }
 
   function resize() {
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
     imgData = ctx.createImageData(W, H);
     d = imgData.data;
-    var count = Math.floor(W * H * 0.09);
-    for (var i = 0; i < count; i++) {
-      var p = Math.floor(Math.random() * W * H) * 4;
-      d[p] = 201; d[p+1] = 185; d[p+2] = 154;
-      d[p+3] = Math.random() * 7 | 0;
-    }
+    fill(d, W, H);
     ctx.putImageData(imgData, 0, 0);
+    console.log('[grain] canvas sized to', W, 'x', H);
   }
 
   function evolve() {
-    var n = Math.floor(W * H * 0.012);
+    var n = Math.floor(W * H * 0.02);
     for (var i = 0; i < n; i++) {
       var p = Math.floor(Math.random() * W * H) * 4;
-      if (Math.random() < 0.55) {
-        d[p] = 201; d[p+1] = 185; d[p+2] = 154;
-        d[p+3] = Math.random() * 7 | 0;
+      if (Math.random() < 0.6) {
+        d[p]   = 201;
+        d[p+1] = 185;
+        d[p+2] = 154;
+        d[p+3] = ALPHA_MIN + (Math.random() * ALPHA_RANGE | 0);
       } else {
         d[p+3] = 0;
       }
