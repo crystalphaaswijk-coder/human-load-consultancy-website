@@ -27,7 +27,7 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: 'DM Sans', sans-serif;
-  background-color: var(--warm-white);
+  background-color: #f5f0e8;
   color: var(--umber);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -38,8 +38,8 @@ body::before {
   content: '';
   position: fixed; inset: 0;
   z-index: 999; pointer-events: none; opacity: .04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 96px 96px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
 }
 .container { width: min(1200px, calc(100% - 56px)); margin: 0 auto; }
 .section { padding: 140px 0; }
@@ -456,14 +456,6 @@ footer::before { content: none; }
 .footer-links a { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: rgba(74,59,44,.5); transition: color .25s; }
 .footer-links a:hover { color: var(--ink); }
 
-#grain-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 998;
-  mix-blend-mode: multiply;
-}
 .reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
 .reveal.delay-1 { transition-delay: .1s; }
 .reveal.delay-2 { transition-delay: .22s; }
@@ -573,7 +565,6 @@ footer { z-index: 11; }
 
   <body>
 
-<canvas id="grain-canvas" aria-hidden="true"></canvas>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -1197,66 +1188,6 @@ window.addEventListener('scroll', function() {
   document.getElementById('contact-modal').addEventListener('click', function(e) {
     if (e.target === this) this.style.display = 'none';
   });
-</script>
-
-<script>
-(function() {
-  var canvas = document.getElementById('grain-canvas');
-  if (!canvas) { console.warn('[grain] canvas element not found'); return; }
-  var ctx = canvas.getContext('2d');
-  console.log('[grain] canvas found in DOM, initialising');
-
-  var W, H, imgData, d, tick = 0;
-  var DENSITY = 0.22;    // 22% of pixels get a grain dot
-  var ALPHA_MIN = 15;    // min alpha (~0.059)
-  var ALPHA_RANGE = 11;  // max alpha 26 (~0.10), avg ~0.08
-
-  function fill(data, w, h) {
-    var count = Math.floor(w * h * DENSITY);
-    for (var i = 0; i < count; i++) {
-      var p = Math.floor(Math.random() * w * h) * 4;
-      data[p]   = 201;
-      data[p+1] = 185;
-      data[p+2] = 154;
-      data[p+3] = ALPHA_MIN + (Math.random() * ALPHA_RANGE | 0);
-    }
-  }
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    imgData = ctx.createImageData(W, H);
-    d = imgData.data;
-    fill(d, W, H);
-    ctx.putImageData(imgData, 0, 0);
-    console.log('[grain] canvas sized to', W, 'x', H);
-  }
-
-  function evolve() {
-    var n = Math.floor(W * H * 0.02);
-    for (var i = 0; i < n; i++) {
-      var p = Math.floor(Math.random() * W * H) * 4;
-      if (Math.random() < 0.6) {
-        d[p]   = 201;
-        d[p+1] = 185;
-        d[p+2] = 154;
-        d[p+3] = ALPHA_MIN + (Math.random() * ALPHA_RANGE | 0);
-      } else {
-        d[p+3] = 0;
-      }
-    }
-    ctx.putImageData(imgData, 0, 0);
-  }
-
-  function loop() {
-    if (++tick % 18 === 0) evolve();
-    requestAnimationFrame(loop);
-  }
-
-  window.addEventListener('resize', resize, { passive: true });
-  resize();
-  requestAnimationFrame(loop);
-})();
 </script>
 </body>
 </html>
