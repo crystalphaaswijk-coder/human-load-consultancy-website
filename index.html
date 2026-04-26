@@ -149,13 +149,19 @@ body::before {
   overflow: hidden; background: var(--cream);
   z-index: 0;
 }
-.hero-layer { position: absolute; inset: -15%; will-change: transform; }
+.hero-layer { position: absolute; inset: -15%; will-change: transform; z-index: 2; }
+.hero-photo {
+  position: absolute;
+  inset: -40%;
+  background: url('front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg') center/cover no-repeat;
+  will-change: transform;
+  z-index: 0;
+}
 .hero-bg {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 1;
   background:
     linear-gradient(90deg, rgba(237,230,214,.96) 0%, rgba(245,240,232,.88) 45%, rgba(250,248,244,.3) 100%),
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,185,154,.25) 0%, transparent 65%),
-    url('front_photo_of_a_light_brown_s_Nano_Banana_Pro_66948.jpg') center/cover no-repeat;
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,185,154,.25) 0%, transparent 65%);
 }
 .hero-shape { position: absolute; border-radius: 50%; will-change: transform; }
 .hero-shape-1 { width: 700px; height: 700px; right: -100px; top: -200px; background: radial-gradient(circle, rgba(201,185,154,.28) 0%, transparent 70%); }
@@ -168,7 +174,7 @@ body::before {
   transition: height 1.8s var(--ease-out) .8s;
 }
 .hero-line.visible { height: 280px; }
-.hero-content { position: relative; z-index: 2; padding: 140px 0 80px; }
+.hero-content { position: relative; z-index: 3; padding: 140px 0 80px; will-change: transform; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
   font-size: 11px; font-weight: 500; letter-spacing: .2em;
@@ -588,6 +594,7 @@ footer { z-index: 11; }
 </header>
 
 <section class="hero" id="hero">
+  <div class="hero-photo" id="heroBg"></div>
   <div class="hero-bg"></div>
   <div class="hero-layer" id="heroLayer1">
     <div class="hero-shape hero-shape-1"></div>
@@ -1002,9 +1009,17 @@ window.addEventListener('load', function() {
   }, 100);
 });
 
+var heroBg = document.getElementById('heroBg');
 var heroLayer = document.getElementById('heroLayer1');
+var heroContent = document.getElementById('heroContent');
 window.addEventListener('scroll', function() {
-  if (heroLayer) heroLayer.style.transform = 'translateY(' + (window.scrollY * 0.28) + 'px)';
+  var y = window.scrollY;
+  // Photo drifts up at 0.5x — creates strong depth separation from text
+  if (heroBg) heroBg.style.transform = 'translateY(' + (y * 0.5) + 'px)';
+  // Shapes drift slightly slower than text for mid-layer feel
+  if (heroLayer) heroLayer.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+  // Text drifts very slightly upward — floats above the receding background
+  if (heroContent) heroContent.style.transform = 'translateY(' + (y * -0.06) + 'px)';
 }, { passive: true });
 
 var cursor = document.getElementById('cursor');
