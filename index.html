@@ -560,12 +560,127 @@ footer { z-index: 11; }
 @media (max-width: 720px) {
   .container { width: calc(100% - 32px); }
   .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
   .about-stats { grid-template-columns: 1fr 1fr; }
   .hero-line { display: none; }
   .section { padding: 100px 0; }
   .statement { padding: 72px 0; }
-  .cursor, .cursor-ring { display: none; }
   .cta-form-row { grid-template-columns: 1fr; }
+
+  /* Hero: stronger overlay + smaller headline for narrow screens */
+  .hero-bg {
+    background:
+      linear-gradient(180deg, rgba(237,230,214,.97) 0%, rgba(237,230,214,.92) 60%, rgba(245,240,232,.80) 100%),
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,185,154,.25) 0%, transparent 65%);
+  }
+  .hero h1 { font-size: clamp(44px, 11vw, 72px); }
+  .hero-body { font-size: 15px; }
+  .hero-content { padding: 120px 0 60px; }
+
+  /* Touch targets: ensure links & buttons are at least 44px */
+  .btn-primary, .btn-intake, .btn-ghost { min-height: 44px; }
+  .btn-ghost { padding-bottom: 0; display: inline-flex; align-items: center; }
+  .faq-item summary { min-height: 44px; }
+  .traj-btn { width: 44px; height: 44px; }
+  .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* Disable custom cursor on touch/no-hover devices */
+@media (hover: none) {
+  .cursor, .cursor-ring { display: none; }
+}
+
+/* Hamburger button — hidden on desktop */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px; height: 44px;
+  background: none; border: none; cursor: pointer;
+  padding: 0; z-index: 1002; flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--ink);
+  transition: transform .35s var(--ease-out), opacity .25s;
+  transform-origin: center;
+}
+.nav-wrap.scrolled .nav-hamburger span { background: var(--ink); }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Full-screen mobile menu */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 1001;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px 40px 60px;
+  opacity: 0; visibility: hidden;
+  transition: opacity .4s var(--ease-out), visibility .4s;
+  pointer-events: none;
+}
+.mobile-menu.open {
+  opacity: 1; visibility: visible;
+  pointer-events: auto;
+}
+.mobile-menu-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 44px; height: 44px;
+  background: rgba(245,240,232,.07);
+  border: 1px solid rgba(245,240,232,.14);
+  border-radius: 50%;
+  color: rgba(245,240,232,.8); font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .25s, color .25s;
+  font-family: 'DM Sans', sans-serif;
+}
+.mobile-menu-close:hover { background: rgba(245,240,232,.14); color: var(--cream); }
+.mobile-nav { width: 100%; }
+.mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.mobile-nav li { opacity: 0; transform: translateY(16px); transition: opacity .4s var(--ease-out), transform .4s var(--ease-out); }
+.mobile-menu.open .mobile-nav li:nth-child(1) { opacity: 1; transform: none; transition-delay: .08s; }
+.mobile-menu.open .mobile-nav li:nth-child(2) { opacity: 1; transform: none; transition-delay: .14s; }
+.mobile-menu.open .mobile-nav li:nth-child(3) { opacity: 1; transform: none; transition-delay: .20s; }
+.mobile-menu.open .mobile-nav li:nth-child(4) { opacity: 1; transform: none; transition-delay: .26s; }
+.mobile-menu.open .mobile-nav li:nth-child(5) { opacity: 1; transform: none; transition-delay: .32s; }
+.mobile-menu.open .mobile-nav li:nth-child(6) { opacity: 1; transform: none; transition-delay: .40s; }
+.mobile-nav a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 9vw, 52px); font-weight: 300;
+  letter-spacing: -.02em; color: rgba(245,240,232,.55);
+  transition: color .25s;
+  display: block; padding: 8px 0;
+  min-height: 44px; line-height: 1.25;
+}
+.mobile-nav a:hover { color: var(--cream); }
+.mobile-nav-cta {
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 13px !important; font-weight: 500 !important;
+  letter-spacing: .06em !important; text-transform: uppercase !important;
+  color: rgba(245,240,232,.75) !important;
+  display: inline-flex !important; align-items: center !important;
+  border: 1px solid rgba(245,240,232,.18) !important;
+  border-radius: 999px !important;
+  padding: 12px 28px !important;
+  margin-top: 8px !important; min-height: 44px !important;
+  transition: background .25s, color .25s !important;
+}
+.mobile-nav-cta:hover {
+  background: rgba(245,240,232,.07) !important;
+  color: var(--cream) !important;
+}
+.mobile-menu-divider {
+  width: 40px; height: 1px;
+  background: rgba(245,240,232,.12);
+  margin: 28px 0;
 }
 </style>
 <link rel="icon" type="image/png" href="favicon.png"></head>
@@ -590,9 +705,31 @@ footer { z-index: 11; }
         <li><a href="#faq">FAQ</a></li>
       <li><a href="mailto:info@humanloadconsultancy.com" class="btn-intake">Request an intake</a></li>
       </ul>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
+  <nav class="mobile-nav">
+    <ul>
+      <li><a href="#about-hlc">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#approach">Method</a></li>
+      <li><a href="#trajectory">Program</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="mobile-menu-divider"></div>
+    <ul>
+      <li><a href="mailto:info@humanloadconsultancy.com" class="mobile-nav-cta">Request an intake</a></li>
+    </ul>
+  </nav>
+</div>
 
 <section class="hero" id="hero">
   <div class="hero-photo" id="heroBg"></div>
@@ -1023,6 +1160,37 @@ window.addEventListener('scroll', function() {
   if (heroContent) heroContent.style.transform = 'translateY(' + (y * -0.06) + 'px)';
 }, { passive: true });
 
+// Hamburger / mobile menu
+(function() {
+  var hamburger = document.getElementById('navHamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var closeBtn = document.getElementById('mobileMenuClose');
+  function openMenu() {
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  closeBtn.addEventListener('click', closeMenu);
+  mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+})();
+
+// Custom cursor — only on pointer/hover devices
+if (window.matchMedia('(hover: hover)').matches) {
 var cursor = document.getElementById('cursor');
 var ring = document.getElementById('cursorRing');
 var mx = 0, my = 0, rx = 0, ry = 0;
@@ -1040,6 +1208,7 @@ document.querySelectorAll('a, button, summary, .stat-card, .flip-card').forEach(
   el.addEventListener('mouseenter', function() { cursor.style.width = '18px'; cursor.style.height = '18px'; ring.style.width = '54px'; ring.style.height = '54px'; });
   el.addEventListener('mouseleave', function() { cursor.style.width = '10px'; cursor.style.height = '10px'; ring.style.width = '36px'; ring.style.height = '36px'; });
 });
+}
 
 var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
