@@ -542,6 +542,8 @@ footer { z-index: 11; }
   
 @media (max-width: 1080px) {
   .about-grid, .about-hlc-grid { grid-template-columns: 1fr; gap: 48px; }
+  /* Remove sticky on about-hlc photo column so it doesn't overlap text */
+  .about-hlc-left { position: static; }
   .trajectory-header { grid-template-columns: 1fr; gap: 24px; }
   .trajectory-header-right { align-items: flex-start; }
   .trajectory-header p { text-align: left; }
@@ -552,7 +554,7 @@ footer { z-index: 11; }
   .flip-front { position: relative; backface-visibility: visible; -webkit-backface-visibility: visible; }
   .diff-grid { grid-template-columns: 1fr; }
   .svc-tracker { grid-template-columns: 1fr; }
-  .svc-sticky { position: relative; height: auto; padding-right: 0; padding-bottom: 40px; }
+  .svc-sticky { display: none; }
   .svc-divider { display: none; }
   .svc-items { padding-left: 0; }
   .svc-item { min-height: auto; opacity: 1; transform: none; padding: 48px 0; border-bottom: 1px solid rgba(180,162,130,.18); }
@@ -566,6 +568,18 @@ footer { z-index: 11; }
   .section { padding: 100px 0; }
   .statement { padding: 72px 0; }
   .cta-form-row { grid-template-columns: 1fr; }
+
+  /* Program carousel → vertical card stack */
+  .trajectory-scroll-wrapper { height: auto; }
+  .trajectory-sticky { position: static; height: auto; overflow: visible; }
+  .trajectory-track-outer { overflow: visible; perspective: none; }
+  .trajectory-track { flex-direction: column; gap: 16px; padding-right: 0; transform: none !important; }
+  .traj-card { flex: 0 0 auto; width: 100%;
+    transform: none !important; opacity: 1 !important;
+    border-color: rgba(74,59,44,.14); background: #fff;
+    box-shadow: 0 4px 20px rgba(43,34,24,.06); }
+  .traj-nav { display: none; }
+  .traj-progress-bar, .traj-counter { display: none; }
 
   /* Hero: stronger overlay + smaller headline for narrow screens */
   .hero-bg {
