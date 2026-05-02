@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Load — Scoring</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --cream: #f5f0e8;
+    --parchment: #ede6d6;
+    --sand: #c9b99a;
+    --sand-mid: #b3a085;
+    --bark: #7c6a52;
+    --umber: #4a3b2c;
+    --ink: #2b2218;
+    --positive: #5a7a5a;
+    --negative: #a04030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; }
+
+  .header {
+    border-bottom: 0.5px solid var(--sand);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+
+  .header-sub {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-top: 0.25rem;
+  }
+
+  .controls {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  select, button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 0.5px solid var(--sand-mid);
+    background: rgba(255,255,255,0.6);
+    color: var(--ink);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  select:focus, button:focus { border-color: var(--bark); }
+
+  button.btn {
+    background: var(--umber);
+    color: var(--cream);
+    border: none;
+  }
+  button.btn:hover { background: var(--ink); }
+  button.btn-link {
+    background: transparent;
+    color: var(--bark);
+    border: 0.5px solid var(--sand);
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  .card {
+    background: rgba(255,255,255,0.5);
+    border: 0.5px solid var(--sand);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.5);
+    border: 0.5px solid var(--sand);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .stat-sub {
+    font-size: 12px;
+    color: var(--sand-mid);
+    margin-top: 0.25rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 0.5px solid var(--sand);
+  }
+
+  th {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark);
+    font-weight: 500;
+  }
+
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .delta-positive { color: var(--positive); font-weight: 500; }
+  .delta-negative { color: var(--negative); font-weight: 500; }
+  .delta-neutral { color: var(--sand-mid); }
+
+  .bar-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.4rem 0;
+  }
+
+  .bar-label {
+    flex: 0 0 110px;
+    font-size: 12px;
+    color: var(--bark);
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--umber);
+    border-radius: 3px;
+    transition: width 0.4s;
+  }
+
+  .bar-value {
+    flex: 0 0 60px;
+    font-size: 12px;
+    color: var(--bark);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .auth-screen {
+    max-width: 520px;
+    margin: 4rem auto;
+    text-align: center;
+  }
+
+  .auth-screen h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .auth-sub {
+    color: var(--bark);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  input[type="password"], input[type="text"] {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.6);
+    border: 0.5px solid var(--sand-mid);
+    border-radius: 6px;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    outline: none;
+  }
+
+  input[type="password"]:focus, input[type="text"]:focus { border-color: var(--bark); }
+
+  .auth-helper {
+    font-size: 13px;
+    color: var(--bark);
+    line-height: 1.7;
+    text-align: left;
+    padding: 12px 16px;
+    border-left: 1px solid var(--sand);
+    margin-bottom: 1.5rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--sand-mid);
+    font-size: 14px;
+  }
+
+  .comments-list { list-style: none; }
+  .comments-list li {
+    padding: 0.75rem 0;
+    border-bottom: 0.5px solid var(--sand);
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .comment-meta {
+    font-size: 11px;
+    color: var(--sand-mid);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- ===== AUTH GATE ===== -->
+<div id="auth-screen" class="auth-screen">
+  <h1>Human Load — Scoring</h1>
+  <p class="auth-sub">Internal dashboard. Service-role access only.</p>
+
+  <div class="auth-helper">
+    Paste your Supabase <strong>service-role key</strong>. It will be saved only in your browser (localStorage), never sent anywhere except Supabase. Clear it anytime by clicking "Sign out".
+  </div>
+
+  <input type="password" id="key-input" placeholder="service_role key (eyJhbG...)" autocomplete="off" />
+  <button class="btn" style="width: 100%; padding: 14px;" onclick="saveKey()">Continue</button>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard" class="hidden">
+  <div class="wrap">
+
+    <div class="header">
+      <div>
+        <div class="header-title">Scoring dashboard</div>
+        <div class="header-sub" id="header-sub">—</div>
+      </div>
+      <div class="controls">
+        <select id="client-select" onchange="loadClient()">
+          <option value="">Loading clients...</option>
+        </select>
+        <button class="btn-link" onclick="signOut()">Sign out</button>
+      </div>
+    </div>
+
+    <div id="content"></div>
+
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://horkotkzleohpyrzzujx.supabase.co";
+let serviceKey = localStorage.getItem('hlc_service_key');
+
+if (serviceKey) {
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+  init();
+}
+
+function saveKey() {
+  const key = document.getElementById('key-input').value.trim();
+  if (!key.startsWith('eyJ')) {
+    alert('That doesn\'t look like a Supabase key. It should start with "eyJ".');
+    return;
+  }
+  serviceKey = key;
+  localStorage.setItem('hlc_service_key', key);
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+  init();
+}
+
+function signOut() {
+  localStorage.removeItem('hlc_service_key');
+  location.reload();
+}
+
+async function api(path, options = {}) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    ...options,
+    headers: {
+      'apikey': serviceKey,
+      'Authorization': 'Bearer ' + serviceKey,
+      'Content-Type': 'application/json',
+      ...(options.headers || {})
+    }
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || res.statusText);
+  }
+  return res.json();
+}
+
+async function init() {
+  try {
+    const clients = await api('clients?select=id,slug,display_name&order=display_name');
+    const sel = document.getElementById('client-select');
+    sel.innerHTML = '<option value="">Select a client…</option>';
+    clients.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.slug;
+      opt.dataset.id = c.id;
+      opt.textContent = c.display_name;
+      sel.appendChild(opt);
+    });
+  } catch (e) {
+    alert('Could not load. Check your key. ' + e.message);
+    signOut();
+  }
+}
+
+async function loadClient() {
+  const sel = document.getElementById('client-select');
+  const slug = sel.value;
+  if (!slug) {
+    document.getElementById('content').innerHTML = '';
+    document.getElementById('header-sub').textContent = '—';
+    return;
+  }
+  const clientId = parseInt(sel.options[sel.selectedIndex].dataset.id, 10);
+  document.getElementById('header-sub').textContent = sel.options[sel.selectedIndex].textContent;
+  document.getElementById('content').innerHTML = '<div class="empty-state">Loading data…</div>';
+
+  try {
+    const [participants, teams, intakes, checkins, closeouts] = await Promise.all([
+      api(`participants?client_id=eq.${clientId}&is_test=eq.false&select=id,personal_code,team_id,registered_at`),
+      api(`client_teams?client_id=eq.${clientId}&select=id,team_name`),
+      api(`intake_answers?select=*,participants!inner(id,team_id,client_id,is_test)&participants.client_id=eq.${clientId}&participants.is_test=eq.false`),
+      api(`checkin_answers?select=*,participants!inner(id,team_id,client_id,is_test)&participants.client_id=eq.${clientId}&participants.is_test=eq.false`),
+      api(`closeout_answers?select=*,participants!inner(id,team_id,client_id,is_test)&participants.client_id=eq.${clientId}&participants.is_test=eq.false`)
+    ]);
+    renderDashboard(participants, teams, intakes, checkins, closeouts);
+  } catch (e) {
+    document.getElementById('content').innerHTML = '<div class="empty-state">Could not load. ' + e.message + '</div>';
+  }
+}
+
+function avg(arr, key) {
+  const vals = arr.map(x => x[key]).filter(v => v !== null && v !== undefined);
+  if (vals.length === 0) return null;
+  return vals.reduce((a, b) => a + b, 0) / vals.length;
+}
+
+function fmt(n, decimals = 2) {
+  return n === null ? '—' : n.toFixed(decimals);
+}
+
+function deltaClass(d, inverted = false) {
+  if (d === null) return 'delta-neutral';
+  const positive = inverted ? d < 0 : d > 0;
+  if (Math.abs(d) < 0.05) return 'delta-neutral';
+  return positive ? 'delta-positive' : 'delta-negative';
+}
+
+function deltaText(d) {
+  if (d === null) return '—';
+  const sign = d > 0 ? '+' : '';
+  return sign + d.toFixed(2);
+}
+
+function renderDashboard(participants, teams, intakes, checkins, closeouts) {
+  if (participants.length === 0) {
+    document.getElementById('content').innerHTML = '<div class="empty-state">No participants yet for this client.</div>';
+    return;
+  }
+
+  const teamMap = {};
+  teams.forEach(t => teamMap[t.id] = t.team_name);
+
+  // Overview stats
+  const intakeCount = intakes.length;
+  const closeoutCount = closeouts.length;
+  const intakeRate = participants.length > 0 ? (intakeCount / participants.length * 100) : 0;
+  const closeoutRate = participants.length > 0 ? (closeoutCount / participants.length * 100) : 0;
+  const totalCheckins = checkins.length;
+  const expectedCheckins = participants.length * 6;
+  const checkinRate = expectedCheckins > 0 ? (totalCheckins / expectedCheckins * 100) : 0;
+
+  // Categories: intake vs closeout
+  const categories = [
+    { key: 'awareness', label: 'Awareness', q: ['q1_awareness_signals', 'q2_awareness_response'], inverted: false },
+    { key: 'behaviour_breaks', label: 'Behaviour — breaks (lower is better)', q: ['q3_behavior_breaks'], inverted: true },
+    { key: 'behaviour_variation', label: 'Behaviour — variation', q: ['q4_behavior_variation'], inverted: false },
+    { key: 'efficacy', label: 'Self-confidence', q: ['q5_efficacy_change', 'q6_efficacy_control'], coq: ['q5_efficacy_maintain', 'q6_efficacy_control'], inverted: false },
+    { key: 'culture', label: 'Culture', q: ['q7_culture_acceptance'], inverted: false }
+  ];
+
+  let categoryRows = '';
+  categories.forEach(cat => {
+    const intakeAvg = avg(intakes.map(i => {
+      const vals = cat.q.map(qk => i[qk]).filter(v => v !== null);
+      if (vals.length === 0) return null;
+      return { v: vals.reduce((a,b) => a+b, 0) / vals.length };
+    }).filter(x => x), 'v');
+
+    const closeoutKeys = cat.coq || cat.q;
+    const closeoutAvg = avg(closeouts.map(i => {
+      const vals = closeoutKeys.map(qk => i[qk]).filter(v => v !== null);
+      if (vals.length === 0) return null;
+      return { v: vals.reduce((a,b) => a+b, 0) / vals.length };
+    }).filter(x => x), 'v');
+
+    const delta = (intakeAvg !== null && closeoutAvg !== null) ? closeoutAvg - intakeAvg : null;
+    categoryRows += `
+      <tr>
+        <td>${cat.label}</td>
+        <td class="num">${fmt(intakeAvg)}</td>
+        <td class="num">${fmt(closeoutAvg)}</td>
+        <td class="num ${deltaClass(delta, cat.inverted)}">${deltaText(delta)}</td>
+      </tr>
+    `;
+  });
+
+  // Per-team breakdown
+  let teamRows = '';
+  teams.forEach(t => {
+    const tParticipants = participants.filter(p => p.team_id === t.id);
+    if (tParticipants.length === 0) return;
+    const ids = tParticipants.map(p => p.id);
+    const tIntakes = intakes.filter(i => ids.includes(i.participant_id));
+    const tCloseouts = closeouts.filter(c => ids.includes(c.participant_id));
+
+    const overallIntake = avg(tIntakes.map(i => ({
+      v: ((i.q1_awareness_signals || 0) + (i.q2_awareness_response || 0) + (i.q4_behavior_variation || 0) +
+          (i.q5_efficacy_change || 0) + (i.q6_efficacy_control || 0) + (i.q7_culture_acceptance || 0)) / 6
+    })), 'v');
+    const overallCloseout = avg(tCloseouts.map(c => ({
+      v: ((c.q1_awareness_signals || 0) + (c.q2_awareness_response || 0) + (c.q4_behavior_variation || 0) +
+          (c.q5_efficacy_maintain || 0) + (c.q6_efficacy_control || 0) + (c.q7_culture_acceptance || 0)) / 6
+    })), 'v');
+    const delta = (overallIntake !== null && overallCloseout !== null) ? overallCloseout - overallIntake : null;
+
+    teamRows += `
+      <tr>
+        <td>${t.team_name}</td>
+        <td class="num">${tParticipants.length}</td>
+        <td class="num">${fmt(overallIntake)}</td>
+        <td class="num">${fmt(overallCloseout)}</td>
+        <td class="num ${deltaClass(delta)}">${deltaText(delta)}</td>
+      </tr>
+    `;
+  });
+
+  // Module adoption
+  let moduleBars = '';
+  for (let m = 1; m <= 6; m++) {
+    const mCheckins = checkins.filter(c => c.module_number === m);
+    const adoption = participants.length > 0 ? (mCheckins.length / participants.length * 100) : 0;
+    const triedAvg = avg(mCheckins, 'q2_tried');
+    moduleBars += `
+      <div class="bar-container">
+        <div class="bar-label">Module ${m}</div>
+        <div class="bar-track"><div class="bar-fill" style="width: ${Math.min(adoption, 100)}%"></div></div>
+        <div class="bar-value">${adoption.toFixed(0)}%</div>
+      </div>
+      <div style="font-size: 11px; color: var(--sand-mid); margin: 0 0 0.75rem 110px;">
+        ${mCheckins.length} responses · avg "tried": ${fmt(triedAvg)}
+      </div>
+    `;
+  }
+
+  // Comments
+  const allComments = [];
+  intakes.forEach(i => {
+    if (i.open_field) allComments.push({ source: 'Intake', text: i.open_field, team: teamMap[i.participants?.team_id] });
+  });
+  checkins.forEach(c => {
+    if (c.open_field) allComments.push({ source: `Check-in M${c.module_number}`, text: c.open_field, team: teamMap[c.participants?.team_id] });
+  });
+  closeouts.forEach(c => {
+    if (c.open_field) allComments.push({ source: 'Closeout', text: c.open_field, team: teamMap[c.participants?.team_id] });
+    if (c.reflection_hardest_moment) allComments.push({ source: 'Closeout reflection', text: c.reflection_hardest_moment, team: teamMap[c.participants?.team_id] });
+  });
+  const commentsHtml = allComments.length > 0
+    ? `<ul class="comments-list">${allComments.map(c => `
+        <li>
+          <div>"${c.text.replace(/[<>]/g, '')}"</div>
+          <div class="comment-meta">${c.source}${c.team ? ' · ' + c.team : ''}</div>
+        </li>
+      `).join('')}</ul>`
+    : '<div class="empty-state">No open-field responses yet.</div>';
+
+  document.getElementById('content').innerHTML = `
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-label">Participants</div>
+        <div class="stat-value">${participants.length}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Intake completed</div>
+        <div class="stat-value">${intakeCount}</div>
+        <div class="stat-sub">${intakeRate.toFixed(0)}% of participants</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Closeout completed</div>
+        <div class="stat-value">${closeoutCount}</div>
+        <div class="stat-sub">${closeoutRate.toFixed(0)}% of participants</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Check-in adoption</div>
+        <div class="stat-value">${checkinRate.toFixed(0)}%</div>
+        <div class="stat-sub">${totalCheckins} of ${expectedCheckins} expected</div>
+      </div>
+    </div>
+
+    <h2>Score per category</h2>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th class="num">Intake</th>
+            <th class="num">Closeout</th>
+            <th class="num">Δ</th>
+          </tr>
+        </thead>
+        <tbody>${categoryRows}</tbody>
+      </table>
+    </div>
+
+    <h2>Score per team</h2>
+    <div class="card">
+      ${teamRows ? `<table>
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th class="num">Participants</th>
+            <th class="num">Intake</th>
+            <th class="num">Closeout</th>
+            <th class="num">Δ</th>
+          </tr>
+        </thead>
+        <tbody>${teamRows}</tbody>
+      </table>` : '<div class="empty-state">No team data yet.</div>'}
+    </div>
+
+    <h2>Module adoption</h2>
+    <div class="card">${moduleBars}</div>
+
+    <h2>Open-field responses</h2>
+    <div class="card">${commentsHtml}</div>
+  `;
+}
+</script>
+</body>
+</html>
