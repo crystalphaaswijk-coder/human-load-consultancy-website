@@ -6,7 +6,7 @@
 <title>Human Load — Module</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
- 
+
   :root {
     --cream: #f5f0e8;
     --parchment: #ede6d6;
@@ -16,9 +16,9 @@
     --umber: #4a3b2c;
     --ink: #2b2218;
   }
- 
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--parchment);
@@ -30,29 +30,32 @@
     justify-content: center;
     padding: 2rem 1rem;
   }
- 
+
   .logo-wrap { margin-bottom: 2.5rem; text-align: center; }
   .logo-wrap img { height: 64px; width: auto; }
- 
+
   .container { width: 100%; max-width: 620px; }
- 
-  #gate { text-align: center; }
- 
-  #gate h1 {
+
+  h1, h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
     font-weight: 400;
     color: var(--ink);
-    margin-bottom: 0.4rem;
   }
- 
-  .gate-module-label {
+
+  h1 { font-size: 2rem; margin-bottom: 0.4rem; }
+  h2 { font-size: 1.6rem; margin-bottom: 0.75rem; }
+
+  .center { text-align: center; }
+  .hidden { display: none !important; }
+
+  .module-tag {
     font-size: 13px;
     color: var(--bark);
     letter-spacing: 0.08em;
     margin-bottom: 2.5rem;
+    text-align: center;
   }
- 
+
   .field-label {
     font-size: 12px;
     letter-spacing: 0.1em;
@@ -61,8 +64,8 @@
     margin-bottom: 0.5rem;
     text-align: left;
   }
- 
-  .code-hint {
+
+  .helper {
     font-size: 13px;
     color: var(--bark);
     line-height: 1.7;
@@ -71,10 +74,10 @@
     padding: 10px 14px;
     border-left: 1px solid var(--sand);
   }
- 
-  .code-hint strong { color: var(--umber); font-weight: 500; }
- 
-  input[type="text"] {
+
+  .helper strong { color: var(--umber); font-weight: 500; }
+
+  input[type="text"], select {
     width: 100%;
     padding: 14px 18px;
     background: rgba(255,255,255,0.6);
@@ -83,21 +86,23 @@
     color: var(--ink);
     font-family: 'DM Sans', sans-serif;
     font-size: 15px;
-    text-align: center;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     margin-bottom: 1.25rem;
     outline: none;
     transition: border-color 0.2s;
   }
- 
-  input[type="text"]:focus { border-color: var(--bark); }
-  input[type="text"]::placeholder { color: var(--sand-mid); letter-spacing: 0.05em; text-transform: none; }
- 
-  #team-field { display: none; }
- 
-  #checkin { display: none; }
- 
+
+  input[type="text"] { text-align: center; letter-spacing: 0.06em; }
+  input[type="text"]:focus, select:focus { border-color: var(--bark); }
+  input[type="text"]::placeholder { color: var(--sand-mid); }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%237c6a52' d='M0 0l5 6 5-6z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    padding-right: 40px;
+  }
+
   .module-label {
     font-size: 12px;
     letter-spacing: 0.15em;
@@ -105,7 +110,7 @@
     color: var(--bark);
     margin-bottom: 0.4rem;
   }
- 
+
   .module-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 2.2rem;
@@ -113,37 +118,37 @@
     color: var(--ink);
     margin-bottom: 0.6rem;
   }
- 
+
   .module-recap {
     font-size: 14px;
     color: var(--bark);
     margin-bottom: 2.5rem;
     line-height: 1.7;
   }
- 
+
   .divider { width: 40px; height: 0.5px; background: var(--sand-mid); margin: 0 0 2rem; }
- 
-  .checkin-intro {
+
+  .section-intro {
     font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--bark);
     margin-bottom: 2rem;
   }
- 
+
   .question-block { margin-bottom: 2.25rem; }
- 
+
   .question-text {
     font-size: 15px;
     color: var(--ink);
     margin-bottom: 1rem;
     line-height: 1.5;
   }
- 
+
   .scale { display: flex; gap: 8px; }
   .scale-labels { display: flex; justify-content: space-between; margin-top: 6px; }
   .scale-label { font-size: 11px; color: var(--sand-mid); }
- 
+
   .scale button {
     flex: 1;
     aspect-ratio: 1;
@@ -157,14 +162,14 @@
     cursor: pointer;
     transition: all 0.15s;
   }
- 
+
   .scale button:hover { border-color: var(--bark); color: var(--ink); background: rgba(255,255,255,0.8); }
   .scale button.selected { background: var(--umber); border-color: var(--umber); color: var(--cream); }
- 
+
   .sub-label { font-size: 12px; color: var(--sand-mid); margin-top: 8px; line-height: 1.5; }
- 
+
   .radio-group { display: flex; flex-direction: column; gap: 10px; }
- 
+
   .radio-group label {
     display: flex;
     align-items: center;
@@ -174,9 +179,9 @@
     color: var(--bark);
     transition: color 0.15s;
   }
- 
+
   .radio-group label:hover { color: var(--ink); }
- 
+
   .radio-group input[type="radio"] {
     accent-color: var(--umber);
     cursor: pointer;
@@ -184,7 +189,7 @@
     height: 16px;
     flex-shrink: 0;
   }
- 
+
   textarea {
     width: 100%;
     padding: 12px 14px;
@@ -199,10 +204,10 @@
     transition: border-color 0.2s;
     line-height: 1.6;
   }
- 
+
   textarea:focus { border-color: var(--bark); }
   textarea::placeholder { color: var(--sand-mid); }
- 
+
   .btn {
     width: 100%;
     padding: 14px;
@@ -217,21 +222,34 @@
     transition: all 0.2s;
     margin-top: 0.5rem;
   }
- 
+
   .btn:hover { background: var(--ink); }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; }
- 
-  #video-section { display: none; }
- 
-  .transition-msg {
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--bark);
+    border: 0.5px solid var(--sand);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.4); color: var(--ink); }
+
+  .code-display {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 2.4rem;
     color: var(--ink);
     text-align: center;
-    margin-bottom: 2rem;
+    padding: 2rem 1rem;
+    border: 0.5px solid var(--sand);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.4);
+    margin: 1rem 0 1.5rem;
+    letter-spacing: 0.02em;
+    word-break: break-word;
   }
- 
+
+  .code-actions { display: flex; gap: 10px; margin-bottom: 2rem; }
+  .code-actions .btn { margin-top: 0; }
+
   .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
@@ -240,103 +258,325 @@
     overflow: hidden;
     border: 0.5px solid var(--sand);
   }
- 
+
   .video-wrapper iframe {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     border: none;
   }
- 
-  #not-found { display: none; text-align: center; }
- 
-  #not-found h2 {
+
+  .transition-msg {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 400;
-    color: var(--bark);
-    margin-bottom: 0.75rem;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 2rem;
   }
- 
-  #not-found p { font-size: 14px; color: var(--bark); line-height: 1.7; }
+
+  .error-msg {
+    font-size: 13px;
+    color: #a04030;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .privacy-note {
+    font-size: 12px;
+    color: var(--sand-mid);
+    line-height: 1.6;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--sand);
+  }
 </style>
 </head>
 <body>
- 
+
 <div class="logo-wrap">
   <img src="../hlclogo.png" alt="Human Load Consultancy" />
 </div>
- 
+
 <div class="container">
- 
-  <div id="gate">
-    <h1>Welcome back.</h1>
-    <div class="gate-module-label" id="gate-module-label"></div>
-    <div class="field-label">Your personal code</div>
-    <div class="code-hint">
-      How to reconstruct it: <strong>first two letters of your mother's name + the day you were born.</strong><br>
-      Example: mother's name is Maria, born on the 14th → <strong>MA14</strong>
-    </div>
-    <input type="text" id="code-input" placeholder="Your code" autocomplete="off" maxlength="10" />
- 
-    <div id="team-field">
-      <div class="field-label" style="margin-top: 0.5rem;">Your team</div>
-      <input type="text" id="team-input" placeholder="Team name" autocomplete="off" style="text-transform: none; letter-spacing: 0.02em;" />
-    </div>
- 
-    <button class="btn" id="continue-btn" onclick="handleContinue()">Continue</button>
+
+  <!-- ===== INVALID / EXPIRED LINK ===== -->
+  <div id="screen-invalid" class="hidden center">
+    <h2 id="invalid-title">Module not found.</h2>
+    <p id="invalid-msg" style="font-size: 14px; color: var(--bark); line-height: 1.7;">
+      This link doesn't appear to be valid.<br>
+      Please check the link in your email or contact your HR manager.
+    </p>
   </div>
- 
-  <div id="not-found">
-    <h2 id="not-found-title">Module not found.</h2>
-    <p id="not-found-msg">This link doesn't appear to be valid.<br>Please check the link in your email or contact your HR manager.</p>
+
+  <!-- ===== INTAKE GATE: pick team, get code ===== -->
+  <div id="screen-intake-gate" class="hidden">
+    <h1 class="center">Welcome.</h1>
+    <div class="module-tag">Intake — week 0</div>
+
+    <p style="font-size: 14px; color: var(--bark); line-height: 1.7; margin-bottom: 2rem; text-align: center;">
+      Before we start, we'll generate your personal code.<br>
+      You'll use it for every module, all the way through to week 12.
+    </p>
+
+    <div class="field-label">Your team</div>
+    <select id="team-select">
+      <option value="">Select your team…</option>
+    </select>
+
+    <div class="helper">
+      Your code will be three random words, like <strong>breath-river-stone</strong>.<br>
+      We use words instead of personal details so your data stays anonymous.
+    </div>
+
+    <button class="btn" id="generate-btn" onclick="generateCode()">Generate my code</button>
   </div>
- 
-  <div id="checkin">
-    <div class="module-label" id="module-label"></div>
-    <div class="module-title" id="module-title"></div>
-    <div class="module-recap" id="module-recap"></div>
+
+  <!-- ===== INTAKE CODE DISPLAY ===== -->
+  <div id="screen-intake-code" class="hidden">
+    <h1 class="center">Your personal code</h1>
+    <div class="module-tag">Save this somewhere safe</div>
+
+    <div class="code-display" id="code-display">—</div>
+
+    <div class="code-actions">
+      <button class="btn btn-secondary" onclick="copyCode()">Copy</button>
+      <button class="btn" onclick="proceedToIntakeForm()">Continue</button>
+    </div>
+
+    <div class="helper">
+      <strong>Important:</strong> we cannot recover this code for you. If you lose it, you'll need a new one — and your previous answers won't connect to the new code. We chose it this way to protect your privacy.
+    </div>
+  </div>
+
+  <!-- ===== INTAKE FORM ===== -->
+  <div id="screen-intake-form" class="hidden">
+    <div class="module-label">Intake</div>
+    <div class="module-title">A short check-in before we begin</div>
+    <p class="module-recap">This helps us understand your team's starting point. About 2 minutes. There are no right or wrong answers.</p>
     <div class="divider"></div>
-    <div class="checkin-intro">Before the video — 30 seconds</div>
- 
+
+    <div class="section-intro">Context</div>
+
+    <div class="question-block">
+      <div class="question-text">How many hours per day do you work on a screen?</div>
+      <div class="radio-group">
+        <label><input type="radio" name="screen_hours" value="<4"> Less than 4 hours</label>
+        <label><input type="radio" name="screen_hours" value="4-6"> 4 to 6 hours</label>
+        <label><input type="radio" name="screen_hours" value="6-8"> 6 to 8 hours</label>
+        <label><input type="radio" name="screen_hours" value=">8"> More than 8 hours</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Where do you typically work?</div>
+      <div class="radio-group">
+        <label><input type="radio" name="work_location" value="office"> Always at the office</label>
+        <label><input type="radio" name="work_location" value="mostly_office"> Mostly at the office</label>
+        <label><input type="radio" name="work_location" value="mixed"> Mixed</label>
+        <label><input type="radio" name="work_location" value="mostly_home"> Mostly at home</label>
+        <label><input type="radio" name="work_location" value="home"> Always at home</label>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">What's the nature of your work most days?</div>
+      <div class="radio-group">
+        <label><input type="radio" name="task_type" value="meetings"> Mostly meetings</label>
+        <label><input type="radio" name="task_type" value="focused"> Mostly focused individual work</label>
+        <label><input type="radio" name="task_type" value="mixed"> A mix of both</label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Awareness</div>
+
+    <div class="question-block">
+      <div class="question-text">During a typical workday, how often do you notice physical tension or discomfort?</div>
+      <div class="scale" id="scale-q1">
+        <button type="button" onclick="setIntakeAnswer('q1',1)">1</button>
+        <button type="button" onclick="setIntakeAnswer('q1',2)">2</button>
+        <button type="button" onclick="setIntakeAnswer('q1',3)">3</button>
+        <button type="button" onclick="setIntakeAnswer('q1',4)">4</button>
+        <button type="button" onclick="setIntakeAnswer('q1',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Never</span>
+        <span class="scale-label">Very often</span>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">When you do notice physical discomfort, how quickly do you respond to it?</div>
+      <div class="scale" id="scale-q2">
+        <button type="button" onclick="setIntakeAnswer('q2',1)">1</button>
+        <button type="button" onclick="setIntakeAnswer('q2',2)">2</button>
+        <button type="button" onclick="setIntakeAnswer('q2',3)">3</button>
+        <button type="button" onclick="setIntakeAnswer('q2',4)">4</button>
+        <button type="button" onclick="setIntakeAnswer('q2',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">I ignore it</span>
+        <span class="scale-label">I act right away</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Behaviour</div>
+
+    <div class="question-block">
+      <div class="question-text">How often do you work for 60 minutes or more without a real break?</div>
+      <div class="scale" id="scale-q3">
+        <button type="button" onclick="setIntakeAnswer('q3',1)">1</button>
+        <button type="button" onclick="setIntakeAnswer('q3',2)">2</button>
+        <button type="button" onclick="setIntakeAnswer('q3',3)">3</button>
+        <button type="button" onclick="setIntakeAnswer('q3',4)">4</button>
+        <button type="button" onclick="setIntakeAnswer('q3',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Rarely</span>
+        <span class="scale-label">Almost every day</span>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">How intentional are you about varying your posture or movement during the workday?</div>
+      <div class="scale" id="scale-q4">
+        <button type="button" onclick="setIntakeAnswer('q4',1)">1</button>
+        <button type="button" onclick="setIntakeAnswer('q4',2)">2</button>
+        <button type="button" onclick="setIntakeAnswer('q4',3)">3</button>
+        <button type="button" onclick="setIntakeAnswer('q4',4)">4</button>
+        <button type="button" onclick="setIntakeAnswer('q4',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Not at all</span>
+        <span class="scale-label">Very intentional</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Self-confidence</div>
+
+    <div class="question-block">
+      <div class="question-text">How confident are you that you could make small changes to how you work — and stick with them?</div>
+      <div class="scale" id="scale-q5">
+        <button type="button" onclick="setIntakeAnswer('q5',1)">1</button>
+        <button type="button" onclick="setIntakeAnswer('q5',2)">2</button>
+        <button type="button" onclick="setIntakeAnswer('q5',3)">3</button>
+        <button type="button" onclick="setIntakeAnswer('q5',4)">4</button>
+        <button type="button" onclick="setIntakeAnswer('q5',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Not confident</span>
+        <span class="scale-label">Very confident</span>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Right now, how much do you feel in control of your physical wellbeing during the workday?</div>
+      <div class="scale" id="scale-q6">
+        <button type="button" onclick="setIntakeAnswer('q6',1)">1</button>
+        <button type="button" onclick="setIntakeAnswer('q6',2)">2</button>
+        <button type="button" onclick="setIntakeAnswer('q6',3)">3</button>
+        <button type="button" onclick="setIntakeAnswer('q6',4)">4</button>
+        <button type="button" onclick="setIntakeAnswer('q6',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">No control</span>
+        <span class="scale-label">Full control</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Culture</div>
+
+    <div class="question-block">
+      <div class="question-text">In your team or organisation, how accepted is it to take a short break or move around during the workday — in practice, not policy?</div>
+      <div class="scale" id="scale-q7">
+        <button type="button" onclick="setIntakeAnswer('q7',1)">1</button>
+        <button type="button" onclick="setIntakeAnswer('q7',2)">2</button>
+        <button type="button" onclick="setIntakeAnswer('q7',3)">3</button>
+        <button type="button" onclick="setIntakeAnswer('q7',4)">4</button>
+        <button type="button" onclick="setIntakeAnswer('q7',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Not accepted</span>
+        <span class="scale-label">Fully accepted</span>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="sub-label" style="margin-bottom: 8px;">Optional — Anything you'd like to share about what's going on at work right now?</div>
+      <textarea id="intake-open" rows="3" placeholder="Your reflection..."></textarea>
+    </div>
+
+    <div class="error-msg hidden" id="intake-error"></div>
+    <button class="btn" id="intake-submit" onclick="submitIntake()">Submit intake</button>
+  </div>
+
+  <!-- ===== CODE GATE (modules + closeout) ===== -->
+  <div id="screen-code-gate" class="hidden">
+    <h1 class="center">Welcome back.</h1>
+    <div class="module-tag" id="code-gate-label"></div>
+
+    <div class="field-label">Your personal code</div>
+    <div class="helper">
+      Three words, separated by hyphens. The code you received at the start of the programme.<br>
+      Example: <strong>breath-river-stone</strong>
+    </div>
+    <input type="text" id="code-input" placeholder="word-word-word" autocomplete="off" />
+
+    <div class="error-msg hidden" id="gate-error"></div>
+    <button class="btn" id="continue-btn" onclick="verifyAndContinue()">Continue</button>
+  </div>
+
+  <!-- ===== CHECK-IN (modules 1-6) ===== -->
+  <div id="screen-checkin" class="hidden">
+    <div class="module-label" id="checkin-module-label"></div>
+    <div class="module-title" id="checkin-module-title"></div>
+    <p class="module-recap" id="checkin-module-recap"></p>
+    <div class="divider"></div>
+    <div class="section-intro">Before the video — 30 seconds</div>
+
     <div class="question-block">
       <div class="question-text">Did you notice physical signals in your body during your workday over the past two weeks?</div>
-      <div class="scale" id="scale-1">
-        <button onclick="selectAnswer(1,1)">1</button>
-        <button onclick="selectAnswer(1,2)">2</button>
-        <button onclick="selectAnswer(1,3)">3</button>
-        <button onclick="selectAnswer(1,4)">4</button>
-        <button onclick="selectAnswer(1,5)">5</button>
+      <div class="scale" id="scale-c1">
+        <button type="button" onclick="setCheckinAnswer(1,1)">1</button>
+        <button type="button" onclick="setCheckinAnswer(1,2)">2</button>
+        <button type="button" onclick="setCheckinAnswer(1,3)">3</button>
+        <button type="button" onclick="setCheckinAnswer(1,4)">4</button>
+        <button type="button" onclick="setCheckinAnswer(1,5)">5</button>
       </div>
       <div class="scale-labels">
         <span class="scale-label">Not at all</span>
         <span class="scale-label">Very clearly</span>
       </div>
     </div>
- 
+
     <div class="question-block">
       <div class="question-text">Did you try this module's experiment during your workday?</div>
-      <div class="scale" id="scale-2">
-        <button onclick="selectAnswer(2,1)">1</button>
-        <button onclick="selectAnswer(2,2)">2</button>
-        <button onclick="selectAnswer(2,3)">3</button>
-        <button onclick="selectAnswer(2,4)">4</button>
-        <button onclick="selectAnswer(2,5)">5</button>
+      <div class="scale" id="scale-c2">
+        <button type="button" onclick="setCheckinAnswer(2,1)">1</button>
+        <button type="button" onclick="setCheckinAnswer(2,2)">2</button>
+        <button type="button" onclick="setCheckinAnswer(2,3)">3</button>
+        <button type="button" onclick="setCheckinAnswer(2,4)">4</button>
+        <button type="button" onclick="setCheckinAnswer(2,5)">5</button>
       </div>
       <div class="scale-labels">
         <span class="scale-label">Not once</span>
         <span class="scale-label">Every day</span>
       </div>
     </div>
- 
+
     <div class="question-block">
       <div class="question-text">When you tried it, did it help you interrupt prolonged sitting or static tension?</div>
-      <div class="scale" id="scale-3">
-        <button onclick="selectAnswer(3,1)">1</button>
-        <button onclick="selectAnswer(3,2)">2</button>
-        <button onclick="selectAnswer(3,3)">3</button>
-        <button onclick="selectAnswer(3,4)">4</button>
-        <button onclick="selectAnswer(3,5)">5</button>
+      <div class="scale" id="scale-c3">
+        <button type="button" onclick="setCheckinAnswer(3,1)">1</button>
+        <button type="button" onclick="setCheckinAnswer(3,2)">2</button>
+        <button type="button" onclick="setCheckinAnswer(3,3)">3</button>
+        <button type="button" onclick="setCheckinAnswer(3,4)">4</button>
+        <button type="button" onclick="setCheckinAnswer(3,5)">5</button>
       </div>
       <div class="scale-labels">
         <span class="scale-label">Not at all</span>
@@ -344,7 +584,7 @@
       </div>
       <div class="sub-label">Leave blank if you answered 1 on the previous question.</div>
     </div>
- 
+
     <div class="question-block">
       <div class="question-text">At what point in your workday did you most often try the experiment?</div>
       <div class="radio-group">
@@ -355,224 +595,535 @@
         <label><input type="radio" name="timing" value="I didn't try it"> I didn't try it</label>
       </div>
     </div>
- 
+
     <div class="question-block">
-      <div class="sub-label" style="margin-bottom: 8px;">Optional — Anything else you noticed over the past two weeks? (2–3 sentences max)</div>
-      <textarea id="open-field" rows="3" placeholder="Your observations..."></textarea>
+      <div class="sub-label" style="margin-bottom: 8px;">Optional — Anything else you noticed over the past two weeks?</div>
+      <textarea id="checkin-open" rows="3" placeholder="Your observations..."></textarea>
     </div>
- 
+
+    <div class="error-msg hidden" id="checkin-error"></div>
     <button class="btn" onclick="submitCheckin()">Submit and watch the module</button>
   </div>
- 
-  <div id="video-section">
+
+  <!-- ===== VIDEO ===== -->
+  <div id="screen-video" class="hidden">
     <div class="transition-msg">Good. Let's begin.</div>
     <div class="video-wrapper">
       <iframe id="video-frame" src="" allowfullscreen allow="autoplay"></iframe>
     </div>
   </div>
- 
+
+  <!-- ===== CLOSEOUT FORM ===== -->
+  <div id="screen-closeout-form" class="hidden">
+    <div class="module-label">Closeout</div>
+    <div class="module-title">Let's see what changed</div>
+    <p class="module-recap">The same questions from twelve weeks ago. Honest reflection is what makes this useful.</p>
+    <div class="divider"></div>
+
+    <div class="section-intro">Awareness</div>
+
+    <div class="question-block">
+      <div class="question-text">During a typical workday, how often do you notice physical tension or discomfort?</div>
+      <div class="scale" id="scale-co1">
+        <button type="button" onclick="setCloseoutAnswer('q1',1)">1</button>
+        <button type="button" onclick="setCloseoutAnswer('q1',2)">2</button>
+        <button type="button" onclick="setCloseoutAnswer('q1',3)">3</button>
+        <button type="button" onclick="setCloseoutAnswer('q1',4)">4</button>
+        <button type="button" onclick="setCloseoutAnswer('q1',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Never</span>
+        <span class="scale-label">Very often</span>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">When you notice physical discomfort, how quickly do you respond to it?</div>
+      <div class="scale" id="scale-co2">
+        <button type="button" onclick="setCloseoutAnswer('q2',1)">1</button>
+        <button type="button" onclick="setCloseoutAnswer('q2',2)">2</button>
+        <button type="button" onclick="setCloseoutAnswer('q2',3)">3</button>
+        <button type="button" onclick="setCloseoutAnswer('q2',4)">4</button>
+        <button type="button" onclick="setCloseoutAnswer('q2',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">I ignore it</span>
+        <span class="scale-label">I act right away</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Behaviour</div>
+
+    <div class="question-block">
+      <div class="question-text">How often do you work for 60 minutes or more without a real break?</div>
+      <div class="scale" id="scale-co3">
+        <button type="button" onclick="setCloseoutAnswer('q3',1)">1</button>
+        <button type="button" onclick="setCloseoutAnswer('q3',2)">2</button>
+        <button type="button" onclick="setCloseoutAnswer('q3',3)">3</button>
+        <button type="button" onclick="setCloseoutAnswer('q3',4)">4</button>
+        <button type="button" onclick="setCloseoutAnswer('q3',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Rarely</span>
+        <span class="scale-label">Almost every day</span>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">How intentional are you about varying your posture or movement during the workday?</div>
+      <div class="scale" id="scale-co4">
+        <button type="button" onclick="setCloseoutAnswer('q4',1)">1</button>
+        <button type="button" onclick="setCloseoutAnswer('q4',2)">2</button>
+        <button type="button" onclick="setCloseoutAnswer('q4',3)">3</button>
+        <button type="button" onclick="setCloseoutAnswer('q4',4)">4</button>
+        <button type="button" onclick="setCloseoutAnswer('q4',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Not at all</span>
+        <span class="scale-label">Very intentional</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Self-confidence</div>
+
+    <div class="question-block">
+      <div class="question-text">How confident are you that you can maintain the changes you've made — and build on them?</div>
+      <div class="scale" id="scale-co5">
+        <button type="button" onclick="setCloseoutAnswer('q5',1)">1</button>
+        <button type="button" onclick="setCloseoutAnswer('q5',2)">2</button>
+        <button type="button" onclick="setCloseoutAnswer('q5',3)">3</button>
+        <button type="button" onclick="setCloseoutAnswer('q5',4)">4</button>
+        <button type="button" onclick="setCloseoutAnswer('q5',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Not confident</span>
+        <span class="scale-label">Very confident</span>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Right now, how much do you feel in control of your physical wellbeing during the workday?</div>
+      <div class="scale" id="scale-co6">
+        <button type="button" onclick="setCloseoutAnswer('q6',1)">1</button>
+        <button type="button" onclick="setCloseoutAnswer('q6',2)">2</button>
+        <button type="button" onclick="setCloseoutAnswer('q6',3)">3</button>
+        <button type="button" onclick="setCloseoutAnswer('q6',4)">4</button>
+        <button type="button" onclick="setCloseoutAnswer('q6',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">No control</span>
+        <span class="scale-label">Full control</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Culture</div>
+
+    <div class="question-block">
+      <div class="question-text">In your team or organisation, how accepted is it to take a short break or move around during the workday — in practice, not policy?</div>
+      <div class="scale" id="scale-co7">
+        <button type="button" onclick="setCloseoutAnswer('q7',1)">1</button>
+        <button type="button" onclick="setCloseoutAnswer('q7',2)">2</button>
+        <button type="button" onclick="setCloseoutAnswer('q7',3)">3</button>
+        <button type="button" onclick="setCloseoutAnswer('q7',4)">4</button>
+        <button type="button" onclick="setCloseoutAnswer('q7',5)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span class="scale-label">Not accepted</span>
+        <span class="scale-label">Fully accepted</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-intro">Reflection</div>
+
+    <div class="question-block">
+      <div class="sub-label" style="margin-bottom: 8px;">Looking back over the past 12 weeks — what was the hardest moment to keep going?</div>
+      <textarea id="closeout-reflection" rows="3" placeholder="Your reflection..."></textarea>
+    </div>
+
+    <div class="question-block">
+      <div class="sub-label" style="margin-bottom: 8px;">Optional — Anything else you'd like to share?</div>
+      <textarea id="closeout-open" rows="3" placeholder="Your reflection..."></textarea>
+    </div>
+
+    <div class="error-msg hidden" id="closeout-error"></div>
+    <button class="btn" onclick="submitCloseout()">Submit closeout</button>
+  </div>
+
+  <!-- ===== THANK YOU ===== -->
+  <div id="screen-done" class="hidden center">
+    <h1 id="done-title">Thank you.</h1>
+    <p id="done-msg" style="font-size: 14px; color: var(--bark); line-height: 1.7; margin-top: 1rem;">Your response has been recorded.</p>
+  </div>
+
+  <div class="privacy-note">
+    All answers are stored anonymously, identified only by your three-word code. Your name is never collected.
+  </div>
+
 </div>
- 
+
 <script>
+// ============================================================================
+// Configuration
+// ============================================================================
 const SUPABASE_URL = "https://horkotkzleohpyrzzujx.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvcmtvdGt6bGVvaHB5cnp6dWp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MDQxNTcsImV4cCI6MjA5MjM4MDE1N30.L2o_1df7unKq4Xi7mRIS16juGqFlzv__LmgICOy57WU";
- 
-const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSfrFQuB-KMpDegCkWQ_0KBeW0Q1HTSN0DQAMntqMPo8FJrNNw/formResponse";
- 
-const FIELDS = {
-  client:       "entry.2041052026",
-  personalCode: "entry.952320979",
-  module:       "entry.1092776172",
-  q1:           "entry.658025627",
-  q2:           "entry.105420267",
-  q3:           "entry.642411437",
-  timing:       "entry.1072483929",
-  open:         "entry.378871376"
-};
- 
+
 const MODULES = {
   MOD1: {
     label: "Module 1", title: "Awareness",
     recap: "Two weeks ago, we started the programme together. Today we ask you to reflect on the past two weeks of noticing.",
-    videoId: "1Feniqehi25qXPfwWx6cG27K98Lzt3vcx", expires: "2099-12-31"
+    videoId: "1Feniqehi25qXPfwWx6cG27K98Lzt3vcx"
   },
   MOD2: {
     label: "Module 2", title: "Duration",
     recap: "Two weeks ago, we asked you to notice where tension builds. Today we look at why it builds — duration.",
-    videoId: "1XxbW8LM4Hci4YcnqGEcOTURiOf9UBB19", expires: "2099-12-31"
+    videoId: "1XxbW8LM4Hci4YcnqGEcOTURiOf9UBB19"
   },
   MOD3: {
     label: "Module 3", title: "Static Muscle Load",
     recap: "Two weeks ago, we asked you to interrupt the pattern — to stop every sixty minutes. Today we look at what happens in your body when you don't.",
-    videoId: "1Vj8xP0EmbRMfP0lI_Xcrz-giVZI6N6wU", expires: "2099-12-31"
+    videoId: "1Vj8xP0EmbRMfP0lI_Xcrz-giVZI6N6wU"
   },
   MOD4: {
     label: "Module 4", title: "Work Rhythm",
     recap: "Two weeks ago, we focused on static load. Today we look at how your work rhythm itself creates variation — or doesn't.",
-    videoId: "1tYmPsZx69cP95uNyqjthNPtCN0v7Oc_E", expires: "2099-12-31"
+    videoId: "1tYmPsZx69cP95uNyqjthNPtCN0v7Oc_E"
   },
   MOD5: {
     label: "Module 5", title: "Micro Recovery",
     recap: "Two weeks ago, we explored how task transitions can create natural movement. Today we focus on micro recovery — short resets that actually work.",
-    videoId: "1fWmoGGGqH3z6Umxl-jo2wg2OoQXlVsit", expires: "2099-12-31"
+    videoId: "1fWmoGGGqH3z6Umxl-jo2wg2OoQXlVsit"
   },
   MOD6: {
     label: "Module 6", title: "Sustainable Habits",
     recap: "Two weeks ago, we practised micro recovery. Today we close the programme — and you choose two habits to carry forward, independently.",
-    videoId: "1Rz3o0RLjxQ_IswdEm1f1e7ke2gphZT5L", expires: "2099-12-31"
+    videoId: "1Rz3o0RLjxQ_IswdEm1f1e7ke2gphZT5L"
   }
 };
- 
-let answers = { q1: null, q2: null, q3: null };
-let currentModule = null;
+
+// ============================================================================
+// State
+// ============================================================================
+let mode = '';            // 'INTAKE' | 'MOD1'..'MOD6' | 'CLOSEOUT'
+let clientSlug = '';
+let isTestMode = false;
+let selectedTeamId = null;
 let personalCode = '';
-let clientName = '';
-let teamName = '';
-let isNewParticipant = false;
- 
-async function supabaseFetch(path, options = {}) {
-  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
-    ...options,
+let intakeAnswers = {};
+let checkinAnswers = { q1: null, q2: null, q3: null };
+let closeoutAnswers = {};
+
+// ============================================================================
+// Helpers
+// ============================================================================
+async function rpc(fn, body) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+    method: 'POST',
     headers: {
       'apikey': SUPABASE_KEY,
       'Authorization': 'Bearer ' + SUPABASE_KEY,
       'Content-Type': 'application/json',
-      'Prefer': options.prefer || 'return=minimal',
-      ...(options.headers || {})
-    }
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify(body)
   });
-  if (options.returnData) return res.json();
-  return res;
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || res.statusText);
+  }
+  const data = await res.json();
+  return data;
 }
- 
-window.onload = function() {
+
+function show(id) {
+  document.querySelectorAll('.container > div').forEach(el => el.classList.add('hidden'));
+  const target = document.getElementById(id);
+  if (target) target.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setError(elementId, message) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  if (message) {
+    el.textContent = message;
+    el.classList.remove('hidden');
+  } else {
+    el.classList.add('hidden');
+  }
+}
+
+// ============================================================================
+// Init: detect mode from URL
+// ============================================================================
+window.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
-  const key = (params.get('mod') || '').toUpperCase();
-  clientName = params.get('client') || 'Unknown';
-  const mod = MODULES[key];
- 
-  if (!mod) {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('not-found').style.display = 'block';
-    return;
+  const modParam = (params.get('mod') || '').toUpperCase();
+  clientSlug = (params.get('client') || '').toLowerCase();
+  isTestMode = params.get('test') === '1';
+
+  if (!clientSlug) return showInvalid('Missing client.');
+
+  if (modParam === 'INTAKE') {
+    mode = 'INTAKE';
+    return startIntake();
   }
- 
-  const today = new Date().toISOString().split('T')[0];
-  if (today > mod.expires) {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('not-found-title').textContent = 'This link has expired.';
-    document.getElementById('not-found-msg').innerHTML = 'Your access window for this module has closed.<br>Please contact your HR manager if you believe this is an error.';
-    document.getElementById('not-found').style.display = 'block';
-    return;
+
+  if (modParam === 'CLOSEOUT') {
+    mode = 'CLOSEOUT';
+    document.getElementById('code-gate-label').textContent = 'Closeout — week 12';
+    return show('screen-code-gate');
   }
- 
-  currentModule = mod;
-  document.getElementById('gate-module-label').textContent = mod.label + ' — ' + mod.title;
-};
- 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && document.getElementById('gate').style.display !== 'none') handleContinue();
+
+  if (MODULES[modParam]) {
+    mode = modParam;
+    const m = MODULES[modParam];
+    document.getElementById('code-gate-label').textContent = `${m.label} — ${m.title}`;
+    return show('screen-code-gate');
+  }
+
+  showInvalid('This link doesn\'t appear to be valid.');
 });
- 
-async function handleContinue() {
-  const code = document.getElementById('code-input').value.trim().toUpperCase();
-  if (!code) { document.getElementById('code-input').focus(); return; }
- 
-  const teamFieldVisible = document.getElementById('team-field').style.display === 'block';
- 
-  if (teamFieldVisible) {
-    const team = document.getElementById('team-input').value.trim();
-    if (!team) { document.getElementById('team-input').focus(); return; }
-    teamName = team;
-    personalCode = code;
-    await saveParticipant(code, team);
-    showCheckin();
+
+function showInvalid(msg) {
+  document.getElementById('invalid-msg').innerHTML = msg + '<br>Please contact your HR manager.';
+  show('screen-invalid');
+}
+
+// ============================================================================
+// Intake gate: pick team, generate code
+// ============================================================================
+async function startIntake() {
+  try {
+    const teams = await rpc('get_client_teams', { p_client_slug: clientSlug });
+    if (!teams || teams.length === 0) {
+      return showInvalid('No teams configured for this organisation.');
+    }
+    const sel = document.getElementById('team-select');
+    teams.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t.team_id;
+      opt.textContent = t.team_name;
+      sel.appendChild(opt);
+    });
+    show('screen-intake-gate');
+  } catch (e) {
+    showInvalid('Could not load this organisation.');
+  }
+}
+
+async function generateCode() {
+  const sel = document.getElementById('team-select');
+  selectedTeamId = parseInt(sel.value, 10);
+  if (!selectedTeamId) {
+    sel.focus();
     return;
   }
- 
+  const btn = document.getElementById('generate-btn');
+  btn.disabled = true;
+  btn.textContent = 'Generating...';
+
+  try {
+    const result = await rpc('register_participant', {
+      p_client_slug: clientSlug,
+      p_team_id: selectedTeamId,
+      p_is_test: isTestMode
+    });
+    personalCode = result[0].personal_code;
+    document.getElementById('code-display').textContent = personalCode;
+    show('screen-intake-code');
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Generate my code';
+    alert('Something went wrong. Please try again.');
+  }
+}
+
+function copyCode() {
+  navigator.clipboard.writeText(personalCode).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = 'Copied';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
+}
+
+function proceedToIntakeForm() {
+  show('screen-intake-form');
+}
+
+function setIntakeAnswer(q, v) {
+  intakeAnswers[q] = v;
+  document.querySelectorAll(`#scale-${q} button`).forEach((b, i) => {
+    b.classList.toggle('selected', i + 1 === v);
+  });
+}
+
+async function submitIntake() {
+  setError('intake-error', '');
+  const screenHours = document.querySelector('input[name="screen_hours"]:checked');
+  const workLoc = document.querySelector('input[name="work_location"]:checked');
+  const taskType = document.querySelector('input[name="task_type"]:checked');
+  for (let i = 1; i <= 7; i++) {
+    if (!intakeAnswers['q' + i]) {
+      setError('intake-error', 'Please answer all rating questions before submitting.');
+      return;
+    }
+  }
+  if (!screenHours || !workLoc || !taskType) {
+    setError('intake-error', 'Please answer all context questions.');
+    return;
+  }
+  const btn = document.getElementById('intake-submit');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  try {
+    await rpc('submit_intake', {
+      p_personal_code: personalCode,
+      p_client_slug: clientSlug,
+      p_screen_hours: screenHours.value,
+      p_work_location: workLoc.value,
+      p_task_type: taskType.value,
+      p_q1: intakeAnswers.q1, p_q2: intakeAnswers.q2, p_q3: intakeAnswers.q3,
+      p_q4: intakeAnswers.q4, p_q5: intakeAnswers.q5, p_q6: intakeAnswers.q6,
+      p_q7: intakeAnswers.q7,
+      p_open_field: document.getElementById('intake-open').value.trim() || null
+    });
+    document.getElementById('done-title').textContent = 'Thank you.';
+    document.getElementById('done-msg').innerHTML = `Your code is <strong>${personalCode}</strong>.<br>Save it somewhere safe — you'll need it for every module.`;
+    show('screen-done');
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Submit intake';
+    setError('intake-error', 'Could not submit. Please check your connection and try again.');
+  }
+}
+
+// ============================================================================
+// Code gate: verify and route
+// ============================================================================
+async function verifyAndContinue() {
+  setError('gate-error', '');
+  const code = document.getElementById('code-input').value.trim().toLowerCase();
+  if (!code || !code.includes('-')) {
+    setError('gate-error', 'Please enter your three-word code.');
+    return;
+  }
   const btn = document.getElementById('continue-btn');
   btn.disabled = true;
   btn.textContent = 'Checking...';
- 
   try {
-    const data = await supabaseFetch(
-      `participant_codes?personal_code=eq.${encodeURIComponent(code)}&client=eq.${encodeURIComponent(clientName)}&select=team`,
-      { returnData: true }
-    );
- 
-    if (data && data.length > 0) {
-      personalCode = code;
-      teamName = data[0].team;
-      showCheckin();
-    } else {
-      personalCode = code;
-      isNewParticipant = true;
-      document.getElementById('team-field').style.display = 'block';
+    const result = await rpc('verify_participant', {
+      p_personal_code: code,
+      p_client_slug: clientSlug
+    });
+    if (!result || result.length === 0) {
       btn.disabled = false;
       btn.textContent = 'Continue';
-      document.getElementById('team-input').focus();
+      setError('gate-error', 'We don\'t recognise that code. Check the spelling or contact HR.');
+      return;
+    }
+    personalCode = code;
+
+    if (mode === 'CLOSEOUT') {
+      show('screen-closeout-form');
+    } else {
+      const m = MODULES[mode];
+      document.getElementById('checkin-module-label').textContent = m.label;
+      document.getElementById('checkin-module-title').textContent = m.title;
+      document.getElementById('checkin-module-recap').textContent = m.recap;
+      show('screen-checkin');
     }
   } catch (e) {
-    personalCode = code;
-    teamName = '';
-    showCheckin();
+    btn.disabled = false;
+    btn.textContent = 'Continue';
+    setError('gate-error', 'Connection problem. Please try again.');
   }
 }
- 
-async function saveParticipant(code, team) {
-  await supabaseFetch('participant_codes', {
-    method: 'POST',
-    prefer: 'return=minimal',
-    body: JSON.stringify({ personal_code: code, team: team, client: clientName })
+
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  const gate = document.getElementById('screen-code-gate');
+  if (gate && !gate.classList.contains('hidden')) verifyAndContinue();
+});
+
+// ============================================================================
+// Check-in (modules 1-6)
+// ============================================================================
+function setCheckinAnswer(q, v) {
+  checkinAnswers['q' + q] = v;
+  document.querySelectorAll(`#scale-c${q} button`).forEach((b, i) => {
+    b.classList.toggle('selected', i + 1 === v);
   });
 }
- 
-function showCheckin() {
-  document.getElementById('gate').style.display = 'none';
-  document.getElementById('module-label').textContent = currentModule.label;
-  document.getElementById('module-title').textContent = currentModule.title;
-  document.getElementById('module-recap').textContent = currentModule.recap;
-  document.getElementById('checkin').style.display = 'block';
-}
- 
-function selectAnswer(question, value) {
-  answers['q' + question] = value;
-  document.querySelectorAll('#scale-' + question + ' button').forEach((b, i) => {
-    b.classList.toggle('selected', i + 1 === value);
-  });
-}
- 
-function submitCheckin() {
-  if (!answers.q1 || !answers.q2) {
-    alert('Please answer the first two questions before continuing.');
+
+async function submitCheckin() {
+  setError('checkin-error', '');
+  if (!checkinAnswers.q1 || !checkinAnswers.q2) {
+    setError('checkin-error', 'Please answer the first two questions.');
     return;
   }
- 
+  const moduleNumber = parseInt(mode.replace('MOD', ''), 10);
   const timing = document.querySelector('input[name="timing"]:checked');
-  const openField = document.getElementById('open-field').value.trim();
- 
-  const params = new URLSearchParams();
-  params.append(FIELDS.client, clientName);
-  params.append(FIELDS.personalCode, personalCode + (teamName ? ' (' + teamName + ')' : ''));
-  params.append(FIELDS.module, currentModule.label);
-  params.append(FIELDS.q1, answers.q1);
-  params.append(FIELDS.q2, answers.q2);
-  params.append(FIELDS.q3, answers.q3 || '');
-  params.append(FIELDS.timing, timing ? timing.value : '');
-  params.append(FIELDS.open, openField);
- 
-  fetch(FORM_ACTION, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params.toString()
-  }).catch(() => {});
- 
-  document.getElementById('checkin').style.display = 'none';
-  document.getElementById('video-section').style.display = 'block';
-  document.getElementById('video-frame').src = `https://drive.google.com/file/d/${currentModule.videoId}/preview`;
+  try {
+    await rpc('submit_checkin', {
+      p_personal_code: personalCode,
+      p_client_slug: clientSlug,
+      p_module_number: moduleNumber,
+      p_q1: checkinAnswers.q1,
+      p_q2: checkinAnswers.q2,
+      p_q3: checkinAnswers.q3,
+      p_timing: timing ? timing.value : null,
+      p_open_field: document.getElementById('checkin-open').value.trim() || null
+    });
+    const m = MODULES[mode];
+    document.getElementById('video-frame').src = `https://drive.google.com/file/d/${m.videoId}/preview`;
+    show('screen-video');
+  } catch (e) {
+    setError('checkin-error', 'Could not submit. Please try again.');
+  }
+}
+
+// ============================================================================
+// Closeout (week 12)
+// ============================================================================
+function setCloseoutAnswer(q, v) {
+  closeoutAnswers[q] = v;
+  const map = { q1: 'co1', q2: 'co2', q3: 'co3', q4: 'co4', q5: 'co5', q6: 'co6', q7: 'co7' };
+  document.querySelectorAll(`#scale-${map[q]} button`).forEach((b, i) => {
+    b.classList.toggle('selected', i + 1 === v);
+  });
+}
+
+async function submitCloseout() {
+  setError('closeout-error', '');
+  for (let i = 1; i <= 7; i++) {
+    if (!closeoutAnswers['q' + i]) {
+      setError('closeout-error', 'Please answer all rating questions.');
+      return;
+    }
+  }
+  try {
+    await rpc('submit_closeout', {
+      p_personal_code: personalCode,
+      p_client_slug: clientSlug,
+      p_q1: closeoutAnswers.q1, p_q2: closeoutAnswers.q2, p_q3: closeoutAnswers.q3,
+      p_q4: closeoutAnswers.q4, p_q5: closeoutAnswers.q5, p_q6: closeoutAnswers.q6,
+      p_q7: closeoutAnswers.q7,
+      p_reflection: document.getElementById('closeout-reflection').value.trim() || null,
+      p_open_field: document.getElementById('closeout-open').value.trim() || null
+    });
+    document.getElementById('done-title').textContent = 'Thank you.';
+    document.getElementById('done-msg').innerHTML = 'Your closeout has been recorded.<br>The programme is complete.';
+    show('screen-done');
+  } catch (e) {
+    setError('closeout-error', 'Could not submit. Please try again.');
+  }
 }
 </script>
 </body>
 </html>
- 
