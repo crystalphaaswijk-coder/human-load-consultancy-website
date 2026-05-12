@@ -775,7 +775,7 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const MODULES = {
   MOD1: {
     label: "Module 1", title: "Awareness",
-    recap: "Two weeks ago, we started the programme together. Today we ask you to reflect on the past two weeks of noticing.",
+    recap: "Welcome to the first module of the programme. Take three minutes — this is where it begins.",
     videoId: "1Feniqehi25qXPfwWx6cG27K98Lzt3vcx"
   },
   MOD2: {
@@ -1031,6 +1031,10 @@ async function verifyAndContinue() {
  
     if (mode === 'CLOSEOUT') {
       show('screen-closeout-form');
+    } else if (mode === 'MOD1') {
+      const m = MODULES[mode];
+      document.getElementById('video-frame').src = `https://drive.google.com/file/d/${m.videoId}/preview`;
+      show('screen-video');
     } else {
       const m = MODULES[mode];
       document.getElementById('checkin-module-label').textContent = m.label;
