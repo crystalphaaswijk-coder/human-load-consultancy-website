@@ -281,6 +281,31 @@
     margin-bottom: 1rem;
     text-align: center;
   }
+
+  .module-closing {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+  }
+
+  .closing-experiment {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.7;
+    white-space: pre-line;
+    margin-bottom: 0;
+  }
+
+  .closing-rule {
+    border: none;
+    border-top: 0.5px solid var(--sand-mid);
+    margin: 2.5rem 0;
+  }
+
+  .closing-farewell {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
  
   .privacy-note {
     font-size: 12px;
@@ -346,7 +371,7 @@
     </div>
  
     <div class="helper">
-      <strong>Important:</strong> we cannot recover this code for you. If you lose it, you'll need a new one, and your previous answers won't connect to the new code. We chose it this way to protect your privacy.
+      <strong>Important:</strong> we cannot recover this code for you. If you lose it, you'll need a new one — and your previous answers won't connect to the new code. We chose it this way to protect your privacy.
     </div>
   </div>
  
@@ -459,7 +484,7 @@
     <div class="section-intro">Self-confidence</div>
  
     <div class="question-block">
-      <div class="question-text">How confident are you that you could make small changes to how you work, and stick with them?</div>
+      <div class="question-text">How confident are you that you could make small changes to how you work — and stick with them?</div>
       <div class="scale" id="scale-q5">
         <button type="button" onclick="setIntakeAnswer('q5',1)">1</button>
         <button type="button" onclick="setIntakeAnswer('q5',2)">2</button>
@@ -492,7 +517,7 @@
     <div class="section-intro">Culture</div>
  
     <div class="question-block">
-      <div class="question-text">In your team or organisation, how accepted is it to take a short break or move around during the workday, in practice, not policy?</div>
+      <div class="question-text">In your team or organisation, how accepted is it to take a short break or move around during the workday — in practice, not policy?</div>
       <div class="scale" id="scale-q7">
         <button type="button" onclick="setIntakeAnswer('q7',1)">1</button>
         <button type="button" onclick="setIntakeAnswer('q7',2)">2</button>
@@ -555,7 +580,7 @@
     </div>
  
     <div class="question-block">
-      <div class="question-text">Did you try this module's experiment during your workday?</div>
+      <div class="question-text">Did you try the previous module's experiment during your workday over the past two weeks?</div>
       <div class="scale" id="scale-c2">
         <button type="button" onclick="setCheckinAnswer(2,1)">1</button>
         <button type="button" onclick="setCheckinAnswer(2,2)">2</button>
@@ -610,6 +635,11 @@
     <div class="transition-msg">Good. Let's begin.</div>
     <div class="video-wrapper">
       <iframe id="video-frame" src="" allowfullscreen allow="autoplay"></iframe>
+    </div>
+    <div class="module-closing">
+      <p class="closing-experiment" id="closing-experiment"></p>
+      <hr class="closing-rule">
+      <p class="closing-farewell" id="closing-farewell"></p>
     </div>
   </div>
  
@@ -689,7 +719,7 @@
     <div class="section-intro">Self-confidence</div>
  
     <div class="question-block">
-      <div class="question-text">How confident are you that you can maintain the changes you've made, and build on them?</div>
+      <div class="question-text">How confident are you that you can maintain the changes you've made — and build on them?</div>
       <div class="scale" id="scale-co5">
         <button type="button" onclick="setCloseoutAnswer('q5',1)">1</button>
         <button type="button" onclick="setCloseoutAnswer('q5',2)">2</button>
@@ -722,7 +752,7 @@
     <div class="section-intro">Culture</div>
  
     <div class="question-block">
-      <div class="question-text">In your team or organisation, how accepted is it to take a short break or move around during the workday, in practice, not policy?</div>
+      <div class="question-text">In your team or organisation, how accepted is it to take a short break or move around during the workday — in practice, not policy?</div>
       <div class="scale" id="scale-co7">
         <button type="button" onclick="setCloseoutAnswer('q7',1)">1</button>
         <button type="button" onclick="setCloseoutAnswer('q7',2)">2</button>
@@ -740,7 +770,7 @@
     <div class="section-intro">Reflection</div>
  
     <div class="question-block">
-      <div class="sub-label" style="margin-bottom: 8px;">Looking back over the past 12 weeks: what was the hardest moment to keep going?</div>
+      <div class="sub-label" style="margin-bottom: 8px;">Looking back over the past 12 weeks — what was the hardest moment to keep going?</div>
       <textarea id="closeout-reflection" rows="3" placeholder="Your reflection..."></textarea>
     </div>
  
@@ -775,33 +805,57 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const MODULES = {
   MOD1: {
     label: "Module 1", title: "Awareness",
-    recap: "Two weeks ago, we started the programme together. Today we ask you to reflect on the past two weeks of noticing.",
-    videoId: "1Feniqehi25qXPfwWx6cG27K98Lzt3vcx"
+    recap: "Welcome to the first module of the programme. Take three minutes — this is where it begins.",
+    videoId: "1Feniqehi25qXPfwWx6cG27K98Lzt3vcx",
+    closing: {
+      experiment: "Three times a day, three questions.\n\nWhere do I feel tension right now?\nHow long have I been in the same position?\nDid I notice \u2014 or did I only just start noticing?",
+      farewell: "We\u2019ll see you in two weeks."
+    }
   },
   MOD2: {
     label: "Module 2", title: "Duration",
-    recap: "Two weeks ago, we asked you to notice where tension builds. Today we look at why it builds: duration.",
-    videoId: "1XxbW8LM4Hci4YcnqGEcOTURiOf9UBB19"
+    recap: "Two weeks ago, we asked you to notice where tension builds. Today we look at why it builds — duration.",
+    videoId: "1XxbW8LM4Hci4YcnqGEcOTURiOf9UBB19",
+    closing: {
+      experiment: "Every hour, thirty seconds. Stand. Move. Look away.",
+      farewell: "We\u2019ll see you in two weeks."
+    }
   },
   MOD3: {
     label: "Module 3", title: "Static Muscle Load",
-    recap: "Two weeks ago, we asked you to interrupt the pattern: to stop every sixty minutes. Today we look at what happens in your body when you don't.",
-    videoId: "1Vj8xP0EmbRMfP0lI_Xcrz-giVZI6N6wU"
+    recap: "Two weeks ago, we asked you to interrupt the pattern — to stop every sixty minutes. Today we look at what happens in your body when you don't.",
+    videoId: "1Vj8xP0EmbRMfP0lI_Xcrz-giVZI6N6wU",
+    closing: {
+      experiment: "Shoulders. Jaw. Neck. Notice. Release. Move on.",
+      farewell: "We\u2019ll see you in two weeks."
+    }
   },
   MOD4: {
     label: "Module 4", title: "Work Rhythm",
-    recap: "Two weeks ago, we focused on static load. Today we look at how your work rhythm itself creates variation, or doesn't.",
-    videoId: "1tYmPsZx69cP95uNyqjthNPtCN0v7Oc_E"
+    recap: "Two weeks ago, we focused on static load. Today we look at how your work rhythm itself creates variation — or doesn't.",
+    videoId: "1tYmPsZx69cP95uNyqjthNPtCN0v7Oc_E",
+    closing: {
+      experiment: "Between every task, twenty seconds. The gap is already there.",
+      farewell: "We\u2019ll see you in two weeks."
+    }
   },
   MOD5: {
     label: "Module 5", title: "Micro Recovery",
-    recap: "Two weeks ago, we explored how task transitions can create natural movement. Today we focus on micro recovery: short resets that actually work.",
-    videoId: "1fWmoGGGqH3z6Umxl-jo2wg2OoQXlVsit"
+    recap: "Two weeks ago, we explored how task transitions can create natural movement. Today we focus on micro recovery — short resets that actually work.",
+    videoId: "1fWmoGGGqH3z6Umxl-jo2wg2OoQXlVsit",
+    closing: {
+      experiment: "One moment, every day. Twenty seconds of nothing.",
+      farewell: "We\u2019ll see you in two weeks."
+    }
   },
   MOD6: {
     label: "Module 6", title: "Sustainable Habits",
-    recap: "Two weeks ago, we practised micro recovery. Today we close the programme, and you choose two habits to carry forward, independently.",
-    videoId: "1Rz3o0RLjxQ_IswdEm1f1e7ke2gphZT5L"
+    recap: "Two weeks ago, we practised micro recovery. Today we close the programme — and you choose two habits to carry forward, independently.",
+    videoId: "1Rz3o0RLjxQ_IswdEm1f1e7ke2gphZT5L",
+    closing: {
+      experiment: "Two habits. Repeated daily.",
+      farewell: "Two weeks from now: the close-out."
+    }
   }
 };
  
@@ -1031,6 +1085,8 @@ async function verifyAndContinue() {
  
     if (mode === 'CLOSEOUT') {
       show('screen-closeout-form');
+    } else if (mode === 'MOD1') {
+      showVideo();
     } else {
       const m = MODULES[mode];
       document.getElementById('checkin-module-label').textContent = m.label;
@@ -1051,6 +1107,17 @@ document.addEventListener('keydown', (e) => {
   if (gate && !gate.classList.contains('hidden')) verifyAndContinue();
 });
  
+// ============================================================================
+// Video
+// ============================================================================
+function showVideo() {
+  const m = MODULES[mode];
+  document.getElementById('video-frame').src = `https://drive.google.com/file/d/${m.videoId}/preview`;
+  document.getElementById('closing-experiment').textContent = m.closing.experiment;
+  document.getElementById('closing-farewell').textContent = m.closing.farewell;
+  show('screen-video');
+}
+
 // ============================================================================
 // Check-in (modules 1-6)
 // ============================================================================
@@ -1080,9 +1147,7 @@ async function submitCheckin() {
       p_timing: timing ? timing.value : null,
       p_open_field: document.getElementById('checkin-open').value.trim() || null
     });
-    const m = MODULES[mode];
-    document.getElementById('video-frame').src = `https://drive.google.com/file/d/${m.videoId}/preview`;
-    show('screen-video');
+    showVideo();
   } catch (e) {
     setError('checkin-error', 'Could not submit. Please try again.');
   }
