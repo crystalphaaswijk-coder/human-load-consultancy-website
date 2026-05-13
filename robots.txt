@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /modules/
+Disallow: /scoring.html
+
+Sitemap: https://humanloadconsultancy.com/sitemap.xml
