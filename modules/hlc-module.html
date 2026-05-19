@@ -1082,17 +1082,49 @@ async function verifyAndContinue() {
       return;
     }
     personalCode = code;
- 
+
     if (mode === 'CLOSEOUT') {
-      show('screen-closeout-form');
+      let alreadySubmitted = false;
+      try {
+        alreadySubmitted = await rpc('has_submitted_closeout', {
+          p_personal_code: personalCode,
+          p_client_slug: clientSlug
+        });
+      } catch (e) {
+        alreadySubmitted = false;
+      }
+      if (alreadySubmitted) {
+        document.getElementById('done-title').textContent = 'Thank you.';
+        document.getElementById('done-msg').innerHTML = 'Your closeout has been recorded.<br>The programme is complete.';
+        show('screen-done');
+      } else {
+        show('screen-closeout-form');
+      }
     } else if (mode === 'MOD1') {
       showVideo();
     } else {
       const m = MODULES[mode];
-      document.getElementById('checkin-module-label').textContent = m.label;
-      document.getElementById('checkin-module-title').textContent = m.title;
-      document.getElementById('checkin-module-recap').textContent = m.recap;
-      show('screen-checkin');
+      const moduleNumber = parseInt(mode.replace('MOD', ''), 10);
+      let alreadySubmitted = false;
+      if (moduleNumber >= 2 && moduleNumber <= 6) {
+        try {
+          alreadySubmitted = await rpc('has_submitted_checkin', {
+            p_personal_code: personalCode,
+            p_client_slug: clientSlug,
+            p_module_number: moduleNumber
+          });
+        } catch (e) {
+          alreadySubmitted = false;
+        }
+      }
+      if (alreadySubmitted) {
+        showVideo();
+      } else {
+        document.getElementById('checkin-module-label').textContent = m.label;
+        document.getElementById('checkin-module-title').textContent = m.title;
+        document.getElementById('checkin-module-recap').textContent = m.recap;
+        show('screen-checkin');
+      }
     }
   } catch (e) {
     btn.disabled = false;
