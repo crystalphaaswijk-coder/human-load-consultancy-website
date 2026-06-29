@@ -3,11 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HLC | Human Load Consultancy</title>
+<title>Human Load Consultancy — Behavior-First Prevention for Screen-Based Work</title>
+<meta name="description" content="A 12-week behavioral intervention that prevents musculoskeletal complaints in screen-based work. Behavior-first. Not environment-first.">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://humanloadconsultancy.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Human Load Consultancy">
+<meta property="og:title" content="Human Load Consultancy — Behavior-First Prevention">
+<meta property="og:description" content="A 12-week behavioral intervention that prevents musculoskeletal complaints in screen-based work.">
+<meta property="og:url" content="https://humanloadconsultancy.com/">
+<meta property="og:image" content="https://humanloadconsultancy.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Human Load Consultancy — Behavior-First Prevention">
+<meta name="twitter:description" content="A 12-week behavioral intervention that prevents musculoskeletal complaints in screen-based work.">
+<meta name="twitter:image" content="https://humanloadconsultancy.com/og-image.jpg">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Human Load Consultancy",
+  "description": "A 12-week behavioral intervention that prevents musculoskeletal complaints in screen-based work.",
+  "url": "https://humanloadconsultancy.com/",
+  "founder": {
+    "@type": "Person",
+    "name": "Crystal Haaswijk",
+    "jobTitle": "Physical Therapist & Founder"
+  },
+  "areaServed": ["NL", "AW", "BE"],
+  "serviceType": "Preventive workplace health consulting"
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -54,7 +94,7 @@ body::before {
 .services-section { background: var(--cream); }
 .approach-section { background: var(--warm-white); }
 .faq-section { background: var(--warm-white); }
-.cta-section { background: var(--parchment); position: relative; overflow: hidden; }
+.cta-section { background: var(--parchment); position: relative; overflow: hidden; scroll-margin-top: 80px; }
 .cta-section::before { content: ''; position: absolute; inset: -15%; background: url('services.jpg') center/cover no-repeat; opacity: .09; filter: sepia(30%); pointer-events: none; z-index: 0; transform: translateY(var(--parallax-y, 0px)); transition: transform 0s linear; }
 .cta-section .container { position: relative; z-index: 1; }
 
@@ -193,6 +233,7 @@ body::before {
   transition: opacity 1s var(--ease-out) .4s, transform 1s var(--ease-out) .4s;
 }
 .hero h1 em { font-style: italic; font-weight: 300; color: var(--bark); }
+.nowrap { white-space: nowrap; }
 .hero-content.loaded h1 { opacity: 1; transform: none; }
 .hero-body {
   max-width: 500px; font-size: 17px; line-height: 1.85;
@@ -717,7 +758,7 @@ footer { z-index: 11; }
         <li><a href="#approach">Method</a></li>
         <li><a href="#trajectory">Program</a></li>
         <li><a href="#faq">FAQ</a></li>
-      <li><a href="mailto:info@humanloadconsultancy.com" class="btn-intake">Request an intake</a></li>
+      <li><a href="#intake-form" class="btn-intake">Request an intake</a></li>
       </ul>
       <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
         <span></span>
@@ -740,7 +781,7 @@ footer { z-index: 11; }
     </ul>
     <div class="mobile-menu-divider"></div>
     <ul>
-      <li><a href="mailto:info@humanloadconsultancy.com" class="mobile-nav-cta">Request an intake</a></li>
+      <li><a href="#intake-form" class="mobile-nav-cta">Request an intake</a></li>
     </ul>
   </nav>
 </div>
@@ -757,12 +798,13 @@ footer { z-index: 11; }
   <div class="container">
     <div class="hero-content" id="heroContent">
       <p class="eyebrow">Preventive Culture Intervention</p>
-      <h1>Before absence<br>becomes <em>the answer.</em></h1>
-      <p class="hero-body">Musculoskeletal complaints in screen-based work are predictable — and preventable. Human Load Consultancy helps organizations intervene before physical strain turns into sick leave, reduced performance, and rising absenteeism costs.</p>
+      <h1><span class="nowrap">Behavior-first.</span><br><span class="nowrap">Not <em>environment-first.</em></span></h1>
+      <p class="hero-body">Ergonomics addresses the workstation. Human Load addresses what happens within it, through a 12-week behavioral intervention that prevents physical complaints before they erode the capacity your business depends on.</p>
       <div class="hero-actions">
-        <a href="mailto:info@humanloadconsultancy.com" class="btn-intake">Request an intake <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#about" class="btn-ghost">Discover the method</a>
+        <a href="#intake-form" class="btn-intake">Request an intake <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#about" class="btn-ghost">Read the framework</a>
       </div>
+      <p class="hero-scarcity" style="font-size:13px; color:rgba(180,162,130,0.7); margin-top:20px; letter-spacing:0.01em;">We accept a limited number of engagements each quarter — by intake conversation only.</p>
     </div>
   </div>
   <div class="scroll-indicator">
@@ -777,7 +819,7 @@ footer { z-index: 11; }
       <p class="statement-label reveal-left">The Human Load position</p>
       <blockquote class="reveal-left" style="transition-delay:.12s">
         Most organizations act when complaints are already visible.<br>
-        We operate <em>earlier in the cycle</em> — before pain becomes policy.
+        We operate <em>earlier in the cycle</em>, before pain becomes policy.
       </blockquote>
     </div>
   </div>
@@ -816,8 +858,8 @@ footer { z-index: 11; }
     </div>
     <div>
       <p class="lead reveal">Ergonomics addresses the workstation. Human Load addresses what happens within it.</p>
-      <p class="reveal delay-1">In screen-based work, physical complaints are rarely caused by intensity. They are caused by duration, repetition, and the absence of variation — day after day, across an entire workforce.</p>
-      <p class="reveal delay-2">By the time HR becomes aware of a problem, the pattern has typically been building for months. Employees have normalized discomfort. Managers have not been equipped to act. And the cost — in sick leave, lost productivity, and staff turnover — is already accumulating.</p>
+      <p class="reveal delay-1">In screen-based work, physical complaints are rarely caused by intensity. They are caused by duration, repetition, and the absence of variation, day after day, across an entire workforce.</p>
+      <p class="reveal delay-2">By the time HR becomes aware of a problem, the pattern has typically been building for months. Employees have normalized discomfort. Managers have not been equipped to act. And the cost is already accumulating: in reduced output, the attrition of experienced staff, and eventually in sick leave.</p>
 </div>
   </div>
 </div>
@@ -838,9 +880,9 @@ footer { z-index: 11; }
   </div>
 </div>
       <div class="about-hlc-right">
-        <p class="lead reveal">After eight years as a physical therapist, I kept seeing the same patients — different names, same complaints. Neck pain. Shoulder tension. Back problems. Arm issues. All from screen-based work.</p>
-        <p class="reveal delay-1">By the time people came to me, the damage was already done. The pattern had been building for months — sometimes years. The advice was always the same. Sit up straight. Adjust your chair. Take breaks. Ergonomics — necessary, but nowhere near enough.</p>
-        <p class="reveal delay-2">Human Load Consultancy exists because I believe physical complaints from screen-based work are largely preventable — and that prevention is more effective, more humane, and more economical than treatment. As a physical therapist and lifestyle therapist, I bring clinical expertise to a problem that has always been treated too late, by the wrong people, at the wrong moment.</p>
+        <p class="lead reveal">After eight years as a physical therapist, I kept seeing the same patients. Different names, same complaints. Neck pain. Shoulder tension. Back problems. Arm issues. All from screen-based work.</p>
+        <p class="reveal delay-1">By the time people came to me, the damage was already done. The pattern had been building for months, sometimes years. The advice was always the same. Sit up straight. Adjust your chair. Take breaks. Ergonomics: necessary, but nowhere near enough.</p>
+        <p class="reveal delay-2">Human Load Consultancy exists because I believe physical complaints from screen-based work are largely preventable, and that prevention is more effective, more humane, and more durable than treatment. As a physical therapist and lifestyle therapist, I bring clinical expertise to a problem that has always been treated too late, by the wrong people, at the wrong moment.</p>
         <p class="reveal delay-3">The question that kept coming back: what if they had never needed to come at all?</p>
         <div class="about-credentials reveal delay-3">
           <div class="credential">
@@ -887,26 +929,26 @@ footer { z-index: 11; }
         <div class="svc-item active" data-index="0">
           <p class="svc-item-label">01 — Intake & Assessment</p>
           <h3>We map the load before we intervene.</h3>
-          <p>Every engagement begins with a structured intake. We analyze work routines, identify behavioral risk patterns, and establish a clear baseline — against which we measure change throughout the 12 weeks.</p>
+          <p>Every engagement begins with a structured intake. We analyze work routines, identify behavioral risk patterns, and establish a clear baseline against which we measure change throughout the 12 weeks.</p>
           <p class="svc-item-detail">The intake informs a tailored implementation roadmap aligned to your team's schedule, work culture, and existing workflows.</p>
         </div>
         <div class="svc-item" data-index="1">
           <p class="svc-item-label">02 — Kick-off Workshop</p>
           <h3>On-site. Practical. No theory overload.</h3>
           <p>A facilitated on-site session that launches the program. Employees learn to recognize early physical signals, understand how static load accumulates, and take ownership of their first behavioral experiment.</p>
-          <p class="svc-item-detail">Designed around adult learning principles — immediate, applicable, and built around real workplace situations rather than abstract theory.</p>
+          <p class="svc-item-detail">Designed around adult learning principles: immediate, applicable, and built around real workplace situations rather than abstract theory.</p>
         </div>
         <div class="svc-item" data-index="2">
           <p class="svc-item-label">03 — Six Bi-weekly Modules</p>
           <h3>One behavior. Two weeks. Sustained repetition.</h3>
-          <p>Six structured video modules — each introducing a single behavioral principle and a concrete bi-weekly experiment. Bi-weekly reminders and a 30-second check-in reinforce adoption without adding friction to the workday.</p>
-          <p class="svc-item-detail">Structured to fit the workday without disrupting output — each module builds directly on the previous one.</p>
+          <p>Six structured video modules, each introducing a single behavioral principle and a concrete bi-weekly experiment. Bi-weekly reminders and a 30-second check-in reinforce adoption without adding friction to the workday.</p>
+          <p class="svc-item-detail">Structured to fit the workday without disrupting output, each module builds directly on the previous one.</p>
         </div>
         <div class="svc-item" data-index="3">
           <p class="svc-item-label">04 — Reporting & Behavioral Data</p>
           <h3>Evidence HR and leadership can act on.</h3>
           <p>At program close, you receive a structured report covering behavioral adoption rates, self-reported physical awareness, and habit integration across your workforce.</p>
-          <p class="svc-item-detail">Concrete evidence of organizational impact — and the foundation for a duty-of-care conversation with leadership.</p>
+          <p class="svc-item-detail">Concrete evidence of organizational impact, and the foundation for a duty-of-care conversation with leadership.</p>
         </div>
       </div>
     </div>
@@ -931,10 +973,10 @@ footer { z-index: 11; }
           </div>
           <div class="flip-back">
             <p class="flip-back-label">Assess</p>
-            <p>We analyze where physical load accumulates in daily work routines — not just in workstation setup, but in how people actually work: how long, how often, and how they respond to physical signals.</p>
+            <p>We analyze where physical load accumulates in daily work routines, not just in workstation setup, but in how people actually work: how long, how often, and how they respond to physical signals.</p>
             <div class="flip-back-divider"></div>
             <p class="flip-back-org-label">What this means for your organization</p>
-            <p class="flip-back-org">A clear picture of behavioral risk patterns across your workforce — before complaints become visible on sick leave reports.</p>
+            <p class="flip-back-org">A clear picture of behavioral risk patterns across your workforce, before complaints become visible on sick leave reports.</p>
           </div>
         </div>
       </div>
@@ -949,10 +991,10 @@ footer { z-index: 11; }
           </div>
           <div class="flip-back">
             <p class="flip-back-label">Activate</p>
-            <p>Employees develop practical skills: recognizing early physical signals, interrupting static load, and integrating variation into their existing work rhythm — without reducing productivity.</p>
+            <p>Employees develop practical skills: recognizing early physical signals, interrupting static load, and integrating variation into their existing work rhythm, without reducing productivity.</p>
             <div class="flip-back-divider"></div>
             <p class="flip-back-org-label">What this means for your organization</p>
-            <p class="flip-back-org">A workforce that self-regulates physical load as part of daily routine — reducing dependency on reactive occupational health interventions.</p>
+            <p class="flip-back-org">A workforce that self-regulates physical load as part of daily routine, reducing dependency on reactive occupational health interventions.</p>
           </div>
         </div>
       </div>
@@ -967,7 +1009,7 @@ footer { z-index: 11; }
           </div>
           <div class="flip-back">
             <p class="flip-back-label">Embed</p>
-            <p>Through structured repetition, behavioral reminders, and data-informed check-ins, preventive habits become embedded in how your organization works — not dependent on individual motivation.</p>
+            <p>Through structured repetition, behavioral reminders, and data-informed check-ins, preventive habits become embedded in how your organization works, not dependent on individual motivation.</p>
             <div class="flip-back-divider"></div>
             <p class="flip-back-org-label">What this means for your organization</p>
             <p class="flip-back-org">Measurable behavioral adoption, reduced musculoskeletal risk, and a demonstrable duty-of-care investment that HR and leadership can report on.</p>
@@ -985,7 +1027,7 @@ footer { z-index: 11; }
         <div class="trajectory-header">
           <h2>The 12-week program. <em>Built around daily reality.</em></h2>
           <div class="trajectory-header-right">
-            <p>Each module introduces one behavioral principle and one bi-weekly experiment. Employees apply changes directly within their workday — supported by reminders and a 30-second check-in that takes no time away from work.</p>
+            <p>Each module introduces one behavioral principle and one bi-weekly experiment. Employees apply changes directly within their workday, supported by reminders and a 30-second check-in that takes no time away from work.</p>
             <div class="traj-progress-bar"><div class="traj-progress-fill" id="trajProgressFill"></div></div>
             <div class="traj-counter"><span id="trajCurrent">1</span> / 6</div>
           </div>
@@ -996,37 +1038,37 @@ footer { z-index: 11; }
               <span class="traj-card-num">01</span>
               <span class="traj-card-week">Week 1–2 · Kick-off + Module 1</span>
               <h4>Early Signals</h4>
-              <p>Employees learn to recognize the first physical signals of load accumulation — tension, shoulder elevation, reduced awareness — before they become complaints. The on-site kick-off workshop launches the program.</p>
+              <p>Employees learn to recognize the first physical signals of load accumulation: tension, shoulder elevation, reduced awareness. They learn to act before these become complaints. The on-site kick-off workshop launches the program.</p>
             </div>
             <div class="traj-card">
               <span class="traj-card-num">02</span>
               <span class="traj-card-week">Week 3–4 · Module 2</span>
               <h4>Duration</h4>
-              <p>The program addresses how uninterrupted screen time — not intensity — is the primary risk factor. Employees experiment with a 60-minute interruption check integrated into their existing workflow.</p>
+              <p>The program addresses how uninterrupted screen time, not intensity, is the primary risk factor. Employees experiment with a 60-minute interruption check integrated into their existing workflow.</p>
             </div>
             <div class="traj-card">
               <span class="traj-card-num">03</span>
               <span class="traj-card-week">Week 5–6 · Module 3</span>
               <h4>Static Muscle Load</h4>
-              <p>Employees learn how sustained low-level muscle activation accumulates unnoticed during screen work — and practice targeted shoulder awareness resets during natural work transitions.</p>
+              <p>Employees learn how sustained low-level muscle activation accumulates unnoticed during screen work, and practice targeted shoulder awareness resets during natural work transitions.</p>
             </div>
             <div class="traj-card">
               <span class="traj-card-num">04</span>
               <span class="traj-card-week">Week 7–8 · Module 4</span>
               <h4>Work Rhythm</h4>
-              <p>Physical load is shaped by how work is structured — not just how people sit. Employees learn to use task transitions, meeting endings, and focus breaks as natural moments for variation.</p>
+              <p>Physical load is shaped by how work is structured, not just by how people sit. Employees learn to use task transitions, meeting endings, and focus breaks as natural moments for variation.</p>
             </div>
             <div class="traj-card">
               <span class="traj-card-num">05</span>
               <span class="traj-card-week">Week 9–10 · Module 5</span>
               <h4>Micro Recovery</h4>
-              <p>Short recovery moments — seconds, not minutes — are enough to interrupt sustained muscle activation. Employees build micro-recovery into their daily routine without affecting output.</p>
+              <p>Short recovery moments, seconds rather than minutes, are enough to interrupt sustained muscle activation. Employees build micro-recovery into their daily routine without affecting output.</p>
             </div>
             <div class="traj-card">
               <span class="traj-card-num">06</span>
               <span class="traj-card-week">Week 11–12 · Module 6 + Final Check-in</span>
               <h4>Sustainable Habits</h4>
-              <p>Employees choose two personal routines to carry forward independently. The program closes with a structured final check-in — measuring behavioral adoption and embedding change into work culture.</p>
+              <p>Employees choose two personal routines to carry forward independently. The program closes with a structured final check-in that measures behavioral adoption and embeds change into work culture.</p>
             </div>
           </div>
         </div>
@@ -1049,35 +1091,40 @@ footer { z-index: 11; }
     <h2 class="reveal delay-1">Questions from<br><em>HR and leadership.</em></h2>
     <div class="faq-list">
       <details class="faq-item reveal delay-1">
-        <summary>What does this cost?<span class="faq-icon"></span></summary>
-        <p>The program is priced per participant. For a team of 25 on-site in Aruba, the total investment is AWG 8,750. That is less than the cost of one employee on sick leave for three weeks — before replacement, lost productivity, or re-integration are factored in. The intake conversation is free and includes a cost-of-inaction calculation specific to your organisation.</p>
-      </details>
-      <details class="faq-item reveal delay-2">
         <summary>We already have an occupational health provider. Why would we need this?<span class="faq-icon"></span></summary>
-        <p>Occupational health responds when something has already gone wrong. Human Load operates before that moment — reducing the volume of cases that reach your occupational health provider in the first place. Most clients find the two services naturally complementary.</p>
+        <p>Occupational health responds when something has already gone wrong. Human Load operates before that moment and reduces the volume of cases that reach your occupational health provider in the first place. Most clients find the two services naturally complementary.</p>
       </details>
       <details class="faq-item reveal delay-2">
+        <summary>How is this different from a wellness program or ergonomic audit?<span class="faq-icon"></span></summary>
+        <p>Wellness programs depend on individual motivation and run alongside the workday. Ergonomic audits change the workstation. Human Load changes what happens within the workday: structured, measurable, embedded into how people work. The closing report is an organizational deliverable, not an individual one.</p>
+      </details>
+      <details class="faq-item reveal delay-2">
+        <summary>How do we know this actually works?<span class="faq-icon"></span></summary>
+        <p>Every organisation receives a before-and-after behavioural data report. You see exactly what shifted per team: awareness scores, adoption rates, habit integration. Even the first client receives this. The measurement system is built in from day one, not added later.</p>
+      </details>
+      <details class="faq-item reveal delay-3">
         <summary>How much work is this for HR?<span class="faq-icon"></span></summary>
-        <p>Less than ten minutes per module. HR sends one email on day one and one reminder on day seven. Everything else — the modules, the check-ins, the data collection — runs without HR involvement. At program close, you receive a report ready to present to leadership.</p>
+        <p>Less than ten minutes per module. HR sends one email on day one and one reminder on day seven. Everything else (the modules, the check-ins, the data collection) runs without HR involvement. At program close, you receive a report ready to present to leadership.</p>
       </details>
       <details class="faq-item reveal delay-3">
         <summary>What if our employees just don't engage?<span class="faq-icon"></span></summary>
-        <p>The program is designed for low motivation, not high motivation. Each experiment takes under sixty seconds. The check-in takes thirty. Engagement data is tracked per team — so if adoption drops, you see it early and can act on it. The structure does the work, not individual willpower.</p>
+        <p>The program is designed for low motivation, not high motivation. Each experiment takes under sixty seconds. The check-in takes thirty. Engagement data is tracked per team, so if adoption drops you see it early and can act on it. The structure does the work, not individual willpower.</p>
       </details>
       <details class="faq-item reveal delay-3">
-        <summary>How do we know this actually works?<span class="faq-icon"></span></summary>
-        <p>Every organisation receives a before-and-after behavioural data report. You see exactly what shifted — awareness scores, adoption rates, habit integration — per team. Even the first client receives this. The measurement system is built in from day one, not added later.</p>
+        <summary>What does this involve as an investment?<span class="faq-icon"></span></summary>
+        <p>Investment is scaled to organization size and discussed during the intake conversation. The intake is free, takes 45 minutes, and includes a sustained-capacity assessment specific to your organization.</p>
       </details>
     </div>
   </div>
 </section>
 
-<section class="cta-section section">
+<section class="cta-section section" id="intake-form">
   <div class="container">
     <div class="cta-inner">
       <p class="section-tag reveal">Take the next step</p>
       <h2 class="reveal delay-1">The right time to act<br>is <em>before the data arrives.</em></h2>
-      <p class="reveal delay-2">Most organizations contact us after complaints have already surfaced. The intake conversation is free, takes 45 minutes, and gives you a clear picture of where behavioral risk sits in your organization — and what a structured intervention would look like.</p>
+      <p class="reveal" style="font-size:13px; color:rgba(180,162,130,0.65); font-style:italic; margin-top:-24px; margin-bottom:8px;">Currently in pilot phase with selected organizations across the Netherlands and Aruba.</p>
+      <p class="reveal delay-2">Most organizations contact us after complaints have already surfaced. The intake conversation is free, takes 45 minutes, and gives you a clear picture of where behavioral risk sits in your organization, and what a structured intervention would look like.</p>
       <form class="cta-form reveal delay-3" action="https://formspree.io/f/xzdyyoyy" method="POST">
         <div class="cta-form-row">
           <div class="cta-form-field">
@@ -1134,17 +1181,9 @@ footer { z-index: 11; }
   <div style="background:#2b2218; border:1px solid #c9b99a; padding:48px 40px; max-width:440px; width:90%; position:relative; font-family:'DM Sans',sans-serif;">
     <button onclick="document.getElementById('contact-modal').style.display='none'" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#c9b99a; font-size:22px; cursor:pointer;">✕</button>
     <p style="color:#c9b99a; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; margin:0 0 24px;">Contact</p>
-    <p style="color:#f5f0e8; font-size:15px; margin:0 0 12px;">
+    <p style="color:#f5f0e8; font-size:15px; margin:0;">
       <span style="color:#c9b99a;">Email</span><br>
       <a href="mailto:info@humanloadconsultancy.com" style="color:#f5f0e8; text-decoration:none;">info@humanloadconsultancy.com</a>
-    </p>
-    <p style="color:#f5f0e8; font-size:15px; margin:0 0 12px;">
-      <span style="color:#c9b99a;">Aruba</span> <span style="color:#7c6a52; font-size:13px;">Call &amp; WhatsApp</span><br>
-      <a href="tel:+2977431527" style="color:#f5f0e8; text-decoration:none;">297 743 1527</a>
-    </p>
-    <p style="color:#f5f0e8; font-size:15px; margin:0;">
-      <span style="color:#c9b99a;">International</span> <span style="color:#7c6a52; font-size:13px;">WhatsApp</span><br>
-      <a href="https://wa.me/31636328002" target="_blank" style="color:#f5f0e8; text-decoration:none;">+31 6 36 32 80 02</a>
     </p>
   </div>
 </div>
