@@ -257,13 +257,16 @@
     border-radius: 8px;
     overflow: hidden;
     border: 0.5px solid var(--sand);
+    background: var(--cream);
   }
  
-  .video-wrapper iframe {
+  .video-wrapper video {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     border: none;
+    background: var(--cream);
+    object-fit: contain;
   }
  
   .transition-msg {
@@ -609,7 +612,7 @@
   <div id="screen-video" class="hidden">
     <div class="transition-msg">Good. Let's begin.</div>
     <div class="video-wrapper">
-      <iframe id="video-frame" src="" allowfullscreen allow="autoplay"></iframe>
+      <video id="video-frame" playsinline preload="metadata" controls controlsList="nodownload" disablePictureInPicture></video>
     </div>
   </div>
  
@@ -772,6 +775,8 @@
 const SUPABASE_URL = "https://horkotkzleohpyrzzujx.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvcmtvdGt6bGVvaHB5cnp6dWp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MDQxNTcsImV4cCI6MjA5MjM4MDE1N30.L2o_1df7unKq4Xi7mRIS16juGqFlzv__LmgICOy57WU";
  
+const VIDEO_BASE = "https://pub-38769dd7c4f4469eb3d3eb5d7bc369d0.r2.dev";
+
 const MODULES = {
   MOD1: {
     label: "Module 1", title: "Awareness",
@@ -1080,8 +1085,9 @@ async function submitCheckin() {
       p_timing: timing ? timing.value : null,
       p_open_field: document.getElementById('checkin-open').value.trim() || null
     });
-    const m = MODULES[mode];
-    document.getElementById('video-frame').src = `https://drive.google.com/file/d/${m.videoId}/preview`;
+    const video = document.getElementById('video-frame');
+    video.src = `${VIDEO_BASE}/${mode.toLowerCase()}.mp4`;
+    video.load();
     show('screen-video');
   } catch (e) {
     setError('checkin-error', 'Could not submit. Please try again.');
